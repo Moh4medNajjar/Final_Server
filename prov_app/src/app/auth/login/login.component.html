@@ -1,0 +1,33 @@
+<div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh; flex-direction: column">
+  <div class="header d-flex align-items-center justify-content-center mb-4" style="color:white; flex-direction: column">
+    <div class="brand d-flex align-items-center justify-content-center">
+      <div class="square"></div>
+      <h2>Provision App</h2>
+    </div>
+    <p style="font-weight: 300;">Provision servers with ease..</p>
+  </div>
+  <h2 style="color:white; font-size:20px; margin-bottom: 16px;">Login</h2>
+
+  <div class="form-box" style="width: 100%; max-width: 450px;">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="matricule">Matricule</label>
+        <input type="text" id="matricule" formControlName="matricule" class="form-control" placeholder="Enter matricule">
+        @if (userForm.controls['matricule'].invalid && (userForm.controls['matricule'].dirty || userForm.controls['matricule'].touched)) {
+          <small class="text-danger">Matricule must be 6 digits.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter password">
+        @if (userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)) {
+          <small class="text-danger">At least 8 characters long, with uppercase, lowercase, and numbers.</small>
+        }
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-4 mb-2 w-100" [disabled]="userForm.invalid">Login to your account</button>
+      <p style="color:white; text-align: center;">Don't have an account? <a style="text-decoration:none; color: #61D27E;" routerLink="/signup;">Sign up</a></p>
+    </form>
+  </div>
+</div>

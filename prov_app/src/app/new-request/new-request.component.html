@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <div class="menu">
+      <a routerLink="/my-requests">My Requests</a>
+      <a routerLink="/my-servers">My Servers</a>
+      <a href="">My Profile</a>
+    </div>
+  </div>
+
+  <h3>Create Request</h3>
+  <form (ngSubmit)="onSubmit(vmForm)" #vmForm="ngForm" class="vm-form">
+    <div class="form-group">
+      <label for="vmName">Virtual Machine Name</label>
+      <input type="text" id="vmName" name="vmName" [(ngModel)]="formData.vmName" required placeholder="Virtual Machine Name" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" [(ngModel)]="formData.description" placeholder="Explain briefly the need for this server"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="operating_system">Operating System</label>
+      <select id="operating_system" name="operating_system" [(ngModel)]="formData.operating_system" required>
+        <option value="">Select an Operating System</option>
+        <option value="RHEL 8.4">RHEL 8.4</option>
+        <option value="Ubuntu 20.04 LTS">Ubuntu 20.04 LTS</option>
+        <option value="Windows Server 2022">Windows Server 2022</option>
+        <option value="CentOS 8">CentOS 8</option>
+        <option value="Debian 11">Debian 11</option>
+        <option value="SUSE Linux Enterprise Server 15">SUSE Linux Enterprise Server 15</option>
+        <option value="Oracle Linux 8">Oracle Linux 8</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="environment_type">Environment Type</label>
+      <select id="environment_type" name="environment_type" [(ngModel)]="formData.environment_type" required>
+        <option value="">Select an Environment Type</option>
+        <option value="developing">Development</option>
+        <option value="testing">Testing</option>
+        <option value="staging">Staging</option>
+        <option value="production">Production</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="desired_start_date">Desired Start Date</label>
+      <input type="date" id="desired_start_date" name="desired_start_date" [(ngModel)]="formData.desired_start_date" required />
+    </div>
+
+    <div class="form-group">
+      <label for="software_list">Software List</label>
+      <input type="text" id="software_list" name="software_list" [(ngModel)]="formData.software_list" placeholder="e.g., Apache, MySQL, Node.js" />
+    </div>
+
+    <div class="form-group">
+      <label for="ram">RAM</label>
+      <select id="ram" name="ram" [(ngModel)]="formData.ram" required>
+        <option value="">Select RAM</option>
+        <option value="2 GB">2 GB</option>
+        <option value="4 GB">4 GB</option>
+        <option value="8 GB">8 GB</option>
+        <option value="16 GB">16 GB</option>
+        <option value="32 GB">32 GB</option>
+        <option value="64 GB">64 GB</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="vcpu">vCPUs</label>
+      <select id="vcpu" name="vcpu" [(ngModel)]="formData.vcpu" required>
+        <option value="">Select vCPUs</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="8">8</option>
+        <option value="16">16</option>
+        <option value="32">32</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="disk_space">Disk Space</label>
+      <input type="text" id="disk_space" name="disk_space" [(ngModel)]="formData.disk_space" placeholder="e.g., 100 GB" />
+    </div>
+
+    <div class="form-group">
+      <label for="openPorts">Open Ports</label>
+      <input type="text" id="openPorts" name="openPorts" [(ngModel)]="formData.openPorts" placeholder="e.g., 22, 80, 443" />
+    </div>
+
+    <div class="form-group">
+      <label for="hasPublicIP">Has Public IP</label>
+      <select id="hasPublicIP" name="hasPublicIP" [(ngModel)]="formData.hasPublicIP" required>
+        <option value="">Yes / No</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between">
+      <button type="submit" [disabled]="!vmForm.form.valid">Submit request</button>
+    </div>
+    <p *ngIf="successMessage"  class="text-danger text-center" style="font-size: 12px">Oops! We encountered an error creating the request, <br>- Reload the page <br>- Logout and login and try again <br>- Try again later <br> - </p>
+  </form>
+</div>

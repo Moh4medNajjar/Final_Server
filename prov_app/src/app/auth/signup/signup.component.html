@@ -1,0 +1,102 @@
+<div class="container-fluid d-flex align-items-center justify-content-center" style="flex-direction: column; height: 100vh;">
+  <div class="header d-flex align-items-center justify-content-center mb-2" style="color:white; flex-direction: column">
+    <div class="brand d-flex align-items-center justify-content-center">
+      <div class="square"></div>
+      <h2>Provision App</h2>
+    </div>
+    <p style="font-weight: 300;">Provision servers with ease..</p>
+  </div>
+  <h2 style="color:white; font-size:20px; margin-bottom: 16px;">Create your account</h2>
+
+  <div class="form-box">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" formControlName="fullName" class="form-control" placeholder="Enter full name">
+            <div *ngIf="userForm.controls['fullName'].invalid && (userForm.controls['fullName'].dirty || userForm.controls['fullName'].touched)">
+              <small class="text-danger">Full Name is required.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control" placeholder="(+216) XXXXXXXX">
+            <div *ngIf="userForm.controls['phoneNumber'].invalid && (userForm.controls['phoneNumber'].dirty || userForm.controls['phoneNumber'].touched)">
+              <small class="text-danger">Must be 8 digits with prefix 216.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email">
+            <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)">
+              <small class="text-danger">Valid Email is required.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="matricule">Matricule</label>
+            <input type="text" id="matricule" formControlName="matricule" class="form-control" placeholder="Enter matricule">
+            <div *ngIf="userForm.controls['matricule'].invalid && (userForm.controls['matricule'].dirty || userForm.controls['matricule'].touched)">
+              <small class="text-danger">Matricule must be 6 digits.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <div class="form-group">
+            <label for="position">Position</label>
+            <select id="position" formControlName="position" class="form-control">
+              <option value="" disabled selected>Select a position</option>
+              <option value="Developer">Developer</option>
+              <option value="Tester">Tester</option>
+              <option value="Manager">Manager</option>
+              <option value="DevOps">DevOps</option>
+              <option value="Support">Support</option>
+            </select>
+            <div *ngIf="userForm.controls['position'].invalid && (userForm.controls['position'].dirty || userForm.controls['position'].touched)">
+              <small class="text-danger">Position is required.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3" style="min-height: 100px;">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Create a strong password">
+            <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)">
+              <small class="text-danger">At least 8 characters long, with uppercase,<br> lowercase, and numbers.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm password">
+            <div *ngIf="userForm.controls['confirmPassword'].invalid && (userForm.controls['confirmPassword'].dirty || userForm.controls['confirmPassword'].touched)">
+              <small class="text-danger">Passwords must match.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="userForm.invalid">Create my account</button>
+      <p style="color:white; text-align: center;">Already have an account? <a style="text-decoration:none;" routerLink="/login">Login</a></p>
+    </form>
+  </div>
+</div>

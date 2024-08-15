@@ -1,0 +1,77 @@
+<div class="container-fluid" style="height: 100vh;">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <p style="font-size:large; font-weight: bold; margin: 0">{{ adminName }}</p>
+    @if(adminRole === 'SuperAdmin') {
+      <div class="menu">
+        <a routerLink="/my-requests">Requests</a>
+        <a routerLink="/my-servers">Servers</a>
+        <a routerLink="/users-list">Users</a>
+        <a routerLink="/profile">Profile</a>
+        <a routerLink="/logout">Logout</a>
+      </div>
+    }
+  </div>
+
+  @if(adminRole === 'SuperAdmin') {
+    <h3>Users list</h3>
+    <div class="d-flex justify-content-between align-items-center my-4">
+      <div class="top-table">
+        <input type="search" placeholder="Find user.." class="me-3" [(ngModel)]="searchQuery" (input)="onSearch()" />
+        <div class="button" (click)="onSearch()">
+          Search
+          <i class="fa-solid fa-magnifying-glass ms-1"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container" style="height: 491px; overflow-y: scroll;">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th> <!-- Index Column -->
+            <th (click)="sortTable('name')">
+              Name
+              <i class="fa fa-sort" *ngIf="sortColumn === 'name'"></i>
+            </th>
+            <th (click)="sortTable('position')">
+              Position
+            </th>
+            <th (click)="sortTable('matricule')">
+              Matricule
+            </th>
+            <th (click)="sortTable('email')">
+              Email
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of users; track item) {
+            <tr [ngClass]="{ 'blue-row': users.indexOf(item) % 2 === 0, 'red-row': users.indexOf(item) % 2 !== 0 }">
+              <td>{{ users.indexOf(item) + 1 }}</td> <!-- Index Display -->
+              <td>{{ item.fullName }}</td>
+              <td>{{ item.position }}</td>
+              <td>{{ item.matricule }}</td>
+              <td>{{ item.email }}</td>
+              <td>
+                <i class="fa-solid fa-arrow-up-right-from-square me-3" [routerLink]="['/user-details', item._id]"></i>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @else {
+    <p>Access Denied. This page is restricted to Super Admins only. If you believe you should have access, please contact your administrator.</p>
+  }
+</div>
+
+
+

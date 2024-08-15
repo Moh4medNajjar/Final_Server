@@ -1,0 +1,96 @@
+<div class="container-fluid" style="height: 100%;">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <div style="display:flex; align-items: center; flex-direction: column;">
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
+      <p style="font-weight: bold; margin:0">General Specs Admin</p>
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">Matricule: {{ matricule }}</p>
+    </div>
+    @if(role === ""){
+      <div class="menu">
+        <a routerLink="/my-requests">My Requests</a>
+        <a routerLink="/my-servers">My Servers</a>
+        <a href="">Logout</a>
+      </div>
+    }
+    @if(role === "GeneralSpecAdmin") {
+      <div class="menu">
+        <a routerLink="/my-requests">Incoming requests</a>
+        <a routerLink="/answered-requests">Answered requests</a>
+        <a routerLink="/my-servers">Logout</a>
+      </div>
+    }
+    @if(role === "NetworkAdmin") {
+      <div class="menu">
+        <p style="font-weight: bold;">Network Admin</p>
+      </div>
+    }
+  </div>
+
+  @if(role === "") {
+    <h3>My Requests</h3>
+  }
+  @if(role !== "") {
+    <h3>Incoming Requests </h3>
+  }
+  <div class="d-flex justify-content-between align-items-center my-4">
+    <div class="top-table">
+      <input type="search" placeholder="Find request.." class="me-3" [(ngModel)]="searchQuery" (input)="onSearch()" />
+      <div class="button">
+        Search
+        <i class="fa-solid fa-magnifying-glass ms-1"></i>
+      </div>
+    </div>
+
+    @if(role === "") {
+      <div class="button" routerLink="/new-request">
+        Create Request
+        <i class="fa fa-plus ms-1"></i>
+      </div>
+    }
+  </div>
+
+  <div class="table-container" style="height: 491px; overflow-y: scroll;">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th (click)="sortTable('vmName')">
+            Name
+            <i class="fa fa-sort" *ngIf="sortColumn === 'vmName'"></i>
+          </th>
+          <th (click)="sortTable('desired_start_date')">
+            Desired start date
+            <i class="fa fa-sort" *ngIf="sortColumn === 'desired_start_date'"></i>
+          </th>
+          <th (click)="sortTable('status')">
+            Status
+            <i class="fa fa-sort" *ngIf="sortColumn === 'status'"></i>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of filteredItems; track item) {
+          <tr [ngClass]="{ 'blue-row': filteredItems.indexOf(item) % 2 === 0, 'red-row': filteredItems.indexOf(item) % 2 !== 0 }">
+            <td>{{ filteredItems.indexOf(item) + 1 }}</td>
+            <td>{{ item.vmName }}</td>
+            <td>{{ formatDate(item.desired_start_date) }}</td>
+            <td>
+              <i class="fa fa-circle me-1" [ngClass]="getStatusCircleClass(item.status)"></i>
+              {{ item.status }}
+            </td>
+            <td>
+              <i class="fa-solid fa-arrow-up-right-from-square ms-4" [routerLink]="['/request-details', item._id]"></i>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

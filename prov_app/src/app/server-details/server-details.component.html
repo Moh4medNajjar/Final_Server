@@ -1,0 +1,61 @@
+<div class="container-fluid" style="min-height: 100vh">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
+    <div class="menu">
+      <a routerLink="/my-requests">My Requests</a>
+      <a routerLink="/my-servers">My Servers</a>
+      <a href="">My Profile</a>
+    </div>
+  </div>
+
+  <h3 class="mb-4">Server Details</h3>
+
+  <div>
+    <h4>General specs</h4>
+    <div class="ms-4">
+      <p><span>Virtual Machine:</span>Jenkins Server</p>
+      <p><span>Environment type:</span>Running</p>
+      <p><span>Time created:</span>24/07/2024, 21:08 UTC</p>
+      <p><span>Operating system:</span>Red Hat Entreprise Linux 9</p>
+      <p><span>RAM:</span>8 GB</p>
+      <p><span>vCPUs:</span>8 GB</p>
+      <p><span>vCPUs:</span>8 GB</p>
+    </div>
+  </div>
+
+  <div>
+    <h4>Networking</h4>
+    <div class="ms-4">
+      <p><span>Public IP:</span>22.120.23.10</p>
+      <p><span>Private IP:</span>172.10.23.10</p>
+      <p><span>CIDR Range:</span>22.120.0.0/16</p>
+    </div>
+  </div>
+
+  <div>
+    <h4>Credentials</h4>
+    <div class="ms-4">
+      <p><span>Username:</span>Devadmin</p>
+      <div class="d-flex justify-content-start align-items-center">
+        <p style="margin:0">
+          <span>Password:</span>
+          <span [ngClass]="{'password-hidden': hidePassword, 'password-visible': !hidePassword}">{{ hidePassword ? '************' : password }}</span>
+          <i class="fas fa-eye me-2" (click)="togglePasswordVisibility()"></i>
+          <i class="fas fa-copy" (click)="copyPassword()"></i>
+        </p>
+        <div *ngIf="copySuccess" class="success-message ms-2">
+          Copied!
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

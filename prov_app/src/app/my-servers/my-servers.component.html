@@ -1,0 +1,88 @@
+<div class="container-fluid" style="height: 100vh;">
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
+    <div class="menu">
+      <a routerLink="/my-requests">My Requests</a>
+      <a routerLink="/my-servers">My Servers</a>
+      <a href="">My Profile</a>
+    </div>
+  </div>
+
+  <h3>My Servers</h3>
+  <div class="d-flex justify-content-between align-items-center my-4">
+    <div class="top-table">
+      <input type="search" placeholder="Find server.." class="me-3" [(ngModel)]="searchQuery" (input)="onSearch()" />
+      <div class="button">
+        Search
+        <i class="fa-solid fa-magnifying-glass ms-1"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container" style="height: 491px; overflow-y: scroll;">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th> <!-- Index Column -->
+          <th (click)="sortTable('name')">
+            VM Name
+            <i class="fa fa-sort" *ngIf="sortColumn === 'name'"></i>
+          </th>
+          <th (click)="sortTable('creationDate')">
+            Creation Date
+            <i class="fa fa-sort" *ngIf="sortColumn === 'creationDate'"></i>
+          </th>
+          <th (click)="sortTable('status')">
+            Status
+            <i class="fa fa-sort" *ngIf="sortColumn === 'status'"></i>
+          </th>
+          <th (click)="sortTable('cpu')">
+            CPU (vCPUs)
+            <i class="fa fa-sort" *ngIf="sortColumn === 'cpu'"></i>
+          </th>
+          <th (click)="sortTable('memory')">
+            Memory (GB)
+            <i class="fa fa-sort" *ngIf="sortColumn === 'memory'"></i>
+          </th>
+          <th (click)="sortTable('storage')">
+            Storage (GB)
+            <i class="fa fa-sort" *ngIf="sortColumn === 'storage'"></i>
+          </th>
+          <th>
+            Public IP
+          </th>
+          <th>
+            Private IP
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of filteredItems; track item) {
+          <tr [ngClass]="{ 'blue-row': filteredItems.indexOf(item) % 2 === 0, 'red-row': filteredItems.indexOf(item) % 2 !== 0 }">
+            <td>{{ filteredItems.indexOf(item) + 1 }}</td> <!-- Index Display -->
+            <td>{{ item.name }}</td>
+            <td>{{ item.creationDate }}</td>
+            <td>
+              <i class="fa fa-circle me-1" [ngClass]="getStatusCircleClass(item.status)"></i>
+              {{ item.status }}
+            </td>
+            <td>{{ item.cpu }}</td>
+            <td>{{ item.memory }}</td>
+            <td>{{ item.storage }}</td>
+            <td>{{ item.publicIP }}</td>
+            <td>{{ item.privateIP }}</td>
+            <td>
+              <i class="fa-solid fa-arrow-up-right-from-square me-3" routerLink="/server-details"></i>
+              <i class="fa-solid fa-trash-can"></i>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

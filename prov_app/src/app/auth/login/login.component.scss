@@ -1,0 +1,71 @@
+.form-box {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #3a4956;
+}
+label {
+  color:white
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #2C3842; /* Change input background color */
+  color: white; /* Change input text color */
+  border: 1px solid #2C3842;
+  border-radius: 0px;
+}
+
+.form-group input::placeholder, .form-group select::placeholder {
+  color: #bdbdbd;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px!important;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #61D27E;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.btn:disabled {
+  background-color: #61D27E;
+}
+
+.square{
+  height: 26px;
+  width: 26px;
+  background-color: #61D27E;
+  margin-right: 10px;
+  margin-bottom: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+

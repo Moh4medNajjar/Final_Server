@@ -1,0 +1,156 @@
+<div class="container-fluid" style="height: max(100%, 100vh)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
+    <div class="menu">
+      <a routerLink="/my-requests">My Requests</a>
+      <a routerLink="/my-servers">My Servers</a>
+      <a href="">My Profile</a>
+    </div>
+  </div>
+
+  <h3 class="mb-4">Create User</h3>
+  <div class="form-container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="fullName" class="col-md-4">Full Name</label>
+            <div class="col-md-8">
+              <input type="text" id="fullName" formControlName="fullName" class="form-control" placeholder="Enter full name">
+              @if (userForm.controls['fullName'].invalid && (userForm.controls['fullName'].dirty || userForm.controls['fullName'].touched)) {
+                <small class="text-danger">Full Name is required.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="phoneNumber" class="col-md-4">Phone Number</label>
+            <div class="col-md-8">
+              <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control" placeholder="(+216) XXXXXXXX">
+              @if (userForm.controls['phoneNumber'].invalid && (userForm.controls['phoneNumber'].dirty || userForm.controls['phoneNumber'].touched)) {
+                <small class="text-danger">Must be 8 digits with prefix 216.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="email" class="col-md-4">Email</label>
+            <div class="col-md-8">
+              <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email">
+              @if (userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)) {
+                <small class="text-danger">Valid Email is required.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="matricule" class="col-md-4">Matricule</label>
+            <div class="col-md-8">
+              <input type="text" id="matricule" formControlName="matricule" class="form-control" placeholder="Enter matricule">
+              @if (userForm.controls['matricule'].invalid && (userForm.controls['matricule'].dirty || userForm.controls['matricule'].touched)) {
+                <small class="text-danger">Matricule must be 6 digits.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="department" class="col-md-4">Department</label>
+            <div class="col-md-8">
+              <select id="department" formControlName="department" class="form-control custom-select" >
+                <option value="" disabled>Select department</option>
+                <option *ngFor="let department of departments" [value]="department">{{ department }}</option>
+              </select>
+              @if (userForm.controls['department'].invalid && (userForm.controls['department'].dirty || userForm.controls['department'].touched)) {
+                <small class="text-danger">Department is required.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="role" class="col-md-4">Role</label>
+            <div class="col-md-8">
+              <input type="text" id="role" formControlName="role" class="form-control" placeholder="Enter role">
+              @if (userForm.controls['role'].invalid && (userForm.controls['role'].dirty || userForm.controls['role'].touched)) {
+                <small class="text-danger">Role is required.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="password" class="col-md-4">Password</label>
+            <div class="col-md-8">
+              <input type="password" id="password" formControlName="password" class="form-control" placeholder="Create a strong password">
+              @if (userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)) {
+                <small class="text-danger">At least 8 characters long, with uppercase, lowercase, and numbers.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="confirmPassword" class="col-md-4">Confirm Password</label>
+            <div class="col-md-8">
+              <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm password">
+              @if (userForm.controls['confirmPassword'].invalid && (userForm.controls['confirmPassword'].dirty || userForm.controls['confirmPassword'].touched)) {
+                <small class="text-danger">Passwords must match.</small>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-md-12">
+          <div class="form-group d-flex align-items-start">
+            <label for="permissions" class="col-md-4">Permissions</label>
+            <div class="col-md-8 d-flex align-items-center">
+              <input type="text" id="permissions" formControlName="permissions" class="form-control" placeholder="Enter permissions">
+              <button type="button" class="button text-light ms-3" (click)="addPermission()">Add Permission</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between">
+        <button type="submit" class="button text-light w-70" [disabled]="userForm.invalid">Create account</button>
+      </div>
+
+      <div *ngIf="successMessage" class="success-message">
+        Account created with success.
+      </div>
+    </form>
+  </div>
+</div>

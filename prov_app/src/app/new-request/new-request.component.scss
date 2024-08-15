@@ -1,0 +1,187 @@
+.logo {
+  width:25px;
+  margin-bottom: 4px;
+  margin-right: 10px;
+  height: 25px;
+  background-color: #61D27E;
+}
+a {
+  text-decoration: none;
+  margin-right: 20px;
+}
+.header {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.blue-row {
+  background-color: #313B44;
+}
+
+.red-row {
+  background-color: #212529;
+}
+
+.fa-arrow-up-right-from-square {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.fa-trash-can {
+  cursor: pointer;
+}
+
+//-----------------------------------------------
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ccc;
+  border-radius: 0px;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #FF6B00;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+// .custom-checkbox .checkmark:after {
+//   left: 7px;
+//   top: 3px;
+//   width: 6px;
+//   height: 12px;
+//   border: solid white;
+//   border-width: 0 3px 3px 0;
+//   transform: rotate(45deg);
+// }
+
+
+.button{
+  background-color: #313B44;
+  padding: 6px 14px;
+  border: 1px solid #555;
+  cursor: pointer
+}
+/* General form styling */
+.vm-form {
+  max-width: 600px;
+  padding: 1rem;
+  // margin: auto; /* Center the form horizontally */
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center; /* Vertically center the items */
+}
+
+/* Label styling */
+.form-group label {
+  width: 200px; /* Fixed width for labels */
+  font-weight: bold;
+  margin-right: 1rem; /* Space between label and input */
+  color: #ffffff; /* Adjust label color */
+}
+
+/* Input and select styling */
+.form-group input,
+.form-group select {
+  background-color: #212529; /* Dark background color */
+  border: 2px solid #4B5563; /* Orange border */
+  color: #ffffff; /* Text color inside inputs */
+  padding: 0.5rem; /* Reduced padding for a smaller height */
+  font-size: 0.875rem; /* Smaller font size for a more compact appearance */
+  min-height: 2rem; /* Minimum height to ensure content visibility */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  flex: 1; /* Make the inputs take the remaining space */
+}
+
+/* Textarea specific styling */
+.form-group textarea {
+  background-color: #212529; /* Dark background color */
+  border: 2px solid #4B5563; /* Orange border */
+  color: #ffffff; /* Text color inside textarea */
+  padding: 0.5rem; /* Reduced padding for a smaller height */
+  font-size: 0.875rem; /* Smaller font size */
+  resize: vertical; /* Allow vertical resize */
+  min-height: 100px; /* Minimum height for the textarea */
+  flex: 1; /* Make the textarea take the remaining space */
+}
+
+/* Button styling */
+button[type="submit"] {
+  background-color: #61D27E; /* Orange background color for the button */
+  border: none; /* Remove default border */
+  color: #ffffff; /* Text color inside the button */
+  padding: 0.5rem 1.5rem; /* Reduced padding for a smaller button */
+  font-size: 0.875rem; /* Smaller font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+  margin: 2rem auto 4px auto; /* Center the button horizontally */
+  width: 400px; /* Button width same as input width */
+}
+
+
+
+/* Disable button styling */
+button:disabled {
+  background-color: #4B5563; /* Gray background for disabled button */
+  cursor: not-allowed; /* Not-allowed cursor for disabled button */
+}
+
+/* Calendar icon styling */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.5); /* Light color for calendar icon */
+}
+
+.success-message {
+  color: #2ecc71;
+  text-align: center;
+}
