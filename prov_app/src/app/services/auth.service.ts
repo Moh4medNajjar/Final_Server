@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 interface RegisterResponse {
   message: string;
@@ -17,7 +18,7 @@ export class AuthService {
   private registerUrl = 'http://localhost:3000/api/auth/register';
   private loginUrl = 'http://localhost:3000/api/auth/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router:Router) {}
 
   register(formData: any): Observable<any> {
     return this.http.post<any>(this.registerUrl, formData);
@@ -31,4 +32,10 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
 }

@@ -3,7 +3,7 @@
   margin-bottom: 4px;
   margin-right: 10px;
   height: 25px;
-  background-color: #61D27E;
+  background-color: #87CEEB;
 }
 a {
   text-decoration: none;
@@ -91,15 +91,7 @@ th, td {
   display: block;
 }
 
-// .custom-checkbox .checkmark:after {
-//   left: 7px;
-//   top: 3px;
-//   width: 6px;
-//   height: 12px;
-//   border: solid white;
-//   border-width: 0 3px 3px 0;
-//   transform: rotate(45deg);
-// }
+
 
 
 .button{
@@ -108,26 +100,22 @@ th, td {
   border: 1px solid #555;
   cursor: pointer
 }
-/* General form styling */
 .vm-form {
   max-width: 600px;
   padding: 1rem;
-  // margin: auto; /* Center the form horizontally */
 }
 
-/* Form group styling */
 .form-group {
   margin-bottom: 1rem;
   display: flex;
-  align-items: center; /* Vertically center the items */
+  align-items: center;
 }
 
-/* Label styling */
 .form-group label {
-  width: 200px; /* Fixed width for labels */
+  width: 200px;
   font-weight: bold;
-  margin-right: 1rem; /* Space between label and input */
-  color: #ffffff; /* Adjust label color */
+  margin-right: 1rem;
+  color: #ffffff;
 }
 
 /* Input and select styling */
@@ -157,7 +145,7 @@ th, td {
 
 /* Button styling */
 button[type="submit"] {
-  background-color: #61D27E; /* Orange background color for the button */
+  background-color: #87CEEB; /* Orange background color for the button */
   border: none; /* Remove default border */
   color: #ffffff; /* Text color inside the button */
   padding: 0.5rem 1.5rem; /* Reduced padding for a smaller button */

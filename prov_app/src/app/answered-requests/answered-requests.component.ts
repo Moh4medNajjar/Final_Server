@@ -91,8 +91,9 @@ export class AnsweredRequestsComponent {
       (data) => {
         this.items = data;
         this.filteredItems = [...this.items];
+        console.log(this.filteredItems)
         if(this.role === "GeneralSpecAdmin"){
-          this.filteredItems = this.filteredItems.filter(item => item.status === 'rejected' || item.status === 'approved');
+          this.filteredItems = this.filteredItems.filter(item => item.status === 'rejected' || item.status === 'approved' || item.status === 'finished');
         }
         if(this.role === "NetworkAdmin"){
           this.filteredItems = this.filteredItems.filter(item => item.status === 'approved');

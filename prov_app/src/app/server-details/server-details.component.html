@@ -18,12 +18,20 @@
   <div>
     <h4>Admin Info </h4>
     <div class="ms-4">
-      <p><span>Your request was approved by:</span>{{server?.adminName}}</p>
+      <p><span>Server was Created by:</span>{{server?.adminName}}</p>
     </div>
   </div>
 
   <div>
-    <h4>General specs</h4>
+    <h4>Dedicated to</h4>
+    <div class="ms-4">
+      <p><span>Requester name:</span>{{server?.requesterName}}</p>
+      <p><span>Requester matricule:</span>{{server?.requesterMatricule}}</p>
+    </div>
+  </div>
+
+  <div>
+    <h4>Server Specifications</h4>
     <div class="ms-4">
       <p><span>Virtual Machine:</span>{{server?.vmName}}</p>
       <p><span>Environment type:</span>{{server?.environment_type}}</p>
