@@ -14,10 +14,23 @@ export class ServerService {
 
   createServer(serverData: any): Observable<any> {
     const token = this.authService.getToken();
-
-  const headers = new HttpHeaders({
+    const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });
     return this.http.post<any>(this.apiUrl, serverData, { headers });
   }
+
+
+  getServersByRequesterId(requesterId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/user/${requesterId}`, { headers });
+  }
+
+  getServerById(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
+  }
+
 }

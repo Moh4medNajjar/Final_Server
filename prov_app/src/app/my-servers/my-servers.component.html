@@ -1,10 +1,12 @@
 <div class="container-fluid" style="height: 100vh;">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <div class="header mb-5">
     <div class="brand d-flex align-items-center justify-content-start">
       <div class="logo"></div>
       <h3>Provision App</h3>
     </div>
-    <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
+    <p style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
     <div class="menu">
       <a routerLink="/my-requests">My Requests</a>
       <a routerLink="/my-servers">My Servers</a>
@@ -28,32 +30,33 @@
       <thead>
         <tr>
           <th>#</th> <!-- Index Column -->
-          <th (click)="sortTable('name')">
+          <th (click)="sortTable('vmName')">
             VM Name
-            <i class="fa fa-sort" *ngIf="sortColumn === 'name'"></i>
+            <i class="fa fa-sort" *ngIf="sortColumn === 'vmName'"></i>
           </th>
-          <th (click)="sortTable('creationDate')">
+          <th (click)="sortTable('createdAt')">
             Creation Date
-            <i class="fa fa-sort" *ngIf="sortColumn === 'creationDate'"></i>
+            <i class="fa fa-sort" *ngIf="sortColumn === 'createdAt'"></i>
           </th>
           <th (click)="sortTable('status')">
-            Status
+            Environment
+            <i class="fa fa-sort" *ngIf="sortColumn === 'status'"></i>
+          </th>
+          <th (click)="sortTable('status')">
+            Operating system
             <i class="fa fa-sort" *ngIf="sortColumn === 'status'"></i>
           </th>
           <th (click)="sortTable('cpu')">
             CPU (vCPUs)
             <i class="fa fa-sort" *ngIf="sortColumn === 'cpu'"></i>
           </th>
-          <th (click)="sortTable('memory')">
+          <th (click)="sortTable('ram')">
             Memory (GB)
-            <i class="fa fa-sort" *ngIf="sortColumn === 'memory'"></i>
+            <i class="fa fa-sort" *ngIf="sortColumn === 'ram'"></i>
           </th>
-          <th (click)="sortTable('storage')">
+          <th (click)="sortTable('disk_space')">
             Storage (GB)
-            <i class="fa fa-sort" *ngIf="sortColumn === 'storage'"></i>
-          </th>
-          <th>
-            Public IP
+            <i class="fa fa-sort" *ngIf="sortColumn === 'disk_space'"></i>
           </th>
           <th>
             Private IP
@@ -62,26 +65,23 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of filteredItems; track item) {
-          <tr [ngClass]="{ 'blue-row': filteredItems.indexOf(item) % 2 === 0, 'red-row': filteredItems.indexOf(item) % 2 !== 0 }">
-            <td>{{ filteredItems.indexOf(item) + 1 }}</td> <!-- Index Display -->
-            <td>{{ item.name }}</td>
-            <td>{{ item.creationDate }}</td>
-            <td>
-              <i class="fa fa-circle me-1" [ngClass]="getStatusCircleClass(item.status)"></i>
-              {{ item.status }}
-            </td>
-            <td>{{ item.cpu }}</td>
-            <td>{{ item.memory }}</td>
-            <td>{{ item.storage }}</td>
-            <td>{{ item.publicIP }}</td>
-            <td>{{ item.privateIP }}</td>
-            <td>
-              <i class="fa-solid fa-arrow-up-right-from-square me-3" routerLink="/server-details"></i>
-              <i class="fa-solid fa-trash-can"></i>
-            </td>
-          </tr>
-        }
+        <tr *ngFor="let item of filteredItems; let i = index" [ngClass]="{ 'blue-row': i % 2 === 0, 'red-row': i % 2 !== 0 }">
+          <td>{{ i + 1 }}</td> <!-- Index Display -->
+          <td>{{ item.vmName }}</td>
+          <td>{{ item.createdAt | date:'yyyy-MM-dd' }}</td> <!-- Format Date -->
+          <td>
+            <i class="fa fa-circle me-1" [ngClass]="getStatusCircleClass(item.status)"></i>
+            {{ item.environment_type }}
+          </td>
+          <td>{{ item.operating_system }}</td>
+          <td>{{ item.cpu }}</td>
+          <td>{{ item.ram }}</td>
+          <td>{{ item.disk_space }}</td>
+          <td>{{ item.privateIP }}</td>
+          <td>
+            <i class="fa-solid fa-arrow-up-right-from-square me-3" [routerLink]="['/server-details', item.id]"></i>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

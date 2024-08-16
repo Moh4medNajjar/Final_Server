@@ -49,6 +49,22 @@ exports.createServer = async (req, res) => {
     }
 };
 
+exports.getServersByUserId = async (req, res) => {
+    try {
+      const { requesterId } = req.params;
+  
+      // Find servers with the matching requesterId
+      const servers = await Server.find({ requesterId: requesterId });
+  
+      // Respond with the servers
+      res.status(200).json({ servers });
+    } catch (error) {
+      console.error('Error fetching servers:', error);
+      res.status(500).json({ message: 'Error fetching servers', error });
+    }
+  };
+  
+
 
 
 exports.getServers = async (req, res) => {

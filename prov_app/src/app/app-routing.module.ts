@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'my-requests', component: MyRequestsComponent },
   { path: 'my-servers', component: MyServersComponent },
   { path: 'new-request', component: NewRequestComponent },
-  { path: 'server-details', component: ServerDetailsComponent },
+  { path: 'server-details/:id', component: ServerDetailsComponent },
   { path: 'request-details/:id', component: RequestDetailsComponent },
   { path: 'users-list', component: UsersListComponent },
   { path: 'admins-list', component: AdminsListComponent },

@@ -1,51 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { ServerService } from '../services/server.service';
 
 @Component({
   selector: 'app-my-servers',
   templateUrl: './my-servers.component.html',
   styleUrl: './my-servers.component.scss'
 })
-export class MyServersComponent {
-  // items = [
-  //   { name: 'Server A', creationDate: '2024-07-28', status: 'Stopped', cpu: '4 vCPUs', memory: '16 GB', storage: '100 GB' },
-  //   { name: 'Server B', creationDate: '2024-07-27', status: 'Running', cpu: '2 vCPUs', memory: '8 GB', storage: '50 GB' },
-  //   { name: 'Server C', creationDate: '2024-07-26', status: 'Running', cpu: '8 vCPUs', memory: '32 GB', storage: '200 GB' },
-  //   { name: 'Server D', creationDate: '2024-07-25', status: 'Running', cpu: '4 vCPUs', memory: '16 GB', storage: '150 GB' },
-  //   { name: 'Server E', creationDate: '2024-07-24', status: 'Stopped', cpu: '2 vCPUs', memory: '8 GB', storage: '50 GB' },
-  //   { name: 'Server F', creationDate: '2024-07-23', status: 'Running', cpu: '4 vCPUs', memory: '16 GB', storage: '100 GB' },
-  //   { name: 'Server G', creationDate: '2024-07-22', status: 'Running', cpu: '2 vCPUs', memory: '8 GB', storage: '50 GB' },
-  //   { name: 'Server H', creationDate: '2024-07-21', status: 'Stopped', cpu: '4 vCPUs', memory: '16 GB', storage: '100 GB' },
-  //   { name: 'Server I', creationDate: '2024-07-20', status: 'Stopped', cpu: '8 vCPUs', memory: '32 GB', storage: '200 GB' },
-  //   { name: 'Server J', creationDate: '2024-07-19', status: 'Stopped', cpu: '2 vCPUs', memory: '8 GB', storage: '50 GB' },
-  //   { name: 'Server K', creationDate: '2024-07-18', status: 'Stopped', cpu: '4 vCPUs', memory: '16 GB', storage: '100 GB' }
-  // ];
+export class MyServersComponent implements OnInit {
 
-  items = [
-    { name: 'AppServer01', creationDate: '2024-07-28', status: 'Stopped', cpu: 4, memory: 16, storage: 256, publicIP: '34.120.22.151', privateIP: '10.0.0.10' },
-    { name: 'DBServer02', creationDate: '2024-07-27', status: 'Running', cpu: 8, memory: 32, storage: 512, publicIP: '54.178.88.20', privateIP: '10.0.0.11' },
-    { name: 'WebServer03', creationDate: '2024-07-26', status: 'Running', cpu: 2, memory: 8, storage: 128, publicIP: '13.89.11.190', privateIP: '10.0.0.12' },
-    { name: 'FileServer04', creationDate: '2024-07-25', status: 'Running', cpu: 6, memory: 24, storage: 1024, publicIP: '52.14.66.95', privateIP: '10.0.0.13' },
-    { name: 'MailServer05', creationDate: '2024-07-24', status: 'Stopped', cpu: 4, memory: 16, storage: 512, publicIP: '44.230.42.159', privateIP: '10.0.0.14' },
-    { name: 'BackupServer06', creationDate: '2024-07-23', status: 'Running', cpu: 8, memory: 32, storage: 2048, publicIP: '18.117.68.22', privateIP: '10.0.0.15' },
-    { name: 'CacheServer07', creationDate: '2024-07-22', status: 'Running', cpu: 4, memory: 16, storage: 256, publicIP: '3.128.70.11', privateIP: '10.0.0.16' },
-    { name: 'DevServer08', creationDate: '2024-07-21', status: 'Stopped', cpu: 2, memory: 8, storage: 128, publicIP: '35.177.90.214', privateIP: '10.0.0.17' },
-    { name: 'TestServer09', creationDate: '2024-07-20', status: 'Running', cpu: 6, memory: 24, storage: 512, publicIP: '54.165.39.67', privateIP: '10.0.0.18' },
-    { name: 'ProdServer10', creationDate: '2024-07-19', status: 'Stopped', cpu: 8, memory: 32, storage: 1024, publicIP: '34.211.85.240', privateIP: '10.0.0.19' },
-    { name: 'AnalyticsServer11', creationDate: '2024-07-18', status: 'Running', cpu: 12, memory: 64, storage: 4096, publicIP: '18.208.124.21', privateIP: '10.0.0.20' },
-    { name: 'StorageServer12', creationDate: '2024-07-17', status: 'Running', cpu: 8, memory: 32, storage: 2048, publicIP: '3.22.87.119', privateIP: '10.0.0.21' },
-    { name: 'MonitoringServer13', creationDate: '2024-07-16', status: 'Stopped', cpu: 4, memory: 16, storage: 256, publicIP: '52.10.38.250', privateIP: '10.0.0.22' },
-    { name: 'APIService14', creationDate: '2024-07-15', status: 'Running', cpu: 6, memory: 24, storage: 512, publicIP: '44.192.182.193', privateIP: '10.0.0.23' },
-    { name: 'LoadBalancer15', creationDate: '2024-07-14', status: 'Running', cpu: 4, memory: 16, storage: 128, publicIP: '35.164.97.123', privateIP: '10.0.0.24' },
-    { name: 'SecurityServer16', creationDate: '2024-07-13', status: 'Stopped', cpu: 8, memory: 32, storage: 256, publicIP: '34.125.68.78', privateIP: '10.0.0.25' },
-    { name: 'ProxyServer17', creationDate: '2024-07-12', status: 'Running', cpu: 4, memory: 16, storage: 128, publicIP: '54.186.51.101', privateIP: '10.0.0.26' },
-    { name: 'ManagementServer18', creationDate: '2024-07-11', status: 'Stopped', cpu: 6, memory: 24, storage: 512, publicIP: '18.117.26.203', privateIP: '10.0.0.27' },
-    { name: 'LogServer19', creationDate: '2024-07-10', status: 'Running', cpu: 8, memory: 32, storage: 1024, publicIP: '34.120.133.82', privateIP: '10.0.0.28' },
-    { name: 'ClusterNode20', creationDate: '2024-07-09', status: 'Running', cpu: 12, memory: 64, storage: 2048, publicIP: '54.72.124.59', privateIP: '10.0.0.29' }
-];
+  items: any[] = [];
+  userData: any;
+  fullName = ""
+  matricule = ""
+  position = ""
+  role = ""
+
+constructor(private serverService:ServerService,private authService: AuthService){}
+ngOnInit() {
+  const token = this.authService.getToken();
+  if (token) {
+    const decodedPayload = atob(token.split('.')[1]);
+    const userData = JSON.parse(decodedPayload);
+    console.log(userData)
+    this.userData = userData
+    this.fullName = userData.fullName
+    this.matricule = userData.matricule
+    this.position = userData.position
+    this.role = userData.role
+
+    this.fetchServersById(userData.id)
+  }
+
+}
 
 
 
 
+
+fetchServersById(requesterId: string) {
+  this.serverService.getServersByRequesterId(requesterId).subscribe(
+    (response: any) => {
+      // Map the server attributes to the desired names
+      console.log(response)
+      this.items = response.servers.map((server: any) => ({
+        vmName: server.vmName,
+        createdAt: server.createdAt,
+        environment_type: server.environment_type,
+        cpu: server.cpu,
+        operating_system: server.operating_system,
+        ram: server.ram,
+        disk_space: server.disk_space,
+        privateIP: server.privateIP,
+        id: server._id
+      }));
+      this.filteredItems = [...this.items];
+      console.log(this.filteredItems);
+    },
+    (error) => {
+      console.error('Error fetching servers:', error);
+    }
+  );
+}
 
 
   sortColumn: string = 'name';
@@ -94,16 +110,21 @@ export class MyServersComponent {
 
 
 
-  getStatusCircleClass(status: string): string {
-    switch (status.toLowerCase()) {
-      case 'running':
-        return 'circle-approved';
-      case 'stopped':
-        return 'circle-rejected';
-      default:
-        return '';
-    }
+getStatusCircleClass(status: string): string {
+  if (!status) {
+    return ''; // Return an empty string if status is not defined
   }
+
+  switch (status.toLowerCase()) {
+    case 'running':
+      return 'circle-approved';
+    case 'stopped':
+      return 'circle-rejected';
+    default:
+      return '';
+  }
+}
+
 
   filteredItems = [...this.items];
   searchQuery: string = '';

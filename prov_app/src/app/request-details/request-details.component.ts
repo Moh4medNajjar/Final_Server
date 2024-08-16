@@ -89,8 +89,6 @@ export class RequestDetailsComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe(
       response => {
         this.requestDetails = response;
-        console.log("requestDetails:",this.requestDetails)
-        // Populate form fields with request details
         this.serverForm.patchValue({
           vmName: this.requestDetails.vmName,
           requestId: this.requestDetails._id,
