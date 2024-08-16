@@ -33,4 +33,10 @@ export class ServerService {
     return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
   }
 
+  getAllServers(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}`, { headers });
+  }
+
 }

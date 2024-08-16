@@ -6,7 +6,7 @@ const roleMiddleware = require('../middlewares/roleMiddleware');
 
 router.post('/', authMiddleware, roleMiddleware(['NetworkAdmin', 'SuperAdmin']), serverController.createServer);
 
-router.get('/', authMiddleware, serverController.getServers);
+router.get('/', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin', 'SuperAdmin']), serverController.getServers);
 router.get('/user/:requesterId', authMiddleware, serverController.getServersByUserId);
 router.get('/:id', authMiddleware, serverController.getServerById);
 router.put('/:id', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin', 'SecurityAdmin']), serverController.updateServer);

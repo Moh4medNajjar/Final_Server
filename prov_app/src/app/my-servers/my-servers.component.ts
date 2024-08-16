@@ -10,6 +10,7 @@ import { ServerService } from '../services/server.service';
 export class MyServersComponent implements OnInit {
 
   items: any[] = [];
+
   userData: any;
   fullName = ""
   matricule = ""
@@ -28,10 +29,39 @@ ngOnInit() {
     this.matricule = userData.matricule
     this.position = userData.position
     this.role = userData.role
+    if( userData.role === 'SuperAdmin') {
+      this.fetchAllServers()
+    }
+    else if(userData.role === ''){
+      this.fetchServersById(userData.id)
+    }
 
-    this.fetchServersById(userData.id)
   }
 
+}
+
+fetchAllServers() {
+  this.serverService.getAllServers().subscribe(
+    (response: any[]) => { // Expecting an array directly
+      console.log("Hello from SuperAdmin", response);
+      this.items = response.map((server: any) => ({
+        vmName: server.vmName,
+        createdAt: server.createdAt,
+        environment_type: server.environment_type,
+        cpu: server.cpu,
+        operating_system: server.operating_system,
+        ram: server.ram,
+        disk_space: server.disk_space,
+        privateIP: server.privateIP,
+        id: server._id
+      }));
+      this.filteredItems = [...this.items];
+      console.log(this.filteredItems);
+    },
+    (error) => {
+      console.error('Error fetching servers:', error);
+    }
+  );
 }
 
 
