@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   userForm!: FormGroup;
+  errorMessage: string = ''; // Add this line
   departments: string[] = ['IT Support', 'Development', 'HR', 'Finance', 'Administration'];
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
@@ -20,7 +21,6 @@ export class LoginComponent implements OnInit {
       matricule: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
     });
   }
-
 
   onSubmit() {
     if (this.userForm.valid) {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         },
         error: (error: any) => {
           console.error('Login failed', error);
-          // Display error message to the user
+          this.errorMessage = 'Invalid matricule or password. Please try again or contact your administrator'; // Set the error message
         }
       });
     } else {

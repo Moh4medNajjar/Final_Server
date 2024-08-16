@@ -7,7 +7,7 @@
       <h3>Provision App</h3>
     </div>
     <p style="font-size:large; font-weight: bold; margin: 0">{{ adminName }}</p>
-    @if(adminRole === 'SuperAdmin') {
+    @if(adminRole !== '') {
       <div class="menu">
         <a routerLink="/my-requests">Requests</a>
         <a routerLink="/my-servers">Servers</a>
@@ -18,7 +18,7 @@
     }
   </div>
 
-  @if(adminRole === 'SuperAdmin') {
+  @if(adminRole !== '') {
     <h3>Users list</h3>
     <div class="d-flex justify-content-between align-items-center my-4">
       <div class="top-table">
@@ -28,7 +28,7 @@
           <i class="fa-solid fa-magnifying-glass ms-1"></i>
         </div>
       </div>
-      @if(role === "") {
+      @if(role === "SuperAdmin") {
         <div class="button" routerLink="/create-user">
           Create User
           <i class="fa fa-user ms-2"></i>
@@ -60,7 +60,7 @@
         <tbody>
           @for (item of users; track item) {
             <tr [ngClass]="{ 'blue-row': users.indexOf(item) % 2 === 0, 'red-row': users.indexOf(item) % 2 !== 0 }">
-              <td>{{ users.indexOf(item) + 1 }}</td> <!-- Index Display -->
+              <td>{{ users.indexOf(item) + 1 }}</td>
               <td>{{ item.fullName }}</td>
               <td>{{ item.position }}</td>
               <td>{{ item.matricule }}</td>
