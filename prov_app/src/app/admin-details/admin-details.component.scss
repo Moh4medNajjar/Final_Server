@@ -197,3 +197,20 @@ i {
   align-items: center;
   justify-content: center;
 }
+
+select {
+  background-color: #212529; /* Dark background color */
+  border: 2px solid #4B5563; /* Orange border */
+  color: #ffffff; /* Text color inside inputs */
+  padding: 0.5rem; /* Reduced padding for a smaller height */
+  font-size: 0.875rem; /* Smaller font size for a more compact appearance */
+  min-height: 2rem; /* Minimum height to ensure content visibility */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  border-radius: 0;
+  width: 200px!important;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}

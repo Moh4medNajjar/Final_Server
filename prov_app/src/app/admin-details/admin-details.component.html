@@ -7,11 +7,15 @@
       <h3>Provision App</h3>
     </div>
     <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
-    <div class="menu">
-      <a routerLink="/my-requests">My Requests</a>
-      <a routerLink="/my-servers">My Servers</a>
-      <a href="">My Profile</a>
-    </div>
+    @if(adminRole === 'SuperAdmin') {
+      <div class="menu">
+        <a routerLink="/my-requests">Requests</a>
+        <a routerLink="/my-servers">Servers</a>
+        <a routerLink="/users-list">Users</a>
+        <a routerLink="/profile">Profile</a>
+        <a routerLink="/logout">Logout</a>
+      </div>
+    }
   </div>
 
   <h3 class="mb-4">User Details</h3>
@@ -25,7 +29,16 @@
       <p><span>Position:</span>{{user.position}}</p>
       <div class="d-flex align-items-center justify-content-start my-2">
         <p style="margin:0"><span>Admin role:</span><span style="color:rgb(33, 179, 33)">{{user.role !==''?user.role:'Ordinary user' }}</span>  </p>
-        <button class="button text-light ms-4" style="height: 35px;">Change role</button>
+      </div>
+      <div class="role-selection mt-3 d-flex align-items-center justify-content-start">
+        <label for="roleSelect" class="form-label">Change User Role:</label>
+        <select id="roleSelect" class="form-select ms-2" [(ngModel)]="selectedRole">
+          <option value="">Select Role</option>
+          <option value="GeneralSpecAdmin">GeneralSpecAdmin</option>
+          <option value="NetworkAdmin">NetworkAdmin</option>
+          <option value="SuperAdmin">SuperAdmin</option>
+        </select>
+        <button class="button text-light ms-4" style="height: 35px;" (click)="updateUserRole()">Update role</button>
       </div>
     </div>
   </div>

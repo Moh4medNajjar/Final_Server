@@ -30,4 +30,10 @@ export class UserService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<any>(`${this.apiUrl}/${id}`, {headers});
   }
+
+  updateUserRole(id: string, updatedData: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, updatedData, {headers});
+  }
 }
