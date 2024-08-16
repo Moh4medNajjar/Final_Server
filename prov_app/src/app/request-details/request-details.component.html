@@ -81,14 +81,39 @@
 
 
   @if (adminRole === 'NetworkAdmin') {
-    <div class="form-group" style="width: 600px">
-      <label for="cidr">Private IP</label>
-      <input type="text" id="cidr" formControlName="cidr" class="form-control" placeholder="eg: 192.168.1.0/24">
-    </div>
-    <div class="form-group" style="width: 600px">
-      <label for="cidr">Subnet mask</label>
-      <input type="text" id="cidr" formControlName="cidr" class="form-control" placeholder="eg: 255.255.0.0">
-    </div>
+    <form [formGroup]="serverForm">
+      <div class="form-group" style="width: 600px">
+        <label for="privateIP">Private IP</label>
+        <input type="text" id="privateIP" formControlName="privateIP" class="form-control" placeholder="eg: 192.168.1.0/24">
+      </div>
+      <div class="form-group" style="width: 600px">
+        <label for="subnetMask">Subnet mask</label>
+        <input type="text" id="subnetMask" formControlName="subnetMask" class="form-control" placeholder="eg: 255.255.0.0">
+      </div>
+      <div class="form-group" style="width: 600px">
+        <label for="defaultGateway">Default Gateway</label>
+        <input type="text" id="defaultGateway" formControlName="defaultGateway" class="form-control" placeholder="eg: 17.25.0.1">
+      </div>
+
+      <h4 class="my-4">Credentials</h4>
+      <div class="form-group" style="width: 600px">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username">
+      </div>
+      <div class="form-group" style="width: 600px">
+        <label for="password">Password</label>
+        <input type="text" id="password" formControlName="password" class="form-control" placeholder="Server password">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-flex align-items-center justify-content-center mt-4">
+        <button class="btn btn-primary" (click)="createServer()">Create Server</button>
+      </div>
+
+    </form>
+
+
+
   }
 
 

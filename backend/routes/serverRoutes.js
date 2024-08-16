@@ -4,7 +4,7 @@ const serverController = require('../controllers/serverController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 
-router.post('/', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin', 'SecurityAdmin']), serverController.createServer);
+router.post('/', authMiddleware, roleMiddleware(['NetworkAdmin', 'SuperAdmin']), serverController.createServer);
 
 router.get('/', authMiddleware, serverController.getServers);
 router.get('/:id', authMiddleware, serverController.getServerById);

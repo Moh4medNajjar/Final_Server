@@ -1,15 +1,49 @@
 const Server = require('../models/serverModel');
 
 exports.createServer = async (req, res) => {
-    const { vmName, environment_type, timeCreated, operating_system, cpu, ram, vCPUs, disk_space, publicIP, cidrRange, status } = req.body;
+    const {
+        vmName,
+        username,
+        requesterId,
+        requesterName,
+        requesterMatricule, // Ensure this matches the schema
+        password,
+        environment_type,
+        operating_system,
+        ram,
+        cpu,
+        disk_space,
+        privateIP,
+        subnetMask,
+        defaultGateway
+    } = req.body;
+
     try {
-        const newServer = new Server({ vmName, environment_type, timeCreated, operating_system, cpu, ram, vCPUs, disk_space, publicIP, cidrRange, status });
+        const newServer = new Server({
+            vmName,
+            username,
+            requesterId,
+            requesterName,
+            requesterMatricule, // Ensure this matches the schema
+            password,
+            environment_type,
+            operating_system,
+            ram,
+            cpu,
+            disk_space,
+            privateIP,
+            subnetMask,
+            defaultGateway
+        });
+
         await newServer.save();
         res.status(201).json({ message: 'Server created successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Error creating server', error });
     }
 };
+
+
 
 exports.getServers = async (req, res) => {
     try {

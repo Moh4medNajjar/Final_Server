@@ -3,30 +3,64 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from '../services/request.service';
 import { AuthService } from '../services/auth.service';
 import { DatePipe } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ServerService } from '../services/server.service'; // Ensure ServerService is imported
 
 @Component({
   selector: 'app-request-details',
   templateUrl: './request-details.component.html',
-  styleUrl: './request-details.component.scss'
+  styleUrls: ['./request-details.component.scss']
 })
 export class RequestDetailsComponent implements OnInit {
 
   requestId!: string;
   requestDetails: any;
+  serverForm!: FormGroup;
+  fullName = "";
+  matricule = "";
+  position = "";
+  email = "";
+  role = "";
+  adminName = "";
+  adminMatricule = "";
+  adminPosition = "";
+  adminEmail = "";
+  adminRole = "";
+  id = "";
+  userData: any
 
-  constructor(private router: Router, private route: ActivatedRoute, private requestService: RequestService, private authService: AuthService, private datePipe: DatePipe) { }
-  fullName = ""
-  matricule = ""
-  position = ""
-  email = ""
-  role = ""
-  adminName = ""
-  adminMatricule = ""
-  adminPosition = ""
-  adminEmail = ""
-  adminRole = ""
+  hidePassword = true;
+  copySuccess = false;
+  password = 'password here'; // Consider generating or securely handling this password
+
+  constructor(
+    private serverService: ServerService,
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private requestService: RequestService,
+    private authService: AuthService,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
+    this.serverForm = this.fb.group({
+      vmName: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      environment_type: ['', Validators.required],
+      operating_system: ['', Validators.required],
+      ram: ['', Validators.required],
+      cpu: ['', Validators.required],
+      disk_space: ['', Validators.required],
+      privateIP: ['', Validators.required],
+      subnetMask: ['', Validators.required],
+      defaultGateway: ['', Validators.required],
+      requesterId: ['', Validators.required], // Add new fields here
+      requesterName: ['', Validators.required],
+      requesterMatricule: ['', Validators.required],
+    });
+
     this.route.paramMap.subscribe(params => {
       this.requestId = params.get('id')!;
       this.fetchRequestDetails(this.requestId);
@@ -34,15 +68,16 @@ export class RequestDetailsComponent implements OnInit {
 
     const token = this.authService.getToken();
     if (token) {
-      // Extract user data (consider using a secure backend API instead)
       const decodedPayload = atob(token.split('.')[1]);
       const userData = JSON.parse(decodedPayload);
-      console.log(userData)
-      this.adminName = userData.fullName
-      this.adminMatricule = userData.matricule
-      this.adminPosition = userData.position
-      this.adminEmail = userData.email
-      this.adminRole = userData.role
+      this.userData = userData;
+      this.adminName = userData.fullName;
+      this.adminMatricule = userData.matricule;
+      this.adminPosition = userData.position;
+      this.adminEmail = userData.email;
+      this.adminRole = userData.role;
+      this.matricule = userData.matricule;
+      this.id = userData.id;
     }
   }
 
@@ -50,7 +85,18 @@ export class RequestDetailsComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe(
       response => {
         this.requestDetails = response;
-        // console.log('Request Details:', this.requestDetails);
+        // Populate form fields with request details
+        this.serverForm.patchValue({
+          vmName: this.requestDetails.vmName,
+          requesterId: this.userData.id,
+          requesterName: this.userData.fullName,
+          requesterMatricule: this.userData.matricule,
+          environment_type: this.requestDetails.environment_type,
+          operating_system: this.requestDetails.operating_system,
+          ram: this.requestDetails.ram,
+          cpu: this.requestDetails.vcpu,
+          disk_space: this.requestDetails.disk_space
+        });
       },
       error => {
         console.error('Error fetching request details:', error);
@@ -61,11 +107,6 @@ export class RequestDetailsComponent implements OnInit {
   formatDate(date: string) {
     return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
-
-  //**************************************************************/
-  password = 'password here';
-  hidePassword = true;
-  copySuccess = false;
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
@@ -90,7 +131,6 @@ export class RequestDetailsComponent implements OnInit {
         },
         error => {
           console.error('Error rejecting request:', error);
-          // Handle error
         }
       );
     }
@@ -104,7 +144,20 @@ export class RequestDetailsComponent implements OnInit {
         },
         error => {
           console.error('Error approving request:', error);
-          // Handle error
+        }
+      );
+    }
+  }
+
+  createServer(): void {
+    if (this.serverForm.valid) {
+      this.serverService.createServer(this.serverForm.value).subscribe(
+        response => {
+          console.log('Server created successfully', response);
+          this.router.navigate(['/my-requests']);
+        },
+        error => {
+          console.error('Error creating server', error);
         }
       );
     }
