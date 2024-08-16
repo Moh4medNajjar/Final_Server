@@ -29,7 +29,7 @@ ngOnInit() {
     this.matricule = userData.matricule
     this.position = userData.position
     this.role = userData.role
-    if( userData.role === 'SuperAdmin') {
+    if( userData.role === 'SuperAdmin' || userData.role === 'NetworkAdmin' || userData.role === 'GeneralSpecAdmin') {
       this.fetchAllServers()
     }
     else if(userData.role === ''){

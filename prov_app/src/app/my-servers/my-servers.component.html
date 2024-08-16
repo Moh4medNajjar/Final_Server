@@ -8,9 +8,12 @@
     </div>
     <p style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
     <div class="menu">
-      <a routerLink="/my-requests">My Requests</a>
-      <a routerLink="/my-servers">My Servers</a>
-      <a href="">My Profile</a>
+      @if (this.userData.role !== '') {
+        <a routerLink="/my-requests">Requests</a>
+        <a routerLink="/my-servers">Servers</a>
+        <a routerLink="/users-list">Users</a>
+        <a routerLink="/my-servers">Logout</a>
+      }
     </div>
   </div>
 
