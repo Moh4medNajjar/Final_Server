@@ -2,6 +2,8 @@ const Server = require('../models/serverModel');
 
 exports.createServer = async (req, res) => {
     const {
+        adminId,
+        adminName,
         vmName,
         username,
         requestId,
@@ -21,6 +23,8 @@ exports.createServer = async (req, res) => {
 
     try {
         const newServer = new Server({
+            adminId,
+            adminName,
             vmName,
             username,
             requestId,

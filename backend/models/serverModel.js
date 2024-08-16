@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const serverSchema = new mongoose.Schema({
+
+    adminId: { type: String, required: true },
+    adminName: { type: String, required: true },
     vmName: { type: String, required: true },
     username: { type: String, required: true },
     requestId: { type: String, required: true },

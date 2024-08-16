@@ -60,6 +60,9 @@ export class RequestDetailsComponent implements OnInit {
       requesterId: ['', Validators.required],
       requesterName: ['', Validators.required],
       requesterMatricule: ['', Validators.required],
+      adminId: ['', Validators.required],
+      adminName: ['', Validators.required],
+
     });
 
     this.route.paramMap.subscribe(params => {
@@ -86,13 +89,16 @@ export class RequestDetailsComponent implements OnInit {
     this.requestService.getRequestById(id).subscribe(
       response => {
         this.requestDetails = response;
+        console.log("requestDetails:",this.requestDetails)
         // Populate form fields with request details
         this.serverForm.patchValue({
           vmName: this.requestDetails.vmName,
           requestId: this.requestDetails._id,
-          requesterId: this.userData.id,
-          requesterName: this.userData.fullName,
-          requesterMatricule: this.userData.matricule,
+          requesterId: this.requestDetails.requesterId,
+          requesterName: this.requestDetails.fullName,
+          requesterMatricule: this.requestDetails.matricule,
+          adminId: this.userData.id,
+          adminName: this.userData.fullName,
           environment_type: this.requestDetails.environment_type,
           operating_system: this.requestDetails.operating_system,
           ram: this.requestDetails.ram,
