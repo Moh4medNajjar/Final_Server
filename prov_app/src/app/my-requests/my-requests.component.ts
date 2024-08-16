@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './my-requests.component.scss'
 })
 export class MyRequestsComponent {
+userData: any;
   constructor(private authService: AuthService, private requestService: RequestService, private datePipe: DatePipe ) { }
 
   sortColumn: string = 'vmName';
@@ -66,7 +67,8 @@ export class MyRequestsComponent {
     if (token) {
       const decodedPayload = atob(token.split('.')[1]);
       const userData = JSON.parse(decodedPayload);
-      // console.log(userData)
+      console.log(userData)
+      this.userData = userData
       this.fullName = userData.fullName
       this.matricule = userData.matricule
       this.position = userData.position

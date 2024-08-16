@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
+  userData: any;
 
   constructor(
     private userService: UserService,
@@ -20,7 +21,7 @@ export class UsersListComponent implements OnInit {
     private authService: AuthService,
     private datePipe: DatePipe
   ) { }
- 
+
 
   fullName = '';
   matricule = '';
@@ -40,6 +41,7 @@ export class UsersListComponent implements OnInit {
     if (token) {
       const decodedPayload = atob(token.split('.')[1]);
       const userData = JSON.parse(decodedPayload);
+      this.userData = userData
       this.adminName = userData.fullName;
       this.adminMatricule = userData.matricule;
       this.adminPosition = userData.position;
