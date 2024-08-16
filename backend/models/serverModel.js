@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const serverSchema = new mongoose.Schema({
     vmName: { type: String, required: true },
     username: { type: String, required: true },
-    requesterId: { type: String, required: true }, // Fixed typo here
+    requestId: { type: String, required: true },
+    requesterId: { type: String, required: true }, 
     requesterName: { type: String, required: true },
     requesterMatricule: { type: String, required: true }, // Fixed typo here
     password: { type: String, required: true },

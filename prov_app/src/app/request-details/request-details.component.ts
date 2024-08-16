@@ -56,7 +56,8 @@ export class RequestDetailsComponent implements OnInit {
       privateIP: ['', Validators.required],
       subnetMask: ['', Validators.required],
       defaultGateway: ['', Validators.required],
-      requesterId: ['', Validators.required], // Add new fields here
+      requestId: ['', Validators.required],
+      requesterId: ['', Validators.required],
       requesterName: ['', Validators.required],
       requesterMatricule: ['', Validators.required],
     });
@@ -88,6 +89,7 @@ export class RequestDetailsComponent implements OnInit {
         // Populate form fields with request details
         this.serverForm.patchValue({
           vmName: this.requestDetails.vmName,
+          requestId: this.requestDetails._id,
           requesterId: this.userData.id,
           requesterName: this.userData.fullName,
           requesterMatricule: this.userData.matricule,
@@ -149,17 +151,29 @@ export class RequestDetailsComponent implements OnInit {
     }
   }
 
-  createServer(): void {
-    if (this.serverForm.valid) {
-      this.serverService.createServer(this.serverForm.value).subscribe(
-        response => {
-          console.log('Server created successfully', response);
-          this.router.navigate(['/my-requests']);
-        },
-        error => {
-          console.error('Error creating server', error);
-        }
-      );
-    }
+  createServer() {
+    // Extract values from the form
+    const serverData = this.serverForm.value;
+
+    // Ensure serverData contains only the necessary fields
+    this.serverService.createServer(serverData).subscribe(
+      (response) => {
+        console.log('Server created successfully', response);
+        // Update request status after server creation
+        this.requestService.finishRequest(this.requestDetails._id).subscribe(
+          (updateResponse) => {
+            console.log('Request status updated successfully', updateResponse);
+            this.router.navigate(['/my-requests']);
+          },
+          (error) => {
+            console.error('Error updating request status', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error creating server', error);
+      }
+    );
   }
+
 }

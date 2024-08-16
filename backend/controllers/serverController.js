@@ -4,6 +4,7 @@ exports.createServer = async (req, res) => {
     const {
         vmName,
         username,
+        requestId,
         requesterId,
         requesterName,
         requesterMatricule, // Ensure this matches the schema
@@ -22,6 +23,7 @@ exports.createServer = async (req, res) => {
         const newServer = new Server({
             vmName,
             username,
+            requestId,
             requesterId,
             requesterName,
             requesterMatricule, // Ensure this matches the schema

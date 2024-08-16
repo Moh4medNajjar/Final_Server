@@ -98,23 +98,20 @@ exports.approveByGeneralSpecAdmin = async (req, res) => {
     }
 };
 
-// Approve request by NetworkAdmin
-exports.approveByNetworkAdmin = async (req, res) => {
-    try {
-        const request = await Request.findById(req.params.id);
-        if (!request) return res.status(404).json({ message: 'Request not found' });
+    // Approve request by NetworkAdmin
+    exports.approveByNetworkAdmin = async (req, res) => {
+        try {
+            const request = await Request.findById(req.params.id);
+            if (!request) return res.status(404).json({ message: 'Request not found' });
 
-        request.status = 'Approved by NetworkAdmin';
-        await request.save();
-        
-        // Notify SecurityAdmin
-        // (You may add notification logic here)
+            request.status = 'finished';
+            await request.save();
 
-        res.status(200).json({ message: 'Request approved by NetworkAdmin', request });
-    } catch (error) {
-        res.status(500).json({ message: 'Error approving request by NetworkAdmin', error });
-    }
-};
+            res.status(200).json({ message: 'Request is finished', request });
+        } catch (error) {
+            res.status(500).json({ message: 'Error finishing', error });
+        }
+    };
 
 // Approve request by SecurityAdmin
 exports.approveBySecurityAdmin = async (req, res) => {
