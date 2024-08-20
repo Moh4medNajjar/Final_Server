@@ -15,8 +15,8 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private registerUrl = 'http://0.0.0.0:3000/api/auth/register';
-  private loginUrl = 'http://0.0.0.0:3000/api/auth/login';
+  private registerUrl = 'http://192.168.1.212:3000/api/auth/register';
+  private loginUrl = 'http://192.168.1.212:3000/api/auth/login';
 
   constructor(private http: HttpClient, private router:Router) {}
 
