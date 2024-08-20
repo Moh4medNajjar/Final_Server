@@ -45,8 +45,8 @@
               Name
               <i class="fa fa-sort" *ngIf="sortColumn === 'name'"></i>
             </th>
-            <th (click)="sortTable('position')">
-              Position
+            <th (click)="sortTable('role')">
+              Role
             </th>
             <th (click)="sortTable('matricule')">
               Matricule
@@ -62,7 +62,14 @@
             <tr [ngClass]="{ 'blue-row': users.indexOf(item) % 2 === 0, 'red-row': users.indexOf(item) % 2 !== 0 }">
               <td>{{ users.indexOf(item) + 1 }}</td>
               <td>{{ item.fullName }}</td>
-              <td>{{ item.position }}</td>
+              <td [ngClass]="{
+                'role-ordinary-user': item.role === '',
+                'role-network-admin': item.role === 'NetworkAdmin',
+                'role-general-spec-admin': item.role === 'GeneralSpecAdmin',
+                'role-super-admin': item.role === 'SuperAdmin'
+              }">
+            {{ item.role === '' ? "Ordinary User" : item.role }}
+          </td>
               <td>{{ item.matricule }}</td>
               <td>{{ item.email }}</td>
               <td>

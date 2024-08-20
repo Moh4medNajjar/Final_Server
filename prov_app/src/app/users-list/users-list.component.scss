@@ -274,3 +274,22 @@ html {
 .cancel-btn:hover {
   opacity: 0.9;
 }
+
+
+
+/* component.css */
+.role-ordinary-user {
+  color: white;
+}
+
+.role-network-admin {
+  color: green;
+}
+
+.role-general-spec-admin {
+  color: #FFA500; /* Orange Yellowish color */
+}
+
+.role-super-admin {
+  color: red;
+}
