@@ -143,6 +143,7 @@ export class RequestDetailsComponent implements OnInit {
   }
 
   approveRequest(): void {
+    console.log(this.requestId)
     if (this.requestId) {
       this.requestService.approveRequest(this.requestId).subscribe(
         response => {

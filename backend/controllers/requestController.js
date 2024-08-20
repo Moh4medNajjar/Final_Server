@@ -94,9 +94,11 @@ exports.approveByGeneralSpecAdmin = async (req, res) => {
 
         res.status(200).json({ message: 'Request approved by GeneralSpecAdmin', request });
     } catch (error) {
+        console.error('Error approving request by GeneralSpecAdmin:', error); // Enhanced logging
         res.status(500).json({ message: 'Error approving request by GeneralSpecAdmin', error });
     }
 };
+
 
     // Approve request by NetworkAdmin
     exports.approveByNetworkAdmin = async (req, res) => {
