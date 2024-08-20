@@ -62,8 +62,9 @@
       when: build_result.rc != 0
 
 - name: Configure Apache and Node.js
-  hosts: mean_stack
+  hosts: localhost
   become: yes
+  connection: local
   tasks:
     - name: Configure Apache to serve Angular app
       copy:
@@ -117,8 +118,9 @@
         enabled: yes
 
 - name: Setup and run Node.js app
-  hosts: mean_stack
+  hosts: localhost
   become: yes
+  connection: local
   tasks:
     - name: Stop and disable the Final_Server service if running
       systemd:
