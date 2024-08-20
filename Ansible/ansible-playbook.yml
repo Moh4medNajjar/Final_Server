@@ -1,7 +1,8 @@
 
 - name: Deploy MEAN stack application with MongoDB in Docker
-  hosts: mean_stack
+  hosts: localhost
   become: yes
+  connection: local
 
   tasks:
     - name: Start and enable Docker service
