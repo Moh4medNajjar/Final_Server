@@ -83,33 +83,33 @@ exports.deleteRequest = async (req, res) => {
     }
 };
 
-// Approve request by GeneralSpecAdmin
-exports.approveByGeneralSpecAdmin = async (req, res) => {
-    try {
-        // Fetch the request by ID
-        const request = await Request.findById(req.params.id);
+// // Approve request by GeneralSpecAdmin
+// exports.approveByGeneralSpecAdmin = async (req, res) => {
+//     try {
+//         // Fetch the request by ID
+//         const request = await Request.findById(req.params.id);
         
-        // Check if the request exists
-        if (!request) {
-            return res.status(404).json({ message: 'Request not found' });
-        }
+//         // Check if the request exists
+//         if (!request) {
+//             return res.status(404).json({ message: 'Request not found' });
+//         }
         
-        // Update the status to 'approved'
-        request.status = 'approved';
+//         // Update the status to 'approved'
+//         request.status = 'approved';
         
-        // Save the updated request
-        await request.save();
+//         // Save the updated request
+//         await request.save();
         
-        // Send a success response
-        res.status(200).json({ message: 'Request approved by GeneralSpecAdmin', request });
-    } catch (error) {
-        // Log the error for debugging
-        console.error('Error approving request by GeneralSpecAdmin:', error);
+//         // Send a success response
+//         res.status(200).json({ message: 'Request approved by GeneralSpecAdmin', request });
+//     } catch (error) {
+//         // Log the error for debugging
+//         console.error('Error approving request by GeneralSpecAdmin:', error);
         
-        // Send an error response
-        res.status(500).json({ message: 'Error approving request by GeneralSpecAdmin', error });
-    }
-};
+//         // Send an error response
+//         res.status(500).json({ message: 'Error approving request by GeneralSpecAdmin', error });
+//     }
+// };
 
 
 
@@ -166,5 +166,27 @@ exports.rejectRequest = async (req, res) => {
     } catch (error) {
         console.error('Error rejecting request:', error);  // Log error to server console
         res.status(500).json({ message: 'Error rejecting request', error: error.message });
+    }
+};
+
+// Reject a request
+exports.approveByGeneralSpecAdmin = async (req, res) => {
+    try {
+        console.log('Approve request received for ID:', req.params.id);  // Debugging output
+
+        const request = await Request.findById(req.params.id);
+        if (!request) {
+            console.log('Request not found');
+            return res.status(404).json({ message: 'Request not found' });
+        }
+
+        request.status = 'approved';
+        await request.save();
+        console.log('Request approved:', request);  // Debugging output
+
+        res.status(200).json({ message: 'Request approved successfully', request });
+    } catch (error) {
+        console.error('Error approved request:', error);  // Log error to server console
+        res.status(500).json({ message: 'Error approving request', error: error.message });
     }
 };
