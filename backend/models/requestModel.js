@@ -22,7 +22,7 @@ const requestSchema = new mongoose.Schema({
     subnet_mask: { type: String, required: false },
     /***********************************************/ 
     software_list: {type: [String], default: []},
-    status: { type: String, enum: ['pending', 'approved', 'approvedByNetworkAdmin','approvedBySecurityAdmin', 'finished', 'rejected'], default: 'pending' },
+    status: { type: String, enum: ['pending', 'approved','Approved by GeneralSpecAdmin', 'approvedByNetworkAdmin','approvedBySecurityAdmin', 'finished', 'rejected'], default: 'pending' },
     openPorts: {type: [String], default: []},
     hasPublicIP: { type: Boolean, default: false },
 }, { timestamps: true });
