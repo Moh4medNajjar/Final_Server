@@ -86,18 +86,31 @@ exports.deleteRequest = async (req, res) => {
 // Approve request by GeneralSpecAdmin
 exports.approveByGeneralSpecAdmin = async (req, res) => {
     try {
+        // Fetch the request by ID
         const request = await Request.findById(req.params.id);
-        if (!request) return res.status(404).json({ message: 'Request not found' });
         
+        // Check if the request exists
+        if (!request) {
+            return res.status(404).json({ message: 'Request not found' });
+        }
+        
+        // Update the status to 'approved'
         request.status = 'approved';
+        
+        // Save the updated request
         await request.save();
-
+        
+        // Send a success response
         res.status(200).json({ message: 'Request approved by GeneralSpecAdmin', request });
     } catch (error) {
-        console.error('Error approving request by GeneralSpecAdmin:', error); // Enhanced logging
+        // Log the error for debugging
+        console.error('Error approving request by GeneralSpecAdmin:', error);
+        
+        // Send an error response
         res.status(500).json({ message: 'Error approving request by GeneralSpecAdmin', error });
     }
 };
+
 
 
     // Approve request by NetworkAdmin
