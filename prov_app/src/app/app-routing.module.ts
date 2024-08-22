@@ -14,7 +14,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { AnsweredRequestsComponent } from './answered-requests/answered-requests.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signup', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path:"login", component: LoginComponent},
   { path:"signup", component: SignupComponent},
   { path: 'my-requests', component: MyRequestsComponent },
