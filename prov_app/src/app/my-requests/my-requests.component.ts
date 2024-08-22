@@ -110,6 +110,8 @@ userData: any;
     );
   }
 
+
+
   fetchRequestsByUserId(userId: string) {
     this.requestService.getRequestsByUserId(userId).subscribe(
       (data) => {
@@ -127,4 +129,9 @@ userData: any;
   }
 
   searchQuery: string = '';
+
+
+  logout(){
+    this.authService.logout();
+  }
 }

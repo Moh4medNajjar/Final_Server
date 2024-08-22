@@ -8,7 +8,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 })
 export class RequestService {
 
-  private apiUrl = 'http://192.168.1.212:3000/api/requests';
+  private apiUrl = 'http://localhost:3000/api/requests';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

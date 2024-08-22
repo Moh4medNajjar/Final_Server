@@ -83,50 +83,20 @@ exports.deleteRequest = async (req, res) => {
     }
 };
 
-// // Approve request by GeneralSpecAdmin
-// exports.approveByGeneralSpecAdmin = async (req, res) => {
-//     try {
-//         // Fetch the request by ID
-//         const request = await Request.findById(req.params.id);
-        
-//         // Check if the request exists
-//         if (!request) {
-//             return res.status(404).json({ message: 'Request not found' });
-//         }
-        
-//         // Update the status to 'approved'
-//         request.status = 'approved';
-        
-//         // Save the updated request
-//         await request.save();
-        
-//         // Send a success response
-//         res.status(200).json({ message: 'Request approved by GeneralSpecAdmin', request });
-//     } catch (error) {
-//         // Log the error for debugging
-//         console.error('Error approving request by GeneralSpecAdmin:', error);
-        
-//         // Send an error response
-//         res.status(500).json({ message: 'Error approving request by GeneralSpecAdmin', error });
-//     }
-// };
+// Approve request by NetworkAdmin
+exports.approveByNetworkAdmin = async (req, res) => {
+    try {
+        const request = await Request.findById(req.params.id);
+        if (!request) return res.status(404).json({ message: 'Request not found' });
 
+        request.status = 'finished';
+        await request.save();
 
-
-    // Approve request by NetworkAdmin
-    exports.approveByNetworkAdmin = async (req, res) => {
-        try {
-            const request = await Request.findById(req.params.id);
-            if (!request) return res.status(404).json({ message: 'Request not found' });
-
-            request.status = 'finished';
-            await request.save();
-
-            res.status(200).json({ message: 'Request is finished', request });
-        } catch (error) {
-            res.status(500).json({ message: 'Error finishing', error });
-        }
-    };
+        res.status(200).json({ message: 'Request is finished', request });
+    } catch (error) {
+        res.status(500).json({ message: 'Error finishing', error });
+    }
+};
 
 // Approve request by SecurityAdmin
 exports.approveBySecurityAdmin = async (req, res) => {
@@ -136,9 +106,6 @@ exports.approveBySecurityAdmin = async (req, res) => {
 
         request.status = 'Approved by SecurityAdmin';
         await request.save();
-        
-        // Trigger Ansible playbooks for server creation
-        // (You may add playbook execution logic here)
 
         res.status(200).json({ message: 'Request approved by SecurityAdmin', request });
     } catch (error) {
@@ -160,19 +127,18 @@ exports.rejectRequest = async (req, res) => {
 
         request.status = 'rejected';
         await request.save();
-        console.log('Request rejected:', request);  // Debugging output
+        console.log('Request rejected:', request); 
 
         res.status(200).json({ message: 'Request rejected successfully', request });
     } catch (error) {
-        console.error('Error rejecting request:', error);  // Log error to server console
+        console.error('Error rejecting request:', error);  
         res.status(500).json({ message: 'Error rejecting request', error: error.message });
     }
 };
 
-// Reject a request
 exports.approveByGeneralSpecAdmin = async (req, res) => {
     try {
-        console.log('Approve request received for ID:', req.params.id);  // Debugging output
+        console.log('Approve request received for ID:', req.params.id);
 
         const request = await Request.findById(req.params.id);
         if (!request) {
@@ -182,11 +148,11 @@ exports.approveByGeneralSpecAdmin = async (req, res) => {
 
         request.status = 'approved';
         await request.save();
-        console.log('Request approved:', request);  // Debugging output
+        console.log('Request approved:', request);  
 
         res.status(200).json({ message: 'Request approved successfully', request });
     } catch (error) {
-        console.error('Error approved request:', error);  // Log error to server console
+        console.error('Error approved request:', error);  
         res.status(500).json({ message: 'Error approving request', error: error.message });
     }
 };
