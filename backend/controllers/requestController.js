@@ -136,23 +136,23 @@ exports.rejectRequest = async (req, res) => {
     }
 };
 
-exports.approveByGeneralSpecAdmin = async (req, res) => {
-    try {
-        console.log('Approve request received for ID:', req.params.id);
+// exports.approveByGeneralSpecAdmin = async (req, res) => {
+//     try {
+//         console.log('Approve request received for ID:', req.params.id);
 
-        const request = await Request.findById(req.params.id);
-        if (!request) {
-            console.log('Request not found');
-            return res.status(404).json({ message: 'Request not found' });
-        }
+//         const request = await Request.findById(req.params.id);
+//         if (!request) {
+//             console.log('Request not found');
+//             return res.status(404).json({ message: 'Request not found' });
+//         }
 
-        request.status = 'approved';
-        await request.save();
-        console.log('Request approved:', request);  
+//         request.status = 'approved';
+//         await request.save();
+//         console.log('Request approved:', request);  
 
-        res.status(200).json({ message: 'Request approved successfully', request });
-    } catch (error) {
-        console.error('Error approved request:', error);  
-        res.status(500).json({ message: 'Error approving request', error: error.message });
-    }
-};
+//         res.status(200).json({ message: 'Request approved successfully', request });
+//     } catch (error) {
+//         console.error('Error approved request:', error);  
+//         res.status(500).json({ message: 'Error approving request', error: error.message });
+//     }
+// };

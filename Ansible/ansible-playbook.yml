@@ -1,4 +1,3 @@
-
 - name: Deploy MEAN stack application with MongoDB in Docker
   hosts: localhost
   become: yes
@@ -33,11 +32,17 @@
   connection: local
   become: yes
   tasks:
-    - name: Clone the application repository
+    - name: Ensure application repository directory exists
+      file:
+        path: /opt/Final_Server
+        state: directory
+
+    - name: Clone or update the application repository
       git:
         repo: 'https://github.com/Moh4medNajjar/Final_Server'
         dest: /opt/Final_Server
         version: master
+        update: yes  # This will pull the latest changes if the repo already exists
         force: yes
 
     - name: Change to project directory and install dependencies
