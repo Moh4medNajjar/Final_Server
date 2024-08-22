@@ -119,7 +119,7 @@
     - name: Enable and start the Final_Server service
       systemd:
         name: Final_Server
-        state: started
+        state: restarted
         enabled: yes
 
 - name: Setup and run Node.js app
