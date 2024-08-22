@@ -100,7 +100,7 @@
             <td>{{ formatDate(item.createdAt) }}</td>
             <td>
               <i class="fa fa-circle me-1" [ngClass]="getStatusCircleClass(item.status)"></i>
-              {{ item.status }}
+              {{ item.status === "finished"?"Server provisioned":item.status }}
             </td>
             <td>
               <i class="fa-solid fa-arrow-up-right-from-square ms-4" [routerLink]="['/request-details', item._id]"></i>
