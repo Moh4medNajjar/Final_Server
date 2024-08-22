@@ -13,6 +13,10 @@ export class AdminDetailsComponent implements OnInit {
   hidePassword = true;
   copySuccess = false;
 
+  onLogout() {
+    this.authService.logout();
+  }
+
   user: any = {}; // Object to hold user details
   userId: string | null = null;
 

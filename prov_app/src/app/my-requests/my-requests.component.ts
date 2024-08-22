@@ -88,9 +88,13 @@ userData: any;
 
 
     }
+
+
   }
 
-
+  onLogout() {
+    this.authService.logout();
+  }
 
   fetchAllRequests() {
     this.requestService.getRequests().subscribe(

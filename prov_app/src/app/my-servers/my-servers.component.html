@@ -12,12 +12,12 @@
         <a routerLink="/my-requests">Requests</a>
         <a routerLink="/my-servers">Servers</a>
         <a routerLink="/users-list">Users</a>
-        <a routerLink="/my-servers">Logout</a>
+        <a (click)="onLogout()">Logout</a>
       }
       @else {
         <a routerLink="/my-requests">My Requests</a>
         <a routerLink="/my-servers">My Servers</a>
-        <a routerLink="/users-list">Logout</a>
+        <a (click)="onLogout()">Logout</a>
       }
     </div>
   </div>

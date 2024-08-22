@@ -46,6 +46,10 @@ export class CreateUserComponent implements OnInit {
     return password && confirmPassword && password.value === confirmPassword.value ? null : { mismatch: true };
   }
 
+  onLogout() {
+    this.authService.logout();
+  }
+
   onSubmit(): void {
     if (this.userForm.valid) {
       const userData = this.userForm.value;

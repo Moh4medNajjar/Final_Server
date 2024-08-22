@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-server-details',
@@ -18,9 +19,12 @@ export class ServerDetailsComponent implements OnInit {
   constructor(
     private datePipe: DatePipe,
     private route: ActivatedRoute,
-    private serverService: ServerService
+    private serverService: ServerService,
+    private authService: AuthService
   ) {}
-
+  onLogout() {
+    this.authService.logout();
+  }
   ngOnInit() {
     // Get server ID from route parameters
     this.route.paramMap.subscribe(params => {

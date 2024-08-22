@@ -15,14 +15,14 @@
       <div class="menu">
         <a routerLink="/my-requests">My Requests</a>
         <a routerLink="/my-servers">My Servers</a>
-        <a href="">Logout</a>
+        <a (click)="onLogout()">Logout</a>
       </div>
     }
     @if(role === "GeneralSpecAdmin") {
       <div class="menu">
         <a routerLink="/my-requests">Incoming requests</a>
         <a routerLink="/answered-requests">Answered requests</a>
-        <a routerLink="/my-servers">Logout</a>
+        <a (click)="onLogout()">Logout</a>
       </div>
     }
     @if(role === "SuperAdmin") {
@@ -31,7 +31,7 @@
         <a routerLink="/my-servers">Servers</a>
         <a routerLink="/users-list">Users</a>
         <a [routerLink]="['/user-details', userData?.id]">Profile</a>
-        <a routerLink="/my-servers">Logout</a>
+        <a (click)="onLogout()">Logout</a>
       </div>
     }
     @if(role === "NetworkAdmin") {

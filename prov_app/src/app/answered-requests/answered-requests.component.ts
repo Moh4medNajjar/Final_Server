@@ -9,7 +9,9 @@ import { DatePipe } from '@angular/common';
 })
 export class AnsweredRequestsComponent {
   constructor(private authService: AuthService, private requestService: RequestService, private datePipe: DatePipe ) { }
-
+  onLogout() {
+    this.authService.logout();
+  }
   sortColumn: string = 'vmName';
   sortDirection: boolean = true;
 

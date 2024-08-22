@@ -40,6 +40,10 @@ ngOnInit() {
 
 }
 
+onLogout() {
+  this.authService.logout();
+}
+
 fetchAllServers() {
   this.serverService.getAllServers().subscribe(
     (response: any[]) => { // Expecting an array directly

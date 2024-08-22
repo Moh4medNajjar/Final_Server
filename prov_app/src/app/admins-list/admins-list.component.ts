@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-admins-list',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './admins-list.component.scss'
 })
 export class AdminsListComponent {
+  constructor(private authService:AuthService){
+
+  }
   items = [
     { name: 'Mohamed Ben Ali', position: 'Developer', matricule: 'DEV001', role: 'Network Admin' },
     { name: 'Fatma Bouazizi', position: 'Manager', matricule: 'MAN002', role: 'Security Admin' },
@@ -60,6 +64,10 @@ export class AdminsListComponent {
         // Return the comparison based on the sort direction
         return this.sortDirection ? comparison : -comparison;
     });
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   filteredItems = [...this.items];

@@ -43,7 +43,9 @@ export class NewRequestComponent implements OnInit {
       this.formData.position = userData.position;
     }
   }
-
+  onLogout() {
+    this.authService.logout();
+  }
   successMessage: string | null = null;
 
   onSubmit(form: NgForm) {
