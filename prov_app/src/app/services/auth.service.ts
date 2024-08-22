@@ -36,7 +36,7 @@ export class AuthService {
 
   logout() {
     // Remove the JWT token from localStorage or sessionStorage
-    localStorage.removeItem('authToken'); // or sessionStorage.removeItem('authToken');
+    localStorage.removeItem('token'); // or sessionStorage.removeItem('authToken');
 
     // Redirect the user to the login page or home page
     this.router.navigate(['/login']);

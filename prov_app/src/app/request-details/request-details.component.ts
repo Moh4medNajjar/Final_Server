@@ -156,8 +156,10 @@ export class RequestDetailsComponent implements OnInit {
   }
 
   onLogout() {
+    console.log('Token before logout:', localStorage.getItem('token')); // or sessionStorage.getItem('authToken')
     this.authService.logout();
-    this.router.navigate(['/login'])
+    console.log('Token after logout:', localStorage.getItem('token'));
+
   }
 
   createServer() {
