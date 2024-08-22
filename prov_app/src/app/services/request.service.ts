@@ -8,7 +8,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 })
 export class RequestService {
 
-  private apiUrl = 'http://192.168.1.212:3000/api/requests';
+  private apiUrl = 'http://localhost:3000/api/requests';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -50,7 +50,7 @@ rejectRequest(requestId: string): Observable<any> {
 approveRequest(requestId: string): Observable<any> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.put(`${this.apiUrl}/${requestId}/approve`, {}, { headers });
+  return this.http.put(`${this.apiUrl}/${requestId}/approve`, {status: 'approved'}, { headers });
 }
 
 
