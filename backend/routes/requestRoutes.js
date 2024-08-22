@@ -16,7 +16,7 @@ router.get('/user/:userId', requestController.getRequestsByUserId);
 
 router.patch('/:id/reject', roleMiddleware('GeneralSpecAdmin'),requestController.rejectRequest);
 
-router.patch('/:id/approve/general',  roleMiddleware('GeneralSpecAdmin'),requestController.approveByGeneralSpecAdmin);
+router.put('/:id/approve/general',  roleMiddleware('GeneralSpecAdmin'),requestController.approveByGeneralSpecAdmin);
 router.put('/:id/approve/network', roleMiddleware('NetworkAdmin'), requestController.approveByNetworkAdmin);
 router.put('/:id/approve/security', roleMiddleware('SecurityAdmin'), requestController.approveBySecurityAdmin);
 
