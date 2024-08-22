@@ -65,6 +65,7 @@ exports.getRequestById = async (req, res) => {
 exports.updateRequest = async (req, res) => {
     try {
         const updatedRequest = await Request.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        console.log('Status being updated:', req.body.status);
         if (!updatedRequest) return res.status(404).json({ message: 'Request not found' });
         res.status(200).json({ message: 'Request updated successfully', updatedRequest });
     } catch (error) {
