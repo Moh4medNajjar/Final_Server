@@ -45,10 +45,12 @@ rejectRequest(requestId: string): Observable<any> {
   return this.http.patch(`${this.apiUrl}/${requestId}/reject`, {}, { headers });
 }
 
-  approveRequest(requestId: string): Observable<any> {
+
+
+approveRequest(requestId: string): Observable<any> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.put(`${this.apiUrl}/${requestId}/approve/general`, {}, { headers });
+  return this.http.put(`${this.apiUrl}/${requestId}/approve/general`, {status: 'approved'}, { headers });
 }
 
 
