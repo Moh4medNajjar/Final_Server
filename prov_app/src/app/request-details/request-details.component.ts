@@ -149,7 +149,7 @@ export class RequestDetailsComponent implements OnInit {
           this.router.navigate(['/my-requests']);
         },
         error => {
-          console.error('Error approving request:', error);
+          console.error('Barra nayyek ya zebi:', error);
         }
       );
     }

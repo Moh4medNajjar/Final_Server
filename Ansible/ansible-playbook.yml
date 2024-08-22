@@ -42,7 +42,7 @@
         repo: 'https://github.com/Moh4medNajjar/Final_Server'
         dest: /opt/Final_Server
         version: master
-        update: yes  # This will pull the latest changes if the repo already exists
+        update: yes  
         force: yes
 
     - name: Change to project directory and install dependencies
