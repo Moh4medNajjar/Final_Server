@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'prov_app';
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+
 }

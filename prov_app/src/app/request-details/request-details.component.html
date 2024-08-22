@@ -23,7 +23,7 @@
       <div class="menu">
         <a routerLink="/my-requests">Incoming requests</a>
         <a routerLink="/answered-requests">Answered requests</a>
-        <a routerLink="/my-servers">Logout</a>
+        <a (click)="onLogout()">Logout</a>
       </div>
     }
     @if(adminRole === "NetworkAdmin") {

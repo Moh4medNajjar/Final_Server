@@ -22,7 +22,10 @@ export class UsersListComponent implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login'])
+  }
   fullName = '';
   matricule = '';
   position = '';

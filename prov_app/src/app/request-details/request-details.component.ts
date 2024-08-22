@@ -155,6 +155,11 @@ export class RequestDetailsComponent implements OnInit {
     }
   }
 
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login'])
+  }
+
   createServer() {
     // Extract values from the form
     const serverData = this.serverForm.value;
