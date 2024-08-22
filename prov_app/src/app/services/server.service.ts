@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class ServerService {
 
-  private apiUrl = 'http://localhost:3000/api/servers';
+  private apiUrl = 'http://192.168.1.212:3000/api/servers';
 
   constructor(private authService:AuthService, private http: HttpClient) {}
 
