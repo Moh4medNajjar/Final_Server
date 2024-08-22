@@ -81,7 +81,7 @@
       </table>
     </div>
   }
-  @else {
+  @if(adminRole === 'GeneralSpecAdmin') {
     <p>Access Denied. This page is restricted to Super Admins only. If you believe you should have access, please contact your administrator.</p>
   }
 </div>
