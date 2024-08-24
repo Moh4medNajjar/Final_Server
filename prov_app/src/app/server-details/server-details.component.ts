@@ -15,6 +15,14 @@ export class ServerDetailsComponent implements OnInit {
   copySuccess = false;
   server: any;
   serverId: string | null = null;
+  userData: any;
+  adminName: any;
+  adminMatricule: any;
+  adminPosition: any;
+  adminEmail: any;
+  adminRole: any;
+  matricule: any;
+  id: any;
 
   constructor(
     private datePipe: DatePipe,
@@ -26,7 +34,19 @@ export class ServerDetailsComponent implements OnInit {
     this.authService.logout();
   }
   ngOnInit() {
-    // Get server ID from route parameters
+    const token = this.authService.getToken();
+    if (token) {
+      const decodedPayload = atob(token.split('.')[1]);
+      const userData = JSON.parse(decodedPayload);
+      this.userData = userData;
+      this.adminName = userData.fullName;
+      this.adminMatricule = userData.matricule;
+      this.adminPosition = userData.position;
+      this.adminEmail = userData.email;
+      this.adminRole = userData.role;
+      this.matricule = userData.matricule;
+      this.id = userData.id;
+    }
     this.route.paramMap.subscribe(params => {
       this.serverId = params.get('id');
       console.log('Server ID from route:', this.serverId);

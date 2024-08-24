@@ -1,12 +1,16 @@
 <div class="container-fluid" style="min-height: 100vh">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <div class="header mb-5">
+  <div class="header mb-5 d-flex align-items-start justify-content-between">
     <div class="brand d-flex align-items-center justify-content-start">
       <div class="logo"></div>
       <h3>Provision App</h3>
     </div>
-    <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
+    <div>
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminName}}</p>
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminRole}}</p>
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminMatricule}}</p>
+    </div>
     <div class="menu">
       <a routerLink="/my-requests">My Requests</a>
       <a routerLink="/my-servers">My Servers</a>

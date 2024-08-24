@@ -13,7 +13,7 @@
         <a routerLink="/my-servers">Servers</a>
         <a routerLink="/users-list">Users</a>
         <a [routerLink]="['/user-details', userData?.id]">Profile</a>
-        <a (click)="onLogout()">Logout</a>
+        <a (click)="onLogout()" style="cursor:pointer">Logout</a>
       </div>
     }
   </div>
@@ -83,8 +83,10 @@
       </table>
     </div>
   }
-  @if(adminRole !== '') {
-    <p>Access Denied. This page is restricted to Super Admins only. If you believe you should have access, please contact your administrator.</p>
+  @if(adminRole !== 'SuperAdmin') {
+    <div class="container-fluid" style="display:flex; align-items: center; justify-content: center; width: 300px; height: fit-content; background-color: rgba(255, 0, 0, 0.858); margin-top: 230px;">
+      <p>Access Denied. This page is restricted to Super Admins only. If you believe you should have access, please contact your administrator.</p>
+    </div>
   }
 </div>
 

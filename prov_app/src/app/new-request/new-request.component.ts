@@ -29,13 +29,14 @@ export class NewRequestComponent implements OnInit {
     openPorts: [],
     hasPublicIP: false
   };
-
+userData: any
   ngOnInit() {
     const token = this.authService.getToken();
     if (token) {
       // Extract user data (consider using a secure backend API instead)
       const decodedPayload = atob(token.split('.')[1]);
       const userData = JSON.parse(decodedPayload);
+      this.userData = userData
       console.log(userData);
       this.formData.requesterId = userData.id;
       this.formData.fullName = userData.fullName;

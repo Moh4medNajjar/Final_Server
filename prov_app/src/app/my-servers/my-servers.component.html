@@ -6,7 +6,11 @@
       <div class="logo"></div>
       <h3>Provision App</h3>
     </div>
-    <p style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
+    <div style="display:flex; align-items: center; flex-direction: column;">
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
+      <p style="font-weight: bold; margin:0">{{role}}</p>
+      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">Matricule: {{ matricule }}</p>
+    </div>
     <div class="menu">
       @if (this.userData.role !== '') {
         <a routerLink="/my-requests">Requests</a>

@@ -39,12 +39,13 @@ export class AdminDetailsComponent implements OnInit {
   adminRole = '';
   selectedRole: string = ''; // Holds the currently selected role
 
-
+userData: any
   ngOnInit(): void {
     const token = this.authService.getToken();
     if (token) {
       const decodedPayload = atob(token.split('.')[1]);
       const userData = JSON.parse(decodedPayload);
+      this.userData = userData;
       this.adminName = userData.fullName;
       this.adminMatricule = userData.matricule;
       this.adminPosition = userData.position;
