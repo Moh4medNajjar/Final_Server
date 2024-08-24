@@ -25,13 +25,14 @@
         <a (click)="onLogout()">Logout</a>
       </div>
     }
-    @if(role === "SuperAdmin") {
+
+    @if(role === 'SuperAdmin') {
       <div class="menu">
+        <a routerLink="/admin-dashboard">Home</a>
         <a routerLink="/my-requests">Requests</a>
         <a routerLink="/my-servers">Servers</a>
         <a routerLink="/users-list">Users</a>
-        <a [routerLink]="['/user-details', userData?.id]">Profile</a>
-        <a (click)="onLogout()">Logout</a>
+        <a (click)="onLogout()" style="cursor: pointer">Logout</a>
       </div>
     }
     @if(role === "NetworkAdmin") {

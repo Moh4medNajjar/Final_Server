@@ -11,12 +11,15 @@
       <p style="font-weight: bold; margin:0">{{role}}</p>
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">Matricule: {{ matricule }}</p>
     </div>
-    <div class="menu">
-      @if (this.userData.role !== '') {
-        <a routerLink="/my-requests">Requests</a>
-        <a routerLink="/my-servers">Servers</a>
-        <a routerLink="/users-list">Users</a>
-        <a (click)="onLogout()">Logout</a>
+    <div class="menu">      
+      @if(this.userData.role === 'SuperAdmin') {
+        <div class="menu">
+          <a routerLink="/admin-dashboard">Home</a>
+          <a routerLink="/my-requests">Requests</a>
+          <a routerLink="/my-servers">Servers</a>
+          <a routerLink="/users-list">Users</a>
+          <a (click)="onLogout()" style="cursor: pointer">Logout</a>
+        </div>
       }
       @else {
         <a routerLink="/my-requests">My Requests</a>

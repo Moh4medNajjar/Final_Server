@@ -11,11 +11,23 @@
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminRole}}</p>
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminMatricule}}</p>
     </div>
-    <div class="menu">
-      <a routerLink="/my-requests">My Requests</a>
-      <a routerLink="/my-servers">My Servers</a>
-      <a (click)="onLogout()">Logout</a>
-    </div>
+
+    @if(adminRole === '') {
+      <div class="menu">
+        <a routerLink="/my-requests">My Requests</a>
+        <a routerLink="/my-servers">My Servers</a>
+        <a (click)="onLogout()">Logout</a>
+      </div>
+    }
+    @if(adminRole === 'SuperAdmin') {
+      <div class="menu">
+        <a routerLink="/admin-dashboard">Home</a>
+        <a routerLink="/my-requests">Requests</a>
+        <a routerLink="/my-servers">Servers</a>
+        <a routerLink="/users-list">Users</a>
+        <a (click)="onLogout()" style="cursor: pointer">Logout</a>
+      </div>
+    }
   </div>
 
   <h3 class="mb-4">Server Details</h3>

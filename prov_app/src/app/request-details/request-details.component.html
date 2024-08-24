@@ -31,6 +31,16 @@
         <p style="font-weight: bold;">Network Admin</p>
       </div>
     }
+
+    @if(adminRole === 'SuperAdmin') {
+      <div class="menu">
+        <a routerLink="/admin-dashboard">Home</a>
+        <a routerLink="/my-requests">Requests</a>
+        <a routerLink="/my-servers">Servers</a>
+        <a routerLink="/users-list">Users</a>
+        <a (click)="onLogout()" style="cursor: pointer">Logout</a>
+      </div>
+    }
   </div>
 
   @if(adminRole !== "") {
