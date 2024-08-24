@@ -79,7 +79,7 @@
   <div class="activity-widgets">
     <div class="widget activity-widget">
       <h3>Users Activities</h3>
-      <div *ngFor="let request of recentRequests" class="activity-item">
+      <div *ngFor="let request of recentRequests" class="activity-item" [routerLink]="['/request-details', request._id]">
         <i class="fa fa-user"></i>
         <div class="activity-text">
           <p>{{ request.fullName }}, holder of matricule {{ request.matricule }}, has requested a server on: {{ request.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
@@ -89,7 +89,7 @@
 
     <div class="widget activity-widget">
       <h3>Admins Activities</h3>
-      <div *ngFor="let server of recentServers" class="activity-item">
+      <div *ngFor="let server of recentServers" class="activity-item" [routerLink]="['/server-details', server.id]">
         <i class="fa fa-shield-alt"></i>
         <div class="activity-text">
           <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
