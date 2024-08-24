@@ -77,29 +77,53 @@
 
   <!--**********************************************************-->
   <div class="activity-widgets">
-    <div class="widget activity-widget">
-      <h3>Users Activities</h3>
-      <div *ngFor="let request of recentRequests" class="activity-item" [routerLink]="['/request-details', request._id]">
-        <i class="fa fa-user"></i>
-        <div class="activity-text">
-          <p>{{ request.fullName }}, holder of matricule {{ request.matricule }}, has requested a server on: {{ request.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
-        </div>
+      <div class="widget activity-widget">
+        <h3>Users Activities</h3>
+        @if(recentRequests.length === 0) {
+          <div style="text-align: center; padding: 20px;">
+            <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
+            <p style="color: #999; margin-top: 10px;">No recent user activities</p>
+          </div>
+        }
+        @else {
+          <div *ngFor="let request of recentRequests" class="activity-item" [routerLink]="['/request-details', request._id]">
+            <i class="fa fa-user"></i>
+            <div class="activity-text">
+              <p>{{ request.fullName }}, holder of matricule {{ request.matricule }}, has requested a server on: {{ request.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+            </div>
+          </div>
+        }
+
       </div>
-    </div>
+
 
     <div class="widget activity-widget">
       <h3>Admins Activities</h3>
-      <div *ngFor="let server of recentServers" class="activity-item" [routerLink]="['/server-details', server.id]">
-        <i class="fa fa-shield-alt"></i>
-        <div class="activity-text">
-          <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+      @if(recentServers.length === 0) {
+        <div style="text-align: center; padding: 20px;">
+          <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
+          <p style="color: #999; margin-top: 10px;">No recent admin activities</p>
         </div>
-      </div>
+      }
+      @else {
+        <div *ngFor="let server of recentServers" class="activity-item" [routerLink]="['/server-details', server.id]">
+          <i class="fa fa-shield-alt"></i>
+          <div class="activity-text">
+            <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+          </div>
+        </div>
+      }
+
     </div>
+
 
 
 
   </div>
+  <!--**********************************************************-->
+
+
+
 
   <div class="container-fluid container-test">
     <div class="matrix-widgets">
