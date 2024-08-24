@@ -90,7 +90,7 @@
     <div class="widget activity-widget">
       <h3>Admins Activities</h3>
       <div *ngFor="let server of recentServers" class="activity-item">
-        <i class="fa fa-user"></i>
+        <i class="fa fa-shield-alt"></i>
         <div class="activity-text">
           <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
         </div>
@@ -150,11 +150,27 @@
 
 
     <div class="active-servers-widget">
-      <h3>Request Evolution</h3>
-      <div class="widget-content">
-        <canvas id="requestChart"></canvas>
+      <h3>Number of servers per environment</h3>
+      <div class="widget-grid">
+        <div class="environment-widget">
+          <h4>Staging</h4>
+          <p>{{ getServerCount('staging') }}</p>
+        </div>
+        <div class="environment-widget">
+          <h4>Testing</h4>
+          <p>{{ getServerCount('testing') }}</p>
+        </div>
+        <div class="environment-widget">
+          <h4>Developing</h4>
+          <p>{{ getServerCount('developing') }}</p>
+        </div>
+        <div class="environment-widget">
+          <h4>Production</h4>
+          <p>{{ getServerCount('production') }}</p>
+        </div>
       </div>
     </div>
+
 
   </div>
 

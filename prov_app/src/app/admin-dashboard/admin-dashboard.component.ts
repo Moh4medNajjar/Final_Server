@@ -125,6 +125,11 @@ userData: any
     );
   }
 
+  getServerCount(environmentType: string): number {
+    return this.servers?.filter(server => server.environment_type === environmentType).length;
+  }
+
+
   fetchAllRequests() {
     this.requestService.getRequests().subscribe(
       (data) => {
