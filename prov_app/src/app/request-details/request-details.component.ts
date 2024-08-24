@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServerService } from '../services/server.service'; // Ensure ServerService is imported
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-request-details',
@@ -32,6 +33,7 @@ export class RequestDetailsComponent implements OnInit {
   hidePassword = true;
   copySuccess = false;
   password = 'password here'; // Consider generating or securely handling this password
+  user: any;
 
   constructor(
     private serverService: ServerService,
@@ -40,7 +42,8 @@ export class RequestDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private requestService: RequestService,
     private authService: AuthService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -70,11 +73,13 @@ export class RequestDetailsComponent implements OnInit {
       this.fetchRequestDetails(this.requestId);
     });
 
+
+
     const token = this.authService.getToken();
     if (token) {
       const decodedPayload = atob(token.split('.')[1]);
       const userData = JSON.parse(decodedPayload);
-      this.userData = userData;
+      this.userData = userData
       this.adminName = userData.fullName;
       this.adminMatricule = userData.matricule;
       this.adminPosition = userData.position;
@@ -103,6 +108,16 @@ export class RequestDetailsComponent implements OnInit {
           cpu: this.requestDetails.vcpu,
           disk_space: this.requestDetails.disk_space
         });
+        this.userService.getUserById(this.requestDetails?.responderId).subscribe(
+          (data: any) => {
+            this.user = data;
+            console.log('User details:', this.user);
+          },
+          (error: any) => {
+            console.log("ResponderId= ", this.requestDetails?.responderId)
+            console.error('Error retrieving user details:', error);
+          }
+        );
       },
       error => {
         console.error('Error fetching request details:', error);
@@ -144,7 +159,7 @@ export class RequestDetailsComponent implements OnInit {
 
   approveRequest(): void {
     if (this.requestId) {
-      this.requestService.approveRequest(this.requestId).subscribe(
+      this.requestService.approveRequest(this.requestId, this.id).subscribe(
         response => {
           this.router.navigate(['/my-requests']);
         },

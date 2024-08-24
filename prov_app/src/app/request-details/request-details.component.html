@@ -46,18 +46,18 @@
   @if(adminRole !== "") {
     <p class="mb-4" style="color: orange;"> <i class="fa fa-bell me-2"></i>{{requestDetails?.fullName}}: {{requestDetails?.position}},  (Matricule: {{ requestDetails?.matricule}}) has made a server request !</p>
   }
-  @if(adminRole === "GeneralSpecAdmin" && requestDetails?.status === "approved" ) {
+  @if(adminRole !== "" && requestDetails?.status === "approved" ) {
     <div>
-      <p class="mt-1" style="font-size:12px; color: rgb(117, 190, 8); font-weight: 500;">Request approved by General specs admins !</p>
+      <p class="mt-1" style="font-size:16px; color: rgb(117, 190, 8); font-weight: 500;">Request approved by <span style="font-weight: bold;">{{user?.fullName}}</span>!</p>
     </div>
   }
-  @if(adminRole === "GeneralSpecAdmin" && requestDetails?.status === "rejected" ) {
+  @if(adminRole !== "" && requestDetails?.status === "rejected" ) {
     <div>
-      <p class="mt-1" style="font-size:12px; color: rgb(255, 47, 47); font-weight: 500;">Request rejected by General specs admins !</p>
+      <p class="mt-1" style="font-size:12px; color: rgb(255, 47, 47); font-weight: 500;">Request rejected by {{requestDetails?.responderId}} !</p>
     </div>
   }
   @if(adminRole === "NetworkAdmin") {
-    <p class="mb-4" style="color: rgb(6, 216, 10);">This request was approved by General specs admin and is waiting for CIDR range allocation.</p>
+    <p class="mb-4" style="color: rgb(6, 216, 10);">This request was approved by General specs admin and is waiting for network configurations.</p>
   }
 
   <div>

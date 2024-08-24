@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const requestSchema = new mongoose.Schema({
+    responderId: { type: String, default: '' },
     requesterId: { type: String, required: true },
     fullName: { type: String, required: true },
     position: { type: String, required: true },
