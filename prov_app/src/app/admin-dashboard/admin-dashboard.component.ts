@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService} from '../services/auth.service'
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,6 +13,7 @@ export class AdminDashboardComponent {
   password = 'password here';
   hidePassword = true;
   copySuccess = false;
+  users: any;
 
   onLogout() {
     this.authService.logout();
@@ -23,8 +25,8 @@ export class AdminDashboardComponent {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private requestService: RequestService
   ) {}
 
   fullName = '';
@@ -65,62 +67,75 @@ userData: any
         }
       );
     }
-  }
-
-  updateUserRole(): void {
-    if (!this.selectedRole) {
-      alert('Please select a role before updating.');
-      return;
-    }
-
-    if (this.userId) {
-      const updatedData = { role: this.selectedRole };
-
-      // Log the payload to the console
-      console.log('Payload sent to server:', updatedData);
-
-      this.userService.updateUserRole(this.userId, updatedData).subscribe(
-        (response: any) => {
-          console.log('User role updated successfully:', response);
-          alert('User role updated successfully.');
-          window.location.reload();
+    if (this.adminRole === 'SuperAdmin') {
+      this.userService.getAllUsers().subscribe(
+        (data) => {
+          this.users = data;
+          console.log('Users retrieved:', this.users);
         },
-        (error: any) => {
-          console.error('Error updating user role:', error);
-          window.location.reload();
+        (error) => {
+          console.error('Error retrieving users:', error);
         }
       );
     }
-  }
-
-
-  deleteUser(id: string): void {
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.userService.deleteUserById(id).subscribe(
-        (response: any) => {
-          console.log('User deleted successfully:', response);
-          this.router.navigate(['users-list'])
-        },
-        (error: any) => {
-          console.error('Error deleting user:', error);
-          alert('Failed to delete user. Please try again.');
-        }
-      );
+    if (this.adminRole === "SuperAdmin") {
+      this.fetchAllRequests()
     }
   }
+  items: any[] = [];
+  filteredItems = [...this.items];
 
-  togglePasswordVisibility() {
-    this.hidePassword = !this.hidePassword;
+  fetchAllRequests() {
+    this.requestService.getRequests().subscribe(
+      (data) => {
+        this.items = data;
+        this.filteredItems = [...this.items];
+        console.log(this.filteredItems)
+        if(this.role === "GeneralSpecAdmin"){
+          this.filteredItems = this.filteredItems.filter(item => item.status === 'pending');
+        }
+        if(this.role === "NetworkAdmin"){
+          this.filteredItems = this.filteredItems.filter(item => item.status === 'approved');
+        }
+      },
+      (error) => {
+        console.error('Error fetching requests:', error);
+      }
+    );
   }
 
-  copyPassword() {
-    navigator.clipboard.writeText(this.password).then(() => {
-      this.copySuccess = true;
-      setTimeout(() => {
-        this.copySuccess = false;
-      }, 3000);
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-    });
+  getApprovedCount(): number {
+    return this.filteredItems.filter(item => item.status === 'approved').length;
   }
+  getTotalCount(): number {
+    return this.filteredItems.length;
+  }
+  getApprovedPercentage(): number {
+    const total = this.getTotalCount();
+    const approved = this.getApprovedCount();
+    return total ? Math.round((approved / total) * 100) : 0;
+  }
+  getStatusCount(status: string): number {
+    return this.filteredItems?.filter(item => item.status === status).length;
+  }
+  getStatusPercentage(status: string): number {
+    const total = this.getTotalCount();
+    const count = this.getStatusCount(status);
+    return total ? Math.round((count / total) * 100) : 0;
+  }
+
+  getRoleCount(role: string): number {
+    return this.users?.filter((user: { role: string; }) => user.role === role).length;
+  }
+
+  calculateTotalUsers(): number {
+    return this.users?.length;
+  }
+
+  getRolePercentage(role: string): number {
+    const count = this.getRoleCount(role);
+    return Math.round((count / this.users?.length) * 100);
+  }
+
+
 }
