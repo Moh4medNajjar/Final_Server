@@ -14,6 +14,7 @@ export class AdminDashboardComponent {
   hidePassword = true;
   copySuccess = false;
   users: any;
+  recentRequests: any[] = [];
 
   onLogout() {
     this.authService.logout();
@@ -80,7 +81,9 @@ userData: any
     }
     if (this.adminRole === "SuperAdmin") {
       this.fetchAllRequests()
+
     }
+
   }
   items: any[] = [];
   filteredItems = [...this.items];
@@ -91,6 +94,9 @@ userData: any
         this.items = data;
         this.filteredItems = [...this.items];
         console.log(this.filteredItems)
+        this.recentRequests = this.filteredItems
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 4);
         if(this.role === "GeneralSpecAdmin"){
           this.filteredItems = this.filteredItems.filter(item => item.status === 'pending');
         }

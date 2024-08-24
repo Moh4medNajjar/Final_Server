@@ -69,36 +69,18 @@
   <!--**********************************************************-->
   <div class="activity-widgets">
     <div class="widget activity-widget">
-      <h3>Admins Activities</h3>
-      <div class="activity-item">
-        <i class="fa fa-user-tie"></i>
+      <h3>Users Activities</h3>
+      <div *ngFor="let request of recentRequests" class="activity-item">
+        <i class="fa fa-user"></i>
         <div class="activity-text">
-          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
+          <p>{{ request.fullName }}, holder of matricule {{ request.matricule }}, has requested a server on: {{ request.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
         </div>
       </div>
-      <div class="activity-item">
-        <i class="fa fa-user-tie"></i>
-        <div class="activity-text">
-          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
-        </div>
-      </div>
-      <div class="activity-item">
-        <i class="fa fa-user-tie"></i>
-        <div class="activity-text">
-          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
-        </div>
-      </div>
-      <div class="activity-item">
-        <i class="fa fa-user-tie"></i>
-        <div class="activity-text">
-          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
-        </div>
-      </div>
-      <!-- Add more activity items here -->
     </div>
 
+
     <div class="widget activity-widget">
-      <h3>Users Activities</h3>
+      <h3>Admins Activities</h3>
       <div class="activity-item">
         <i class="fa fa-user"></i>
         <div class="activity-text">
