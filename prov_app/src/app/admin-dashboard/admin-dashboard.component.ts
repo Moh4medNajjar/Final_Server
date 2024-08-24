@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService} from '../services/auth.service'
 import { RequestService } from '../services/request.service';
+import { ServerService } from '../services/server.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,6 +16,7 @@ export class AdminDashboardComponent {
   copySuccess = false;
   users: any;
   recentRequests: any[] = [];
+  recentServers: any[] = [];
 
   onLogout() {
     this.authService.logout();
@@ -27,7 +29,8 @@ export class AdminDashboardComponent {
     private route: ActivatedRoute,
     private userService: UserService,
     private authService: AuthService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private serverService: ServerService
   ) {}
 
   fullName = '';
@@ -56,6 +59,10 @@ userData: any
       this.adminRole = userData.role;
     }
     this.userId = this.route.snapshot.paramMap.get('id');
+
+    if( this.userData.role === 'SuperAdmin') {
+      this.fetchAllServers()
+    }
 
     if (this.userId) {
       this.userService.getUserById(this.userId).subscribe(
@@ -87,6 +94,34 @@ userData: any
   }
   items: any[] = [];
   filteredItems = [...this.items];
+  servers: any[] = []
+
+  fetchAllServers() {
+    this.serverService.getAllServers().subscribe(
+      (response: any[]) => { // Expecting an array directly
+        console.log("Hello from SuperAdmin", response);
+        this.servers = response.map((server: any) => ({
+          adminName: server.adminName,
+          requesterName: server.requesterName, 
+          vmName: server.vmName,
+          createdAt: server.createdAt,
+          environment_type: server.environment_type,
+          cpu: server.cpu,
+          operating_system: server.operating_system,
+          ram: server.ram,
+          disk_space: server.disk_space,
+          privateIP: server.privateIP,
+          id: server._id
+        }));
+        this.filteredItems = [...this.servers];
+        this.recentServers = this.filteredItems
+        console.log("recent server = ", this.recentServers)
+      },
+      (error) => {
+        console.error('Error fetching servers:', error);
+      }
+    );
+  }
 
   fetchAllRequests() {
     this.requestService.getRequests().subscribe(

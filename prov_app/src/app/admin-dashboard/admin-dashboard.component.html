@@ -78,35 +78,18 @@
       </div>
     </div>
 
-
     <div class="widget activity-widget">
-      <h3>Admins Activities</h3>
-      <div class="activity-item">
+      <h3>Users Activities</h3>
+      <div *ngFor="let server of recentServers" class="activity-item">
         <i class="fa fa-user"></i>
         <div class="activity-text">
-          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
+          <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
         </div>
       </div>
-      <div class="activity-item">
-        <i class="fa fa-user"></i>
-        <div class="activity-text">
-          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
-        </div>
-      </div>
-      <div class="activity-item">
-        <i class="fa fa-user"></i>
-        <div class="activity-text">
-          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
-        </div>
-      </div>
-      <div class="activity-item">
-        <i class="fa fa-user"></i>
-        <div class="activity-text">
-          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
-        </div>
-      </div>
-      <!-- Add more activity items here -->
     </div>
+
+
+    
   </div>
 
   <div class="container-fluid container-test">
