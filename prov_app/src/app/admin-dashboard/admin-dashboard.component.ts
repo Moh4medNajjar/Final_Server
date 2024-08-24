@@ -102,7 +102,7 @@ userData: any
         console.log("Hello from SuperAdmin", response);
         this.servers = response.map((server: any) => ({
           adminName: server.adminName,
-          requesterName: server.requesterName, 
+          requesterName: server.requesterName,
           vmName: server.vmName,
           createdAt: server.createdAt,
           environment_type: server.environment_type,
@@ -115,6 +115,8 @@ userData: any
         }));
         this.filteredItems = [...this.servers];
         this.recentServers = this.filteredItems
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 4);
         console.log("recent server = ", this.recentServers)
       },
       (error) => {

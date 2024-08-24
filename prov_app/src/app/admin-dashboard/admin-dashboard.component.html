@@ -64,6 +64,15 @@
         </p>
       </div>
     </div>
+    <div class="widget finished-requests">
+      <i class="fa fa-tasks fa-2x"></i>
+      <div class="widget-content">
+        <h4>Requests Done</h4>
+        <p>
+          {{ getStatusCount('finished') }} <span class="percentage">{{ getStatusPercentage('finished') }}%</span>
+        </p>
+      </div>
+    </div>
   </div>
 
   <!--**********************************************************-->
@@ -79,7 +88,7 @@
     </div>
 
     <div class="widget activity-widget">
-      <h3>Users Activities</h3>
+      <h3>Admins Activities</h3>
       <div *ngFor="let server of recentServers" class="activity-item">
         <i class="fa fa-user"></i>
         <div class="activity-text">
@@ -89,7 +98,7 @@
     </div>
 
 
-    
+
   </div>
 
   <div class="container-fluid container-test">
