@@ -83,7 +83,7 @@
           <td>{{ item.createdAt | date:'yyyy-MM-dd' }}</td> <!-- Format Date -->
           <td [style.color]="getEnvironmentStyle(item.environment_type).color">
             <i [class]="'fa ' + getEnvironmentStyle(item.environment_type).icon"
-               [style.color]="getEnvironmentStyle(item.environment_type).color"></i>
+              [style.color]="getEnvironmentStyle(item.environment_type).color"></i>
             {{ item.environment_type }}
           </td>
           <td>{{ item.operating_system }}</td>

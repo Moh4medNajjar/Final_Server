@@ -20,6 +20,7 @@ import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { DatePipe } from '@angular/common';
 import { AnsweredRequestsComponent } from './answered-requests/answered-requests.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AnsweredRequestsComponent } from './answered-requests/answered-requests
     AdminsListComponent,
     AdminDetailsComponent,
     CreateUserComponent,
-    AnsweredRequestsComponent
+    AnsweredRequestsComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,182 @@
+<div class="container-fluid" style="min-height: 100vh">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <div class="header mb-5">
+    <div class="brand d-flex align-items-center justify-content-start">
+      <div class="logo"></div>
+      <h3>Provision App</h3>
+    </div>
+    <p style="font-size:large; font-weight: bold; margin: 0">{{userData.fullName}}</p>
+    @if(adminRole === '') {
+      <div class="menu">
+        <a routerLink="/my-requests">My Requests</a>
+        <a routerLink="/my-servers">My Servers</a>
+        <a (click)="onLogout()">Logout</a>
+      </div>
+    }
+    @if(adminRole === 'SuperAdmin') {
+      <div class="menu">
+        <a routerLink="/admin-dashboard">Home</a>
+        <a routerLink="/my-requests">Requests</a>
+        <a routerLink="/my-servers">Servers</a>
+        <a routerLink="/users-list">Users</a>
+        <a (click)="onLogout()">Logout</a>
+      </div>
+    }
+  </div>
+
+  <h3 class="mb-4">Welcome {{ (userData.fullName || '').split(' ')[0] }} !</h3>
+
+  <div class="widget-container">
+    <div class="widget total-requests">
+      <i class="fa fa-tachometer-alt fa-2x"></i>
+      <div class="widget-content">
+        <h4>Total Requests</h4>
+        <p>150 <span class="percentage">(100%)</span></p>
+      </div>
+    </div>
+    <div class="widget approved-requests">
+      <i class="fa fa-check-circle fa-2x"></i>
+      <div class="widget-content">
+        <h4>Approved Requests</h4>
+        <p>80 <span class="percentage">53%</span></p>
+      </div>
+    </div>
+    <div class="widget rejected-requests">
+      <i class="fa fa-times-circle fa-2x"></i>
+      <div class="widget-content">
+        <h4>Rejected Requests</h4>
+        <p>30 <span class="percentage">20%</span></p>
+      </div>
+    </div>
+    <div class="widget pending-requests">
+      <i class="fa fa-clock fa-2x"></i>
+      <div class="widget-content">
+        <h4>Pending Requests</h4>
+        <p>40 <span class="percentage">27%</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!--**********************************************************-->
+  <div class="activity-widgets">
+    <div class="widget activity-widget">
+      <h3>Admins Activities</h3>
+      <div class="activity-item">
+        <i class="fa fa-user-tie"></i>
+        <div class="activity-text">
+          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <i class="fa fa-user-tie"></i>
+        <div class="activity-text">
+          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <i class="fa fa-user-tie"></i>
+        <div class="activity-text">
+          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <i class="fa fa-user-tie"></i>
+        <div class="activity-text">
+          <p>Admin John Doe approved a request from Aziz on: 28/12/2024</p>
+        </div>
+      </div>
+      <!-- Add more activity items here -->
+    </div>
+
+    <div class="widget activity-widget">
+      <h3>Users Activities</h3>
+      <div class="activity-item">
+        <i class="fa fa-user"></i>
+        <div class="activity-text">
+          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <i class="fa fa-user"></i>
+        <div class="activity-text">
+          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <i class="fa fa-user"></i>
+        <div class="activity-text">
+          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
+        </div>
+      </div>
+      <div class="activity-item">
+        <i class="fa fa-user"></i>
+        <div class="activity-text">
+          <p>User Aziz (matricule 66666) has requested a server on: 27/12/2024</p>
+        </div>
+      </div>
+      <!-- Add more activity items here -->
+    </div>
+  </div>
+
+  <div class="container-fluid container-test">
+    <div class="matrix-widgets">
+      <div class="widget-other role-widget">
+        <h3>Ordinary Users</h3>
+        <div class="widget-content">
+          <i class="fa fa-user"></i>
+          <div class="widget-info">
+            <p class="number">150</p>
+            <p class="percentage">30%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-other role-widget">
+        <h3>General Admins</h3>
+        <div class="widget-content">
+          <i class="fa fa-user-shield"></i>
+          <div class="widget-info">
+            <p class="number">25</p>
+            <p class="percentage">5%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-other role-widget">
+        <h3>Network Admins</h3>
+        <div class="widget-content">
+          <i class="fa fa-network-wired"></i>
+          <div class="widget-info">
+            <p class="number">10</p>
+            <p class="percentage">2%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="widget-other role-widget">
+        <h3>Superadmins</h3>
+        <div class="widget-content">
+          <i class="fa fa-crown"></i>
+          <div class="widget-info">
+            <p class="number">5</p>
+            <p class="percentage">1%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="active-servers-widget">
+      <h3>Request Evolution</h3>
+      <div class="widget-content">
+        <canvas id="requestChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+

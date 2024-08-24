@@ -1,0 +1,533 @@
+.logo {
+  width:25px;
+  margin-bottom: 4px;
+  margin-right: 10px;
+  height: 25px;
+  background-color: #61D27E;
+}
+a {
+  text-decoration: none;
+  margin-right: 20px;
+}
+.header {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.blue-row {
+  background-color: #313B44;
+}
+
+.red-row {
+  background-color: #212529;
+}
+
+.fa-arrow-up-right-from-square {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.fa-trash-can {
+  cursor: pointer;
+}
+
+//-----------------------------------------------
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ccc;
+  border-radius: 0px;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #FF6B00;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+// .custom-checkbox .checkmark:after {
+//   left: 7px;
+//   top: 3px;
+//   width: 6px;
+//   height: 12px;
+//   border: solid white;
+//   border-width: 0 3px 3px 0;
+//   transform: rotate(45deg);
+// }
+
+
+.button{
+  background-color: #313B44;
+  padding: 6px 14px;
+  border: 1px solid #555;
+  cursor: pointer
+}
+/* General form styling */
+.vm-form {
+  max-width: 600px;
+  padding: 1rem;
+  // margin: auto; /* Center the form horizontally */
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center; /* Vertically center the items */
+}
+
+/* Label styling */
+.form-group label {
+  width: 200px; /* Fixed width for labels */
+  font-weight: bold;
+  margin-right: 1rem; /* Space between label and input */
+  color: #ffffff; /* Adjust label color */
+}
+
+/* Input and select styling */
+.form-group input,
+.form-group select {
+  background-color: #212529; /* Dark background color */
+  border: 2px solid #4B5563; /* Orange border */
+  color: #ffffff; /* Text color inside inputs */
+  padding: 0.5rem; /* Reduced padding for a smaller height */
+  font-size: 0.875rem; /* Smaller font size for a more compact appearance */
+  min-height: 2rem; /* Minimum height to ensure content visibility */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  flex: 1; /* Make the inputs take the remaining space */
+}
+
+/* Textarea specific styling */
+.form-group textarea {
+  background-color: #212529; /* Dark background color */
+  border: 2px solid #4B5563; /* Orange border */
+  color: #ffffff; /* Text color inside textarea */
+  padding: 0.5rem; /* Reduced padding for a smaller height */
+  font-size: 0.875rem; /* Smaller font size */
+  resize: vertical; /* Allow vertical resize */
+  min-height: 100px; /* Minimum height for the textarea */
+  flex: 1; /* Make the textarea take the remaining space */
+}
+
+/* Button styling */
+button[type="submit"] {
+  background-color: #61D27E; /* Orange background color for the button */
+  border: none; /* Remove default border */
+  color: #ffffff; /* Text color inside the button */
+  padding: 0.5rem 1.5rem; /* Reduced padding for a smaller button */
+  font-size: 0.875rem; /* Smaller font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+  margin: 2rem auto 4px auto; /* Center the button horizontally */
+  width: 400px; /* Button width same as input width */
+}
+
+
+
+/* Disable button styling */
+button:disabled {
+  background-color: #4B5563; /* Gray background for disabled button */
+  cursor: not-allowed; /* Not-allowed cursor for disabled button */
+}
+
+/* Calendar icon styling */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.5); /* Light color for calendar icon */
+}
+
+.success-message {
+  color: rgb(103, 103, 110);
+  text-align: center;
+}
+span {
+  font-weight: 500;
+  margin-right: 10px;
+}
+i {
+  cursor: pointer
+}
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  background-color: #212529; /* Dark background color */
+  border: 2px solid #4B5563; /* Orange border */
+  color: #ffffff; /* Text color inside inputs */
+  padding: 0.5rem; /* Reduced padding for a smaller height */
+  font-size: 0.875rem; /* Smaller font size for a more compact appearance */
+  min-height: 2rem; /* Minimum height to ensure content visibility */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  border-radius: 0;
+  width: 200px!important;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
+
+p {
+  margin: 5px;
+}
+
+.new-request {
+  background-color: #32414e;
+  padding: 8px 14px;
+  transition: ease-in-out;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+
+.new-request:hover {
+  background-color: #32414e9c ;
+}
+
+/* Add this to your SCSS/CSS file */
+
+.widget-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+  background-color: #212529; /* Main dark background color */
+}
+
+.widget {
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  padding: 20px;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  position: relative; /* Positioning for percentage */
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.widget i {
+  margin-right: 16px;
+  color: #fff;
+}
+
+.widget-content {
+  flex-grow: 1;
+}
+
+.widget-content h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.widget-content p {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.percentage {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff; /* Light color for contrast */
+  margin-top: 4px;
+}
+
+/* Colors */
+.total-requests {
+  background-color: #4A90E2; /* Sky Blue */
+}
+
+.approved-requests {
+  background-color: #61D27E; /* Sky Blue */
+}
+
+.rejected-requests {
+  background-color: #F46F6F; /* Coral Pink */
+}
+
+.pending-requests {
+  background-color: #FF9F00; /* Bright Orange */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .widget-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .widget-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.activity-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.activity-widget {
+  // background-color: #3D4F58; /* Dark background for dark mode */
+  padding: 0px 0;
+}
+
+.activity-widget h3 {
+  margin-bottom: 15px;
+  color: #e0e0e0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px;
+  margin-bottom: 6px;
+  background-color: #346d84; /* Slightly lighter background */
+}
+
+.activity-item:hover {
+  background-color: #346d84ae; /* Slightly lighter background */
+  cursor: pointer;
+}
+
+.activity-item i {
+  font-size: 24px;
+  color: #a1a1a1;
+  margin-right: 15px;
+}
+
+.activity-text p {
+  margin: 0;
+  color: white!important;
+  font-size: 14px;
+}
+
+.role-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.role-widget {
+  background-color: #1e1e1e; /* Dark background for dark mode */
+  padding: 20px;
+}
+
+.role-widget h3 {
+  margin-bottom: 15px;
+  color: #e0e0e0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.widget-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.widget-content i {
+  font-size: 24px;
+  color: #a1a1a1;
+}
+
+.widget-info {
+  text-align: right;
+}
+
+.widget-info .number {
+  font-size: 28px;
+  color: #fff;
+}
+
+.widget-info .percentage {
+  font-size: 16px;
+  color: #d0d0d0;
+}
+
+.active-servers-widget {
+  background-color: #1e1e1e; /* Dark background for dark mode */
+  padding: 20px;
+  height: 100%;
+}
+
+.active-servers-widget h3 {
+  margin-bottom: 15px;
+  color: #e0e0e0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.widget-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.widget-content i {
+  font-size: 24px;
+  color: #a1a1a1;
+}
+
+.widget-info {
+  text-align: right;
+}
+
+.widget-info .number {
+  font-size: 28px;
+  color: #fff;
+}
+
+.widget-info .percentage {
+  font-size: 16px;
+  color: #d0d0d0;
+}
+
+
+
+/***************************************************************************/
+
+.container-test {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+  gap: 20px; /* Space between widgets */
+  align-items: start;
+  padding: 0px 0px!important;
+  margin-top: 25px
+}
+
+.matrix-widgets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+  gap: 15px; /* Space between widgets */
+}
+
+
+.widget-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.widget-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.widget-info .number {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.widget-info .percentage {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.active-servers-widget {
+  background-color: #2c3e50; /* Darker background for contrast */
+  padding: 20px;
+  color: #ecf0f1;
+  text-align: center;
+  grid-column: span 1; /* Span one column in the grid */
+}
+
+.active-servers-widget .widget-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.active-servers-widget .widget-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.active-servers-widget .widget-info .number {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.active-servers-widget .widget-info .percentage {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.widget-other:nth-child(1) {
+  background-color: #6C757D; /* Slate Gray */
+}
+
+.widget-other:nth-child(2) {
+  background-color: #6C757D; /* Slate Gray */
+}
+
+.widget-other:nth-child(3) {
+  background-color: #6C757D; /* Slate Gray */
+}
+
+.widget-other:nth-child(4) {
+  background-color: #6C757D; /* Slate Gray */
+}
+
+

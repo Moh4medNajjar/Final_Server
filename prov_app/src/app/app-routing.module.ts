@@ -12,6 +12,7 @@ import { RequestDetailsComponent } from './request-details/request-details.compo
 import { AdminDetailsComponent } from './admin-details/admin-details.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { AnsweredRequestsComponent } from './answered-requests/answered-requests.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'admins-list', component: AdminsListComponent },
   { path: 'user-details/:id', component: AdminDetailsComponent },
   { path: 'create-user', component: CreateUserComponent },
-  { path: 'answered-requests', component: AnsweredRequestsComponent}
+  { path: 'answered-requests', component: AnsweredRequestsComponent},
+  { path: 'admin-dashboard', component: AdminDashboardComponent}
 
 ];
 
