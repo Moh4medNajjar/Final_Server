@@ -81,8 +81,9 @@
           <td>{{ i + 1 }}</td> <!-- Index Display -->
           <td>{{ item.vmName }}</td>
           <td>{{ item.createdAt | date:'yyyy-MM-dd' }}</td> <!-- Format Date -->
-          <td>
-            <i class="fa fa-circle me-1" [ngClass]="getStatusCircleClass(item.status)"></i>
+          <td [style.color]="getEnvironmentStyle(item.environment_type).color">
+            <i [class]="'fa ' + getEnvironmentStyle(item.environment_type).icon"
+               [style.color]="getEnvironmentStyle(item.environment_type).color"></i>
             {{ item.environment_type }}
           </td>
           <td>{{ item.operating_system }}</td>
