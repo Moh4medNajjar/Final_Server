@@ -37,6 +37,16 @@
         <div class="ms-4">
           <p><i class="fa fa-user-shield me-2"></i><span>Server was Created by:</span> {{server?.adminName}}</p>
         </div>
+        <div class="d-flex align-items-center justify-content-start">
+          @if(adminRole === 'OrdinaryUser'){
+            <button class="btn bg-danger text-light me-2" style="border-radius:0px" (click)="requestDelete(serverId)">Request server removal</button>
+          }
+          @if (showSuccessMessage) {
+            <div style="font-size: 11px; width: 160px; color:rgb(172, 172, 193)">
+              Successfully submitted removal request.
+            </div>
+          }
+        </div>
       </div>
       <div class="col-md-6">
         <h4><i class="fa fa-user-tag me-2"></i>Dedicated to</h4>

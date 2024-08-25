@@ -8,11 +8,7 @@ const userSchema = new mongoose.Schema({
     position: { type: String, required: true, enum: ['Developer', 'Tester', 'Manager', 'DevOps', 'Support'] },
     matricule: { type: String, required: true, unique: true },
     phoneNumber: { type: String, required: true },
-    role: { type: String, enum: ['GeneralSpecAdmin', 'NetworkAdmin', 'SecurityAdmin', 'SuperAdmin', 'OrdinaryUser'], default: '' },
-    permissions: {
-        type: [String],
-        default: []
-    }
+    role: { type: String, enum: ['GeneralSpecAdmin', 'NetworkAdmin', 'SuperAdmin', 'OrdinaryUser'], default: 'OrdinaryUser' }
 }, { timestamps: true });
 
 userSchema.pre('save', async function(next) {

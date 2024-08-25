@@ -26,7 +26,7 @@ export class ServerDetailsComponent implements OnInit {
   hidePassword = true;
   copySuccess = false;
   server: any;
-  serverId: string | null = null;
+  serverId: any ;
   userData: any;
   adminName: any;
   adminMatricule: any;
@@ -35,6 +35,7 @@ export class ServerDetailsComponent implements OnInit {
   adminRole: any;
   matricule: any;
   id: any;
+  showSuccessMessage: boolean = false;
 
   constructor(
     private datePipe: DatePipe,
@@ -84,6 +85,20 @@ export class ServerDetailsComponent implements OnInit {
     );
   }
 
+  requestDelete(serverId: string) {
+    this.serverService.requestDeleteServer(serverId).subscribe(
+      (response: any) => {
+        console.log("Delete request submitted !");
+        this.showSuccessMessage = true;
+      setTimeout(() => {
+        this.showSuccessMessage = false;
+      }, 2500);
+      },
+      (error: any) => {
+        console.error("Error submitting delete request !", error);
+      }
+    );
+  }
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
@@ -107,4 +122,5 @@ export class ServerDetailsComponent implements OnInit {
   formatDate(date: string) {
     return this.datePipe.transform(date, 'yyyy-MM-dd HH:mm a');
   }
+
 }

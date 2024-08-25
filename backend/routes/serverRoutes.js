@@ -10,6 +10,9 @@ router.get('/', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmi
 router.get('/user/:requesterId', authMiddleware, serverController.getServersByUserId);
 router.get('/:id', authMiddleware, serverController.getServerById);
 router.put('/:id', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin']), serverController.updateServer);
+
+router.patch('/:id/request-delete', authMiddleware, serverController.requestRemoveRequest);
+
 router.delete('/:id', authMiddleware, roleMiddleware('SuperAdmin'), serverController.deleteServer);
 
 module.exports = router;

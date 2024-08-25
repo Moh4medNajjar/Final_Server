@@ -69,7 +69,7 @@ ngOnInit() {
     if( userData.role === 'SuperAdmin' || userData.role === 'NetworkAdmin' || userData.role === 'GeneralSpecAdmin') {
       this.fetchAllServers()
     }
-    else if(userData.role === ''){
+    else if(userData.role === 'OrdinaryUser'){
       this.fetchServersById(userData.id)
     }
 
