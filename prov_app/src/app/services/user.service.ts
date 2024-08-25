@@ -36,4 +36,29 @@ export class UserService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<any>(`${this.apiUrl}/${id}`, updatedData, {headers});
   }
+
+
+  getNumberOfGeneralAdmins(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/general`, {headers}); // Adjust the URL as needed
+  }
+
+  getNumberOfNetworkAdmins(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/network`, {headers}); // Adjust the URL as needed
+  }
+
+  getNumberOfSuperAdmins(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/super`, {headers}); // Adjust the URL as needed
+  }
+
+  getNumberOfOrdinaryUsers(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/ordinary`, {headers}); // Adjust the URL as needed
+  }
 }

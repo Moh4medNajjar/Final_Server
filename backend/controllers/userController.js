@@ -11,6 +11,67 @@ exports.getUsers = async (req, res) => {
     }
 };
 
+exports.getNumberOfOrdinaryUsers = async (req, res) => {
+    try {
+    const TotalUsers = await User.countDocuments();
+    const ordinaryUsers = await User.countDocuments({ role: 'OrdinaryUser' });
+
+    const percentage = (ordinaryUsers / TotalUsers) * 100;
+
+    res.json({
+        numberOfOrdinaryUsers: ordinaryUsers,
+        percentageOfOrdinaryUsers: percentage.toFixed(2) // Round to 2 decimal places
+    });
+    } catch (error) {
+    res.status(500).json({ message: 'Error fetching approved requests', error });
+    }
+};
+exports.getNumberOfSuperAdmins = async (req, res) => {
+    try {
+    const TotalUsers = await User.countDocuments();
+    const SuperAdmins = await User.countDocuments({ role: 'SuperAdmin' });
+
+    const percentage = (SuperAdmins / TotalUsers) * 100;
+
+    res.json({
+        numberOfSuperAdmins: SuperAdmins,
+        percentageOfSuperAdmins: percentage.toFixed(2) // Round to 2 decimal places
+    });
+    } catch (error) {
+    res.status(500).json({ message: 'Error fetching SuperAdmins', error });
+    }
+};
+exports.getNumberOfGeneralAdmins = async (req, res) => {
+    try {
+    const TotalUsers = await User.countDocuments();
+    const GeneralAdmins = await User.countDocuments({ role: 'GeneralSpecAdmin' });
+
+    const percentage = (GeneralAdmins / TotalUsers) * 100;
+
+    res.json({
+        numberOfGeneralAdmins: GeneralAdmins,
+        percentageOfGeneralAdmins: percentage.toFixed(2) // Round to 2 decimal places
+    });
+    } catch (error) {
+    res.status(500).json({ message: 'Error fetching GeneralAdmins', error });
+    }
+};
+exports.getNumberOfNetworkAdmins = async (req, res) => {
+    try {
+    const TotalUsers = await User.countDocuments();
+    const networkAdmins = await User.countDocuments({ role: 'NetworkAdmin' });
+
+    const percentage = (networkAdmins / TotalUsers) * 100;
+
+    res.json({
+        numberOfNetworkAdmins: networkAdmins,
+        percentageOfNetworkAdmins: percentage.toFixed(2) // Round to 2 decimal places
+    });
+    } catch (error) {
+    res.status(500).json({ message: 'Error fetching NetworkAdmin', error });
+    }
+};
+
 // Get a single user by ID
 exports.getUserById = async (req, res) => {
     try {

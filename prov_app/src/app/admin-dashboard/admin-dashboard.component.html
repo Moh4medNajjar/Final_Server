@@ -137,8 +137,8 @@
           <div class="widget-content">
             <i class="fa fa-user"></i>
             <div class="widget-info">
-              <p class="number">{{ getRoleCount('') }}</p>
-              <p class="percentage">{{ getRolePercentage('') }}%</p>
+              <p class="number">{{ ordinaryUsers.numberOfOrdinaryUsers }}</p>
+              <p class="percentage">{{ ordinaryUsers.percentageOfOrdinary }}%</p>
             </div>
           </div>
         </div>
@@ -148,8 +148,8 @@
           <div class="widget-content">
             <i class="fa fa-user-shield"></i>
             <div class="widget-info">
-              <p class="number">{{ getRoleCount('GeneralSpecAdmin') }}</p>
-              <p class="percentage">{{ getRolePercentage('GeneralSpecAdmin') }}%</p>
+              <p class="number">{{ generalAdmins.numberOfGeneralAdmins }}</p>
+              <p class="percentage">{{ generalAdmins.percentageOfGeneralAdmins }}%</p>
             </div>
           </div>
         </div>
@@ -159,8 +159,8 @@
           <div class="widget-content">
             <i class="fa fa-network-wired"></i>
             <div class="widget-info">
-              <p class="number">{{ getRoleCount('NetworkAdmin') }}</p>
-              <p class="percentage">{{ getRolePercentage('NetworkAdmin') }}%</p>
+              <p class="number">{{ networkAdmins.numberOfNetworkAdmins }}</p>
+              <p class="percentage">{{ networkAdmins.percentageOfNetworkAdmins }}%</p>
             </div>
           </div>
         </div>
@@ -170,8 +170,8 @@
           <div class="widget-content">
             <i class="fa fa-crown"></i>
             <div class="widget-info">
-              <p class="number">{{ getRoleCount('SuperAdmin') }}</p>
-              <p class="percentage">{{ getRolePercentage('SuperAdmin') }}%</p>
+              <p class="number">{{ superAdmins.numberOfSuperAdmins }}</p>
+              <p class="percentage">{{ superAdmins.percentageOfSuperAdmins }}%</p>
             </div>
           </div>
         </div>

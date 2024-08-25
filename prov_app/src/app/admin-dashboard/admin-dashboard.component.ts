@@ -63,6 +63,11 @@ userData: any
     this.getNumberAndPercentageOfPendingRequests()
     this.getNumberAndPercentageOfFinishedRequests()
 
+    this.getNumberAndPercentageOfSuperAdmins()
+    this.getNumberAndPercentageOfNetworkAdmins()
+    this.getNumberAndPercentageOfGeneralAdmins()
+    this.getNumberAndPercentageOfOrdinaryUsers()
+
     const token = this.authService.getToken();
     if (token) {
       const decodedPayload = atob(token.split('.')[1]);
@@ -250,6 +255,55 @@ userData: any
       }
     )
   }
+/*********************************************************************/
+superAdmins: any
+ordinaryUsers: any
+networkAdmins: any
+generalAdmins: any
+
+getNumberAndPercentageOfSuperAdmins() {
+  this.userService.getNumberOfSuperAdmins().subscribe (
+    (response: any) => {
+      this.superAdmins = response
+    },
+    (error: any) => {
+      console.error(error)
+    }
+  )
+}
+
+getNumberAndPercentageOfNetworkAdmins() {
+  this.userService.getNumberOfNetworkAdmins().subscribe (
+    (response: any) => {
+      this.networkAdmins = response
+    },
+    (error: any) => {
+      console.error(error)
+    }
+  )
+}
+
+getNumberAndPercentageOfGeneralAdmins() {
+  this.userService.getNumberOfGeneralAdmins().subscribe (
+    (response: any) => {
+      this.generalAdmins = response
+    },
+    (error: any) => {
+      console.error(error)
+    }
+  )
+}
+
+getNumberAndPercentageOfOrdinaryUsers() {
+  this.userService.getNumberOfOrdinaryUsers().subscribe (
+    (response: any) => {
+      this.ordinaryUsers = response
+    },
+    (error: any) => {
+      console.error(error)
+    }
+  )
+}
 
 
 }
