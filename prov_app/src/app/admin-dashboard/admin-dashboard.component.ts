@@ -115,8 +115,7 @@ userData: any
         }));
         this.filteredItems = [...this.servers];
         this.recentServers = this.filteredItems
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      .slice(0, 4);
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         console.log("recent server = ", this.recentServers)
       },
       (error) => {
@@ -137,8 +136,7 @@ userData: any
         this.filteredItems = [...this.items];
         console.log(this.filteredItems)
         this.recentRequests = this.filteredItems
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      .slice(0, 4);
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         if(this.role === "GeneralSpecAdmin"){
           this.filteredItems = this.filteredItems.filter(item => item.status === 'pending');
         }

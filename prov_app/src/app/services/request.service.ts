@@ -39,10 +39,10 @@ getRequests(): Observable<any> {
   return this.http.get<any>(`${this.apiUrl}`, {headers});
 }
 
-rejectRequest(requestId: string): Observable<any> {
+rejectRequest(requestId: string, responderId:string): Observable<any> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.patch(`${this.apiUrl}/${requestId}/reject`, {}, { headers });
+  return this.http.put(`${this.apiUrl}/${requestId}/reject`, {status: 'rejected', responderId:responderId}, { headers });
 }
 
 

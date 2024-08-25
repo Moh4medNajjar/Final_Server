@@ -124,6 +124,7 @@ export class RequestDetailsComponent implements OnInit {
           (data: any) => {
             this.user = data;
             console.log('request details:', this.requestDetails);
+            console.log('User : ', this.user)
           },
           (error: any) => {
             console.log("ResponderId= ", this.requestDetails?.responderId)
@@ -188,9 +189,11 @@ export class RequestDetailsComponent implements OnInit {
   getEnvironmentStyle(environmentType: string): EnvironmentStyle {
     return environmentStyles[environmentType] || { icon: 'fa-question-circle', color: '#9E9E9E' }; // Default: gray question mark
   }
+
+
   rejectRequest(): void {
     if (this.requestId) {
-      this.requestService.rejectRequest(this.requestId).subscribe(
+      this.requestService.rejectRequest(this.requestId, this.id).subscribe(
         response => {
           this.router.navigate(['/my-requests']);
         },

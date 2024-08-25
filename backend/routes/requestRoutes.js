@@ -14,7 +14,7 @@ router.delete('/:id', requestController.deleteRequest);
 
 router.get('/user/:userId', requestController.getRequestsByUserId);
 
-router.patch('/:id/reject', roleMiddleware(['GeneralSpecAdmin', 'SuperAdmin']),requestController.rejectRequest);
+router.put('/:id/reject', roleMiddleware(['GeneralSpecAdmin', 'SuperAdmin']),requestController.updateRequest);
 
 router.put('/:id/approve', roleMiddleware(['GeneralSpecAdmin', 'SuperAdmin']), requestController.updateRequest);
 // router.put('/:id/approve/general',  roleMiddleware('GeneralSpecAdmin'),requestController.approveByGeneralSpecAdmin);
