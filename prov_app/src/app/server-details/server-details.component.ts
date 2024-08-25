@@ -4,6 +4,18 @@ import { ServerService } from '../services/server.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../services/auth.service';
 
+export interface EnvironmentStyle {
+  icon: string;
+  color: string;
+}
+
+export const environmentStyles: { [key: string]: EnvironmentStyle } = {
+  'developing': { icon: 'fa-code-branch', color: '#66BB6A' }, // Light Green
+  'testing': { icon: 'fa-check-double', color: '#42A5F5' }, // Bright Yellow
+  'staging': { icon: 'fa-cogs', color: '#FF9800' }, // Amber
+  'production': { icon: 'fa-shield-alt', color: '#FF5252' } // Bright Red
+};
+
 @Component({
   selector: 'app-server-details',
   templateUrl: './server-details.component.html',
@@ -32,6 +44,9 @@ export class ServerDetailsComponent implements OnInit {
   ) {}
   onLogout() {
     this.authService.logout();
+  }
+  getEnvironmentStyle(environmentType: string): EnvironmentStyle {
+    return environmentStyles[environmentType] || { icon: 'fa-question-circle', color: '#9E9E9E' }; // Default: gray question mark
   }
   ngOnInit() {
     const token = this.authService.getToken();

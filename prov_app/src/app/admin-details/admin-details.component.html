@@ -35,8 +35,26 @@
       <p><span>Matricule:</span>{{user.matricule}}  </p>
       <p><span>Position:</span>{{user.position}}</p>
       <div class="d-flex align-items-center justify-content-start my-2">
-        <p style="margin:0"><span>Admin role:</span><span style="color:rgb(33, 179, 33)">{{user.role !==''?user.role:'Ordinary user' }}</span>  </p>
-      </div>
+        <p style="margin: 0">
+          <span>Admin role:</span>
+          <span
+            [ngStyle]="{
+              color: getRoleColor(user.role)
+            }"
+          >
+            <i
+              *ngIf="user.role !== ''"
+              [ngClass]="{
+                'fa-solid fa-network-wired': user.role === 'NetworkAdmin',
+                'fa-solid fa-cogs': user.role === 'GeneralSpecAdmin',
+                'fa-solid fa-user-shield': user.role === 'SuperAdmin'
+              }"
+              style="margin-right: 5px"
+            ></i>
+            {{ user.role !== '' ? user.role : 'Ordinary User' }}
+          </span>
+        </p>
+              </div>
       <div class="role-selection mt-3 d-flex align-items-center justify-content-start">
         <label for="roleSelect" class="form-label">Change User Role:</label>
         <select id="roleSelect" class="form-select ms-2" [(ngModel)]="selectedRole">

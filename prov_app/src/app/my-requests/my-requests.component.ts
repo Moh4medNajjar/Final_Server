@@ -26,6 +26,40 @@ export class MyRequestsComponent implements AfterViewInit {
     const tableElement = this.tableContainer.nativeElement as HTMLElement;
     tableElement.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  getStatusIconClass(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'fa-hourglass-start pending-icon';
+      case 'rejected':
+        return 'fa-times-circle rejected-icon';
+      case 'finished':
+        return 'fa-check-circle finished-icon';
+      case 'approved':
+        return 'fa-check-circle approved-icon';
+      default:
+        return '';
+    }
+  }
+
+  getStatusBackgroundClass(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'pending-background';
+      case 'rejected':
+        return 'rejected-background';
+      case 'finished':
+        return 'finished-background';
+      case 'approved':
+        return 'approved-background';
+      default:
+        return '';
+    }
+  }
+
+
+
+
 userData: any;
   constructor(private authService: AuthService, private requestService: RequestService, private datePipe: DatePipe ) { }
 

@@ -202,3 +202,19 @@ input::placeholder {
   opacity: 1;
 }
 
+.pending-icon::before {
+  content: '\f071'; /* Font Awesome icon for "hourglass-start" */
+  color: goldenrod; /* Gold */
+}
+.pending-background {
+  color: rgb(218, 165, 32);
+}
+.rejected-background {
+  color: #f44336;
+}
+.finished-background {
+  color: #0ba4c7;
+}
+.approved-background {
+  color: #4caf4f;
+}

@@ -67,6 +67,20 @@ userData: any
     }
   }
 
+  getRoleColor(role: string): string {
+    switch (role) {
+      case 'NetworkAdmin':
+        return '#39ff14'; // Neon Green
+      case 'GeneralSpecAdmin':
+        return '#ff8c00'; // Neon Orange
+      case 'SuperAdmin':
+        return '#00aaff'; // Electric Blue
+      default:
+        return '#b0b0b0'; // Light Gray for Ordinary User
+    }
+  }
+
+
   updateUserRole(): void {
     if (!this.selectedRole) {
       alert('Please select a role before updating.');

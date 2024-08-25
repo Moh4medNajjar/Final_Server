@@ -318,3 +318,23 @@ html {
 .back-to-top.show {
   opacity: 1;
 }
+
+
+
+/* Role-based Coloring */
+.role-ordinary-user {
+  color: #b0b0b0; /* Light Gray for Ordinary User */
+}
+
+.role-network-admin {
+  color: #39ff14; /* Neon Green for Network Admin */
+}
+
+.role-general-spec-admin {
+  color: #ff8c00; /* Neon Orange for GeneralSpecAdmin */
+}
+
+.role-super-admin {
+  color: #00aaff; /* Electric Blue for SuperAdmin */
+}
+

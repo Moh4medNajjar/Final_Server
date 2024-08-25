@@ -13,32 +13,32 @@
     </div>
     @if(adminRole === ""){
       <div class="menu">
-        <a routerLink="/my-requests">My Requests</a>
-        <a routerLink="/my-servers">My Servers</a>
-        <a href="">My Profile</a>
+        <a routerLink="/my-requests"><i class="fa fa-file-alt"></i> My Requests</a>
+        <a routerLink="/my-servers"><i class="fa fa-server"></i> My Servers</a>
+        <a href=""><i class="fa fa-user"></i> My Profile</a>
       </div>
     }
 
     @if(adminRole === "GeneralSpecAdmin") {
       <div class="menu">
-        <a routerLink="/my-requests">Incoming requests</a>
-        <a routerLink="/answered-requests">Answered requests</a>
-        <a (click)="onLogout()">Logout</a>
+        <a routerLink="/my-requests"><i class="fa fa-inbox"></i> Incoming requests</a>
+        <a routerLink="/answered-requests"><i class="fa fa-check-double"></i> Answered requests</a>
+        <a (click)="onLogout()"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </div>
     }
     @if(adminRole === "NetworkAdmin") {
       <div class="menu">
-        <p style="font-weight: bold;">Network Admin</p>
+        <p style="font-weight: bold;"><i class="fa fa-network-wired"></i> Network Admin</p>
       </div>
     }
 
     @if(adminRole === 'SuperAdmin') {
       <div class="menu">
-        <a routerLink="/admin-dashboard">Home</a>
-        <a routerLink="/my-requests">Requests</a>
-        <a routerLink="/my-servers">Servers</a>
-        <a routerLink="/users-list">Users</a>
-        <a (click)="onLogout()" style="cursor: pointer">Logout</a>
+        <a routerLink="/admin-dashboard"><i class="fa fa-tachometer-alt"></i> Home</a>
+        <a routerLink="/my-requests"><i class="fa fa-file-alt"></i> Requests</a>
+        <a routerLink="/my-servers"><i class="fa fa-server"></i> Servers</a>
+        <a routerLink="/users-list"><i class="fa fa-users"></i> Users</a>
+        <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </div>
     }
   </div>
@@ -48,83 +48,89 @@
   }
   @if(adminRole !== "" && requestDetails?.status === "approved" ) {
     <div>
-      <p class="mt-1" style="font-size:16px; color: rgb(117, 190, 8); font-weight: 500;">Request approved by <span style="font-weight: bold;">{{user?.fullName}}</span>!</p>
+      <p class="mt-1" style="font-size:16px; color: rgb(117, 190, 8); font-weight: 500;"><i class="fa fa-thumbs-up me-2"></i>Request approved by <span style="font-weight: bold;">{{user?.fullName}}</span>!</p>
     </div>
   }
   @if(adminRole !== "" && requestDetails?.status === "rejected" ) {
     <div>
-      <p class="mt-1" style="font-size:12px; color: rgb(255, 47, 47); font-weight: 500;">Request rejected by {{requestDetails?.responderId}} !</p>
+      <p class="mt-1" style="font-size:12px; color: rgb(255, 47, 47); font-weight: 500;"><i class="fa fa-thumbs-down me-2"></i>Request rejected by {{user?.fullName}} !</p>
     </div>
   }
   @if(adminRole === "NetworkAdmin") {
-    <p class="mb-4" style="color: rgb(6, 216, 10);">This request was approved by General specs admin and is waiting for network configurations.</p>
+    <p class="mb-4" style="color: rgb(6, 216, 10);"><i class="fa fa-clock me-2"></i>This request was approved by General specs admin and is waiting for network configurations.</p>
   }
 
   <div>
     <h3 style="font-weight: 500; font-size: 20px; margin-bottom: 15px;">* Request details</h3>
     <div class="ms-4">
-      <p><span>Server name:</span>{{requestDetails?.vmName}}</p>
-      <p><span>Description:</span>{{requestDetails?.description}}</p>
-      <p><span>Environment type:</span> {{ requestDetails?.environment_type | titlecase }}</p>
-      <p><span>Operating system:</span>{{requestDetails?.operating_system}}</p>
-      <p><span>RAM:</span>{{requestDetails?.ram}}</p>
-      <p><span>vCPUs:</span>{{requestDetails?.vcpu}}</p>
-      <p><span>Disk space:</span>{{requestDetails?.disk_space}}</p>
-      <p><span>Software list:</span>{{requestDetails?.software_list}}</p>
-      <p><span>Open ports:</span>{{requestDetails?.openPorts}}</p>
-      <p><span>Has public IP:</span>{{requestDetails?.hasPublicIP}}</p>
-      <p><span>Desired creation date:</span>{{formatDate(requestDetails?.desired_start_date)}}</p>
-      <p><span>Status:</span>{{requestDetails?.status | titlecase}}</p>
-    </div>
+      <p><i class="fa fa-server me-2"></i><span>Server name:</span> {{requestDetails?.vmName}}</p>
+      <p><i class="fa fa-info-circle me-2"></i><span>Description:</span> {{requestDetails?.description}}</p>
+      <p><i class="fa fa-cogs me-2"></i><span>Environment type:</span> <i style="margin-right: 6px;" [class]="'fa ' + getEnvironmentStyle(requestDetails?.environment_type).icon"
+        [style.color]="getEnvironmentStyle(requestDetails?.environment_type).color"></i>
+        <span [style.color]="getEnvironmentStyle(requestDetails?.environment_type).color">{{ requestDetails?.environment_type | titlecase }}</span></p>
+      <p><i class="fa fa-laptop me-2"></i><span>Operating system:</span> {{requestDetails?.operating_system}}</p>
+      <p><i class="fa fa-memory me-2"></i><span>RAM:</span> {{requestDetails?.ram}}</p>
+      <p><i class="fa fa-microchip me-2"></i><span>vCPUs:</span> {{requestDetails?.vcpu}}</p>
+      <p><i class="fa fa-hdd me-2"></i><span>Disk space:</span> {{requestDetails?.disk_space}}</p>
+      <p><i class="fa fa-boxes me-2"></i><span>Software list:</span> {{requestDetails?.software_list}}</p>
+      <p><i class="fa fa-lock me-2"></i><span>Open ports:</span> {{requestDetails?.openPorts}}</p>
+      <p><i class="fa fa-globe me-2"></i><span>Has public IP:</span> {{requestDetails?.hasPublicIP}}</p>
+      <p><i class="fa fa-calendar me-2"></i><span>Desired creation date:</span> {{formatDate(requestDetails?.desired_start_date)}}</p>
+      <p>
+        <i class="fa fa-tag me-2"></i>
+        <span>Status:</span>
+        <i class="fa me-1" [ngClass]="[
+          getStatusIconClass(requestDetails?.status),
+          getStatusColor(requestDetails?.status)
+        ]"></i>
+        <span [ngClass]="getStatusColor(requestDetails?.status)">
+          {{requestDetails?.status | titlecase}}
+        </span>
+      </p>
+          </div>
   </div>
 
   @if((adminRole === "GeneralSpecAdmin" || adminRole === "SuperAdmin") && requestDetails?.status === "pending" ) {
     <div>
       <div class="d-flex align-items-center justify-content-center mt-4">
-        <button class="me-2 btn button-approve" (click)="approveRequest()">Approve request</button>
-        <button class="btn button-reject" (click)="rejectRequest()">Reject request</button>
+        <button class="me-2 btn button-approve" (click)="approveRequest()"><i class="fa fa-check me-2"></i>Approve request</button>
+        <button class="btn button-reject" (click)="rejectRequest()"><i class="fa fa-times me-2"></i>Reject request</button>
       </div>
       <p class="text-center mt-1" style="font-size:12px">Approving will send this request to the network admin</p>
     </div>
   }
 
-
-
   @if (adminRole === 'NetworkAdmin') {
     <form [formGroup]="serverForm">
       <div class="form-group" style="width: 600px">
-        <label for="privateIP">Private IP</label>
+        <label for="privateIP"><i class="fa fa-network-wired me-2"></i>Private IP</label>
         <input type="text" id="privateIP" formControlName="privateIP" class="form-control" placeholder="eg: 192.168.1.0/24">
       </div>
       <div class="form-group" style="width: 600px">
-        <label for="subnetMask">Subnet mask</label>
+        <label for="subnetMask"><i class="fa fa-network me-2"></i>Subnet mask</label>
         <input type="text" id="subnetMask" formControlName="subnetMask" class="form-control" placeholder="eg: 255.255.0.0">
       </div>
       <div class="form-group" style="width: 600px">
-        <label for="defaultGateway">Default Gateway</label>
+        <label for="defaultGateway"><i class="fa fa-route me-2"></i>Default Gateway</label>
         <input type="text" id="defaultGateway" formControlName="defaultGateway" class="form-control" placeholder="eg: 17.25.0.1">
       </div>
 
       <h4 class="my-4">Credentials</h4>
       <div class="form-group" style="width: 600px">
-        <label for="username">Username</label>
+        <label for="username"><i class="fa fa-user me-2"></i>Username</label>
         <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username">
       </div>
       <div class="form-group" style="width: 600px">
-        <label for="password">Password</label>
+        <label for="password"><i class="fa fa-lock me-2"></i>Password</label>
         <input type="text" id="password" formControlName="password" class="form-control" placeholder="Server password">
       </div>
 
       <!-- Submit Button -->
       <div class="d-flex align-items-center justify-content-center mt-4">
-        <button class="btn btn-primary" (click)="createServer()">Create Server</button>
+        <button class="btn btn-primary" (click)="createServer()"><i class="fa fa-server me-2"></i>Create Server</button>
       </div>
 
     </form>
-
-
-
   }
-
 
 </div>

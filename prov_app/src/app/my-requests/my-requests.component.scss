@@ -239,3 +239,205 @@ html {
 .back-to-top.show {
   opacity: 1;
 }
+
+/* Base styles for table rows */
+.blue-row {
+  background-color: #2a2a2a;
+  color: #dcdcdc;
+}
+
+.red-row {
+  background-color: #1a1a1a;
+  color: #dcdcdc;
+}
+
+/* Status circle colors */
+.pending {
+  color: #ff9800; /* Orange */
+}
+
+.rejected {
+  color: #f44336; /* Red */
+}
+
+.finished {
+  color: #4caf50; /* Green */
+}
+
+.approved {
+  color: #2196f3; /* Blue */
+}
+
+
+.button i {
+  margin-left: 5px;
+}
+
+/* Back to top button styles */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #61d27e;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+/* Base styles for table rows */
+.blue-row {
+  background-color: #2a2a2a;
+  color: #dcdcdc;
+}
+
+.red-row {
+  background-color: #1a1a1a;
+  color: #dcdcdc;
+}
+
+/* Status circle colors */
+.pending {
+  color: #ff9800; /* Orange */
+}
+
+.rejected {
+  color: #f44336; /* Red */
+}
+
+.finished {
+  color: #4caf50; /* Green */
+}
+
+.approved {
+  color: #2196f3; /* Blue */
+}
+
+/* Status icons */
+.pending-icon::before {
+  content: '\f071'; /* Font Awesome icon for "hourglass-start" */
+}
+
+.rejected-icon::before {
+  content: '\f00d'; /* Font Awesome icon for "times-circle" */
+}
+
+.finished-icon::before {
+  content: '\f00c'; /* Font Awesome icon for "check-circle" */
+}
+
+.approved-icon::before {
+  content: '\f00c'; /* Font Awesome icon for "check-circle" */
+}
+
+
+
+.button i {
+  margin-left: 5px;
+}
+
+/* Back to top button styles */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #61d27e;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Base styles for table rows */
+.blue-row {
+  background-color: #2a2a2a;
+  color: #dcdcdc;
+}
+
+.red-row {
+  background-color: #1a1a1a;
+  color: #dcdcdc;
+}
+
+/* Status colors */
+.pending {
+  color: #ffd700; /* Gold */
+}
+
+.rejected {
+  color: #f44336; /* Red */
+}
+
+.finished {
+  color: #4caf50; /* Green */
+}
+
+.approved {
+  color: #4caf50; /* Green */
+}
+
+/* Status icons */
+.pending-icon::before {
+  content: '\f071'; /* Font Awesome icon for "hourglass-start" */
+  color: goldenrod; /* Gold */
+}
+.pending-background {
+  background-color: rgba(218, 165, 32, 0.259);
+}
+.rejected-background {
+  background-color: #f443363e;
+}
+.finished-background {
+  background-color: #0ba4c735;
+}
+.approved-background {
+  background-color: #4caf4f27;
+}
+
+.rejected-icon::before {
+  content: '\f00d'; /* Font Awesome icon for "times-circle" */
+  color: #f44336; /* Red */
+}
+
+.finished-icon::before {
+  content: '\f00c'; /* Font Awesome icon for "check-circle" */
+  color: #4caf50; /* Green */
+}
+
+.approved-icon::before {
+  content: '\f00c'; /* Font Awesome icon for "check-circle" */
+  color: #4caf50; /* Green */
+}
+
+
+.button i {
+  margin-left: 5px;
+}
+
+/* Back to top button styles */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #61d27e;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

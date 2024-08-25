@@ -7,6 +7,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServerService } from '../services/server.service'; // Ensure ServerService is imported
 import { UserService } from '../services/user.service';
 
+export interface EnvironmentStyle {
+  icon: string;
+  color: string;
+}
+
+export const environmentStyles: { [key: string]: EnvironmentStyle } = {
+  'developing': { icon: 'fa-code-branch', color: '#66BB6A' }, // Light Green
+  'testing': { icon: 'fa-check-double', color: '#42A5F5' }, // Bright Yellow
+  'staging': { icon: 'fa-cogs', color: '#FF9800' }, // Amber
+  'production': { icon: 'fa-shield-alt', color: '#FF5252' } // Bright Red
+};
+
 @Component({
   selector: 'app-request-details',
   templateUrl: './request-details.component.html',
@@ -111,7 +123,7 @@ export class RequestDetailsComponent implements OnInit {
         this.userService.getUserById(this.requestDetails?.responderId).subscribe(
           (data: any) => {
             this.user = data;
-            console.log('User details:', this.user);
+            console.log('request details:', this.requestDetails);
           },
           (error: any) => {
             console.log("ResponderId= ", this.requestDetails?.responderId)
@@ -143,7 +155,39 @@ export class RequestDetailsComponent implements OnInit {
       console.error('Failed to copy: ', err);
     });
   }
+  getStatusIconClass(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'fa-hourglass-start pending-icon';
+      case 'rejected':
+        return 'fa-times-circle rejected-icon';
+      case 'finished':
+        return 'fa-check-circle finished-icon';
+      case 'approved':
+        return 'fa-check-circle approved-icon';
+      default:
+        return '';
+    }
+  }
 
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'pending':
+        return 'pending-background';
+      case 'rejected':
+        return 'rejected-background';
+      case 'finished':
+        return 'finished-background';
+      case 'approved':
+        return 'approved-background';
+      default:
+        return '';
+    }
+  }
+
+  getEnvironmentStyle(environmentType: string): EnvironmentStyle {
+    return environmentStyles[environmentType] || { icon: 'fa-question-circle', color: '#9E9E9E' }; // Default: gray question mark
+  }
   rejectRequest(): void {
     if (this.requestId) {
       this.requestService.rejectRequest(this.requestId).subscribe(

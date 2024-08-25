@@ -66,23 +66,38 @@
               <td>{{ users.indexOf(item) + 1 }}</td>
               <td>{{ item.fullName }}</td>
               <td [ngClass]="{
-                'role-ordinary-user': item.role === '',
-                'role-network-admin': item.role === 'NetworkAdmin',
-                'role-general-spec-admin': item.role === 'GeneralSpecAdmin',
-                'role-super-admin': item.role === 'SuperAdmin'
-              }">
-            {{ item.role === '' ? "Ordinary User" : item.role }}
-          </td>
+                  'role-ordinary-user': item.role === '',
+                  'role-network-admin': item.role === 'NetworkAdmin',
+                  'role-general-spec-admin': item.role === 'GeneralSpecAdmin',
+                  'role-super-admin': item.role === 'SuperAdmin'
+                }">
+                <i
+                  *ngIf="item.role === 'NetworkAdmin'"
+                  class="fa-solid fa-network-wired me-2"
+                ></i>
+                <i
+                  *ngIf="item.role === 'GeneralSpecAdmin'"
+                  class="fa-solid fa-cogs me-2"
+                ></i>
+                <i
+                  *ngIf="item.role === 'SuperAdmin'"
+                  class="fa-solid fa-user-shield me-2"
+                ></i>
+                {{ item.role === '' ? 'Ordinary User' : item.role }}
+              </td>
               <td>{{ item.matricule }}</td>
               <td>{{ item.email }}</td>
               <td>
-                <i class="fa-solid fa-arrow-up-right-from-square me-3" [routerLink]="['/user-details', item._id]"></i>
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square me-3"
+                  [routerLink]="['/user-details', item._id]"
+                ></i>
               </td>
             </tr>
           }
-
         </tbody>
       </table>
+
       @if (showBackToTopButton) {
         <button (click)="scrollToTop()" class="back-to-top">
           <i class="fa fa-chevron-up" style="font-size:30px"></i>
