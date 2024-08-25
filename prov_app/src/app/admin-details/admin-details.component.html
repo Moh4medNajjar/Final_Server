@@ -8,7 +8,7 @@
     </div>
     <p style="font-size:large; font-weight: bold; margin: 0">{{userData.fullName}}</p>
     <div class="menu">
-      @if(adminRole === '') {
+      @if(adminRole === 'OrdinaryUser') {
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>My Requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>My Servers</a>
         <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
@@ -41,7 +41,7 @@
             }"
           >
             <i
-              *ngIf="user.role !== ''"
+              *ngIf="user.role !== 'OrdinaryUser'"
               [ngClass]="{
                 'fa-solid fa-network-wired': user.role === 'NetworkAdmin',
                 'fa-solid fa-cogs': user.role === 'GeneralSpecAdmin',
@@ -49,7 +49,7 @@
               }"
               style="margin-right: 5px"
             ></i>
-            {{ user.role !== '' ? user.role : 'Ordinary User' }}
+            {{ user.role !== 'OrdinaryUser' ? user.role : 'Ordinary User' }}
           </span>
         </p>
               </div>
@@ -57,9 +57,10 @@
         <label for="roleSelect" class="form-label">Change User Role:</label>
         <select id="roleSelect" class="form-select ms-2" [(ngModel)]="selectedRole">
           <option value="">Select Role</option>
-          <option value="GeneralSpecAdmin">GeneralSpecAdmin</option>
-          <option value="NetworkAdmin">NetworkAdmin</option>
-          <option value="SuperAdmin">SuperAdmin</option>
+          <option value="GeneralSpecAdmin">General Admin</option>
+          <option value="NetworkAdmin">Network Admin</option>
+          <option value="SuperAdmin">Super Admin</option>
+          <option value="OrdinaryUser">Ordinary User</option>
         </select>
         <button class="button text-light ms-4" style="height: 35px;" (click)="updateUserRole()" [disabled]="adminRole === ''">Update role</button>
       </div>

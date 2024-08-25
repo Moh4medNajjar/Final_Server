@@ -32,10 +32,10 @@
     }
   </div>
 
-  @if(role === "") {
+  @if(role === "OrdinaryUser") {
     <h3>My Requests</h3>
   }
-  @if(role !== "") {
+  @if(role !== "OrdinaryUser") {
     <h3>Incoming Requests </h3>
   }
   <div class="d-flex justify-content-between align-items-center my-4">
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    @if(role === "") {
+    @if(role === "OrdinaryUser") {
       <div class="button" routerLink="/new-request">
         Create Request
         <i class="fa fa-plus ms-1"></i>

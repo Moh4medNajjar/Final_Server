@@ -43,15 +43,15 @@
     }
   </div>
 
-  @if(adminRole !== "") {
+  @if(adminRole !== "OrdinaryUser") {
     <p class="mb-2" style="color: orange;"> <i class="fa fa-bell me-2"></i>{{requestDetails?.fullName}}: {{requestDetails?.position}},  (Matricule: {{ requestDetails?.matricule}}) has made a server request !</p>
   }
-  @if(adminRole !== "" && requestDetails?.status === "approved" ) {
+  @if(adminRole !== "OrdinaryUser" && requestDetails?.status === "approved" ) {
     <div>
       <p class="mt-1" style="font-size:16px; color: rgb(117, 190, 8); font-weight: 500;"><i class="fa fa-thumbs-up me-2"></i>Request approved by <span style="font-weight: bold;">{{user?.fullName}}</span>!</p>
     </div>
   }
-  @if(adminRole !== "" && requestDetails?.status === "rejected" ) {
+  @if(adminRole !== "OrdinaryUser" && requestDetails?.status === "rejected" ) {
     <div>
       <p class="mt-1" style="font-size:12px; color: rgb(255, 47, 47); font-weight: 500;"><i class="fa fa-thumbs-down me-2"></i>Request rejected by {{user?.fullName}} !</p>
     </div>

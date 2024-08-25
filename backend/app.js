@@ -23,6 +23,8 @@ app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/requests', require('./routes/requestRoutes'));
 app.use('/api/servers', require('./routes/serverRoutes'));
 
+
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -8,7 +8,7 @@
     </div>
     <p style="font-size:large; font-weight: bold; margin: 0">Mohamed Najjar</p>
     <div class="menu">
-      @if(role === '') {
+      @if(role === 'OrdinaryUser') {
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>My Requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>My Servers</a>
         <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>

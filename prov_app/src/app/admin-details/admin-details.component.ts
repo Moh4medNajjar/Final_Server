@@ -79,31 +79,31 @@ userData: any
         return '#b0b0b0'; // Light Gray for Ordinary User
     }
   }
-
-
+updatedData: any
   updateUserRole(): void {
-    if (!this.selectedRole) {
-      alert('Please select a role before updating.');
-      return;
-    }
+    // if (!this.selectedRole) {
+    //   alert('Please select a role before updating.');
+    //   return;
+    // }
 
     if (this.userId) {
-      const updatedData = { role: this.selectedRole };
+      // Determine role value based on selection
+      this.updatedData = { role: this.selectedRole };
 
-      // Log the payload to the console
-      console.log('Payload sent to server:', updatedData);
+      // Log the payload to the console for debugging
+      console.log('Payload sent to server:', this.updatedData);
 
-      this.userService.updateUserRole(this.userId, updatedData).subscribe(
+      this.userService.updateUserRole(this.userId, this.updatedData).subscribe(
         (response: any) => {
           console.log('User role updated successfully:', response);
-          alert('User role updated successfully.');
           window.location.reload();
         },
         (error: any) => {
-          console.error('Error updating user role:', error);
           window.location.reload();
         }
       );
+    } else {
+      alert('No user ID provided.');
     }
   }
 

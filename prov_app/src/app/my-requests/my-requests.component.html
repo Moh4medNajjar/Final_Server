@@ -9,7 +9,7 @@
     <div style="display:flex; align-items: center; flex-direction: column;">
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
     </div>
-    @if(role === ""){
+    @if(role === "OrdinaryUser"){
       <div class="menu">
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
@@ -45,10 +45,10 @@
     }
   </div>
 
-  @if(role === "") {
+  @if(role === "OrdinaryUser") {
     <h3>My Requests</h3>
   }
-  @if(role !== "") {
+  @if(role !== "OrdinaryUser") {
     <h3>Incoming Requests</h3>
   }
   <div class="d-flex justify-content-between align-items-center my-4">
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    @if(role === "") {
+    @if(role === "OrdinaryUser") {
       <div class="button" routerLink="/new-request">
         Create Request
         <i class="fa fa-plus ms-1"></i>

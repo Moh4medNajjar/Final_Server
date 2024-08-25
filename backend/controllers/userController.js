@@ -22,6 +22,7 @@ exports.getUserById = async (req, res) => {
     }
 };
 
+
 // Update a user by ID
 exports.updateUser = async (req, res) => {
     const { fullName, email, position, matricule, phoneNumber, role, permissions, password } = req.body;
