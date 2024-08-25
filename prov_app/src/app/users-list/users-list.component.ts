@@ -4,13 +4,32 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { RequestService } from '../services/request.service';
 import { UserService } from '../services/user.service';
+import { AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+
 
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, AfterViewInit {
+  @ViewChild('tableContainer') tableContainer!: ElementRef;
+  showBackToTopButton: boolean = false;
+
+  ngAfterViewInit() {
+    const tableElement = this.tableContainer.nativeElement as HTMLElement;
+
+    // Set up scroll event listener
+    tableElement.addEventListener('scroll', () => {
+      this.showBackToTopButton = tableElement.scrollTop > 100; // Adjust threshold as needed
+    });
+  }
+
+  scrollToTop() {
+    const tableElement = this.tableContainer.nativeElement as HTMLElement;
+    tableElement.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   userData: any;
 
   constructor(

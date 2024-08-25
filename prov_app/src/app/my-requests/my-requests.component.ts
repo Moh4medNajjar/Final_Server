@@ -2,13 +2,30 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { RequestService } from '../services/request.service';
 import { DatePipe } from '@angular/common';
+import { AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-my-requests',
   templateUrl: './my-requests.component.html',
   styleUrl: './my-requests.component.scss'
 })
-export class MyRequestsComponent {
+export class MyRequestsComponent implements AfterViewInit {
+  @ViewChild('tableContainer') tableContainer!: ElementRef;
+  showBackToTopButton: boolean = false;
+
+  ngAfterViewInit() {
+    const tableElement = this.tableContainer.nativeElement as HTMLElement;
+
+    // Set up scroll event listener
+    tableElement.addEventListener('scroll', () => {
+      this.showBackToTopButton = tableElement.scrollTop > 100; // Adjust threshold as needed
+    });
+  }
+
+  scrollToTop() {
+    const tableElement = this.tableContainer.nativeElement as HTMLElement;
+    tableElement.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 userData: any;
   constructor(private authService: AuthService, private requestService: RequestService, private datePipe: DatePipe ) { }
 
