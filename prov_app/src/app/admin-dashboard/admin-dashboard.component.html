@@ -108,7 +108,7 @@
           <div *ngFor="let server of recentServers" class="activity-item" [routerLink]="['/server-details', server.id]">
             <i class="fa fa-shield-alt"></i>
             <div class="activity-text">
-              <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+              <p>{{ server.adminName }} has created a new server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
             </div>
           </div>
         }
@@ -173,7 +173,7 @@
 
 
       <div class="active-servers-widget" style="background-color: #1C2D38;">
-        <h3>Number of servers per environment</h3>
+        <h3>Number of active servers per environment</h3>
         <div class="widget-grid">
           <div class="environment-widget">
             <i class="fa fa-server"></i>

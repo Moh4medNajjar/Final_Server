@@ -39,7 +39,6 @@
       <div class="menu">
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
-        <a routerLink="/users-list" class="me-3"><i class="fa fa-users me-2"></i>Users</a>
         <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
       </div>
     }
@@ -101,7 +100,7 @@
             <td>{{ formatDate(item.createdAt) }}</td>
             <td [ngClass]="getStatusBackgroundClass(item.status)">
               <i class="fa me-1" [ngClass]="getStatusIconClass(item.status)"></i>
-              {{ item.status }}
+              {{ (item.status==='approved' && role === "NetworkAdmin")?'Configuration Needed !':item.status }}
             </td>
             <td>
               <i class="fa-solid fa-arrow-up-right-from-square ms-4" [routerLink]="['/request-details', item._id]"></i>
