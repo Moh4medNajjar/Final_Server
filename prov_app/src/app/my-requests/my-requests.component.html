@@ -8,8 +8,6 @@
     </div>
     <div style="display:flex; align-items: center; flex-direction: column;">
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
-      <p style="font-weight: bold; margin:0">{{role}}</p>
-      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">Matricule: {{ matricule }}</p>
     </div>
     @if(role === ""){
       <div class="menu">
@@ -70,7 +68,7 @@
     }
   </div>
 
-  <div class="table-container" #tableContainer style="height: 475px; overflow-y: scroll;">
+  <div class="table-container" #tableContainer style="height: 440px; overflow-y: scroll;">
     <table>
       <thead>
         <tr>

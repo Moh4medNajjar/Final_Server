@@ -242,13 +242,11 @@ html {
 
 /* Base styles for table rows */
 .blue-row {
-  background-color: #2a2a2a;
-  color: #dcdcdc;
+  background-color: #313B44;
 }
 
 .red-row {
-  background-color: #1a1a1a;
-  color: #dcdcdc;
+  background-color: #212529;
 }
 
 /* Status circle colors */
@@ -293,13 +291,11 @@ html {
 
 /* Base styles for table rows */
 .blue-row {
-  background-color: #2a2a2a;
-  color: #dcdcdc;
+  background-color: #313B44;
 }
 
 .red-row {
-  background-color: #1a1a1a;
-  color: #dcdcdc;
+  background-color: #212529;
 }
 
 /* Status circle colors */
@@ -361,13 +357,11 @@ html {
 
 /* Base styles for table rows */
 .blue-row {
-  background-color: #2a2a2a;
-  color: #dcdcdc;
+  background-color: #313B44;
 }
 
 .red-row {
-  background-color: #1a1a1a;
-  color: #dcdcdc;
+  background-color: #212529;
 }
 
 /* Status colors */
@@ -441,3 +435,25 @@ html {
   justify-content: center;
   cursor: pointer;
 }
+.header {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+

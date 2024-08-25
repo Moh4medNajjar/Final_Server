@@ -1,16 +1,14 @@
-<div class="container-fluid" style="min-height: 100vh; background-color: #1e1e1e; color: #dcdcdc;">
+<div class="container-fluid" style="min-height: 100vh; background-color: #212529; color: #dcdcdc;">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Header Section -->
-  <div class="header mb-5 d-flex align-items-center justify-content-between p-3" style="background-color: #2b2b2b; border-radius: 8px;">
+  <div class="header mb-5 d-flex align-items-center justify-content-between p-3" style="background-color: #212529; border-radius: 8px;">
     <div class="brand d-flex align-items-center">
       <div class="logo"></div>
       <h3 class="ms-3">Provision App</h3>
     </div>
     <div>
       <p class="text-center mb-1" style="font-size:large; font-weight: bold;">{{adminName}}</p>
-      <p class="text-center mb-1" style="font-size:large; font-weight: bold; color: #61d27e;">{{adminRole}}</p>
-      <p class="text-center mb-0" style="font-size:large; font-weight: bold;">{{adminMatricule}}</p>
     </div>
     <div class="menu">
       @if(adminRole === '') {
