@@ -8,10 +8,8 @@
     </div>
     <div style="display:flex; align-items: center; flex-direction: column;">
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{ fullName }}</p>
-      <p style="font-weight: bold; margin:0">{{role}}</p>
-      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">Matricule: {{ matricule }}</p>
     </div>
-    <div class="menu">      
+    <div class="menu">
       @if(this.userData.role === 'SuperAdmin') {
         <div class="menu">
           <a routerLink="/admin-dashboard">Home</a>
@@ -40,7 +38,7 @@
     </div>
   </div>
 
-  <div class="table-container" style="height: 491px; overflow-y: scroll;">
+  <div class="table-container" #tableContainer style="height: 491px; overflow-y: scroll;">
     <table>
       <thead>
         <tr>
@@ -53,9 +51,9 @@
             Creation Date
             <i class="fa fa-sort" *ngIf="sortColumn === 'createdAt'"></i>
           </th>
-          <th (click)="sortTable('status')">
+          <th (click)="sortTable('environment_type')">
             Environment
-            <i class="fa fa-sort" *ngIf="sortColumn === 'status'"></i>
+            <i class="fa" [ngClass]="{ 'fa-sort': sortColumn !== 'environment_type', 'fa-sort-asc': sortColumn === 'environment_type' && sortDirection, 'fa-sort-desc': sortColumn === 'environment_type' && !sortDirection }"></i>
           </th>
           <th (click)="sortTable('status')">
             Operating system
@@ -99,6 +97,14 @@
           </td>
         </tr>
       </tbody>
+
+
     </table>
+    @if (showBackToTopButton) {
+      <button (click)="scrollToTop()" class="back-to-top">
+        <i class="fa fa-chevron-up" style="font-size:30px"></i>
+      </button>
+    }
+
   </div>
 </div>

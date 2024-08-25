@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ServerService } from '../services/server.service';
+import { AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
+
 
 export interface EnvironmentStyle {
   icon: string;
@@ -21,7 +23,24 @@ export const environmentStyles: { [key: string]: EnvironmentStyle } = {
 })
 
 
-export class MyServersComponent implements OnInit {
+export class MyServersComponent implements OnInit, AfterViewInit {
+  @ViewChild('tableContainer') tableContainer!: ElementRef;
+  showBackToTopButton: boolean = false;
+
+  ngAfterViewInit() {
+    const tableElement = this.tableContainer.nativeElement as HTMLElement;
+
+    // Set up scroll event listener
+    tableElement.addEventListener('scroll', () => {
+      this.showBackToTopButton = tableElement.scrollTop > 100; // Adjust threshold as needed
+    });
+  }
+
+  scrollToTop() {
+    const tableElement = this.tableContainer.nativeElement as HTMLElement;
+    tableElement.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 
   getEnvironmentStyle(environmentType: string): EnvironmentStyle {
     return environmentStyles[environmentType] || { icon: 'fa-question-circle', color: '#9E9E9E' }; // Default: gray question mark
@@ -124,41 +143,41 @@ fetchServersById(requesterId: string) {
     this.sortDirection = (this.sortColumn === column) ? !this.sortDirection : true;
     this.sortColumn = column;
 
-    // Sort the items based on the column and direction
-    this.filteredItems.sort((a, b) => {
-        let comparison = 0;
+    const compare = (a: any, b: any) => {
+      let comparison = 0;
 
-        // Handle sorting based on the selected column
-        switch (this.sortColumn) {
-            case 'name':
-                comparison = a.name.localeCompare(b.name);
-                break;
-            case 'creationDate':
-                comparison = new Date(b.creationDate).getTime() - new Date(a.creationDate).getTime();
-                break;
-            case 'status':
-                // Define an ordering for statuses
-                const statusOrder: { [key: string]: number } = { 'Running': 1, 'Stopped': 2 };
-                comparison = (statusOrder[a.status] ?? 0) - (statusOrder[b.status] ?? 0);
-                break;
-            case 'cpu':
-                // Ensure CPU is a number for comparison
-                comparison = (Number(b.cpu) || 0) - (Number(a.cpu) || 0);
-                break;
-            case 'memory':
-                // Ensure memory is a number for comparison
-                comparison = (Number(b.memory) || 0) - (Number(a.memory) || 0);
-                break;
-            case 'storage':
-                // Ensure storage is a number for comparison
-                comparison = (Number(b.storage) || 0) - (Number(a.storage) || 0);
-                break;
-        }
+      switch (this.sortColumn) {
+        case 'vmName':
+        case 'operating_system':
+          comparison = a[this.sortColumn].localeCompare(b[this.sortColumn]);
+          break;
 
-        // Return the comparison based on the sort direction
-        return this.sortDirection ? comparison : -comparison;
-    });
-}
+        case 'createdAt':
+          comparison = new Date(a[this.sortColumn]).getTime() - new Date(b[this.sortColumn]).getTime();
+          break;
+
+        case 'cpu':
+        case 'ram':
+        case 'disk_space':
+          comparison = (Number(b[this.sortColumn]) || 0) - (Number(a[this.sortColumn]) || 0);
+          break;
+
+        case 'environment_type':
+          // Simplified sorting for environment_type (alphabetically)
+          comparison = a[this.sortColumn].localeCompare(b[this.sortColumn]);
+          break;
+
+        default:
+          break;
+      }
+
+      return this.sortDirection ? comparison : -comparison;
+    };
+
+    this.filteredItems.sort(compare);
+  }
+
+
 
 
 
@@ -182,8 +201,16 @@ getStatusCircleClass(status: string): string {
   searchQuery: string = '';
 
   onSearch() {
-    this.filteredItems = this.items.filter(item =>
-      item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+    if (this.searchQuery.trim() === '') {
+      // If search query is empty, show all items
+      this.filteredItems = [...this.items];
+    } else {
+      // Filter items based on the search query
+      this.filteredItems = this.items.filter(item =>
+        item.vmName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        item.operating_system.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
   }
+
 }

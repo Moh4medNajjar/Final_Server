@@ -212,3 +212,59 @@ html {
 .suggestions li:hover {
   background-color: #f0f0f0;
 }
+
+
+.table-container {
+  height: 491px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  background-color: #212529; /* Set the background color to match your design */
+  z-index: 1; /* Ensure the header is above the table rows */
+  border: 1px solid #ddd!important; /* Adjust border style */
+}
+
+th, td {
+  padding: 8px; /* Adjust as needed */
+  border: 1px solid #ddd; /* Adjust border style */
+}
+
+th {
+  background-color: #212529; /* Header background color */
+}
+
+
+.table-container {
+  position: relative;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #66BB69;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s;
+}
+
+.back-to-top.show {
+  opacity: 1; 
+}
