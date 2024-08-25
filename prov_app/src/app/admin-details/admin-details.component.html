@@ -7,22 +7,20 @@
       <h3>Provision App</h3>
     </div>
     <p style="font-size:large; font-weight: bold; margin: 0">{{userData.fullName}}</p>
-    @if(adminRole === '') {
-      <div class="menu">
-        <a routerLink="/my-requests">My Requests</a>
-        <a routerLink="/my-servers">My Servers</a>
-        <a (click)="onLogout()">Logout</a>
-      </div>
-    }
-    @if(adminRole === 'SuperAdmin') {
-      <div class="menu">
-        <a routerLink="/admin-dashboard">Home</a>
-        <a routerLink="/my-requests">Requests</a>
-        <a routerLink="/my-servers">Servers</a>
-        <a routerLink="/users-list">Users</a>
-        <a (click)="onLogout()" style="cursor: pointer">Logout</a>
-      </div>
-    }
+    <div class="menu">
+      @if(adminRole === '') {
+        <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>My Requests</a>
+        <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>My Servers</a>
+        <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+      }
+      @if(adminRole === 'SuperAdmin') {
+        <a routerLink="/admin-dashboard" class="me-3"><i class="fa fa-home me-2"></i>Home</a>
+        <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
+        <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
+        <a routerLink="/users-list" class="me-3"><i class="fa fa-users me-2"></i>Users</a>
+        <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+      }
+    </div>
   </div>
 
   <h3 class="mb-4">User Details</h3>
