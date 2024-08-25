@@ -45,8 +45,24 @@ export class AdminDashboardComponent {
   adminRole = '';
   selectedRole: string = ''; // Holds the currently selected role
 
+  allRequests: any
+  approvedRequests: any
+  finishedRequests: any
+  pendingRequests: any
+  rejectedRequests: any
 userData: any
   ngOnInit(): void {
+    this.approvedRequests = null;
+  this.finishedRequests = null;
+  this.pendingRequests = null;
+  this.rejectedRequests = null;
+
+    this.getNumberAndPercentageOfAllRequests()
+    this.getNumberAndPercentageOfApprovedRequests()
+    this.getNumberAndPercentageOfRejectedRequests()
+    this.getNumberAndPercentageOfPendingRequests()
+    this.getNumberAndPercentageOfFinishedRequests()
+
     const token = this.authService.getToken();
     if (token) {
       const decodedPayload = atob(token.split('.')[1]);
@@ -68,7 +84,6 @@ userData: any
       this.userService.getUserById(this.userId).subscribe(
         (data: any) => {
           this.user = data;
-          console.log('User details:', this.user);
         },
         (error: any) => {
           console.error('Error retrieving user details:', error);
@@ -79,7 +94,6 @@ userData: any
       this.userService.getAllUsers().subscribe(
         (data) => {
           this.users = data;
-          console.log('Users retrieved:', this.users);
         },
         (error) => {
           console.error('Error retrieving users:', error);
@@ -99,7 +113,6 @@ userData: any
   fetchAllServers() {
     this.serverService.getAllServers().subscribe(
       (response: any[]) => { // Expecting an array directly
-        console.log("Hello from SuperAdmin", response);
         this.servers = response.map((server: any) => ({
           adminName: server.adminName,
           requesterName: server.requesterName,
@@ -116,7 +129,6 @@ userData: any
         this.filteredItems = [...this.servers];
         this.recentServers = this.filteredItems
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        console.log("recent server = ", this.recentServers)
       },
       (error) => {
         console.error('Error fetching servers:', error);
@@ -134,7 +146,6 @@ userData: any
       (data) => {
         this.items = data;
         this.filteredItems = [...this.items];
-        console.log(this.filteredItems)
         this.recentRequests = this.filteredItems
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         if(this.role === "GeneralSpecAdmin"){
@@ -181,6 +192,63 @@ userData: any
   getRolePercentage(role: string): number {
     const count = this.getRoleCount(role);
     return Math.round((count / this.users?.length) * 100);
+  }
+
+
+  getNumberAndPercentageOfApprovedRequests() {
+    this.requestService.getNumberOfApprovedRequests().subscribe (
+      (response: any) => {
+        this.approvedRequests = response
+      },
+      (error: any) => {
+        console.error(error)
+      }
+    )
+  }
+
+  getNumberAndPercentageOfPendingRequests() {
+    this.requestService.getNumberOfPendingRequests().subscribe (
+      (response: any) => {
+        this.pendingRequests = response
+      },
+      (error: any) => {
+        console.error(error)
+      }
+    )
+  }
+
+  getNumberAndPercentageOfAllRequests() {
+    this.requestService.getNumberOfAllRequests().subscribe (
+      (response: any) => {
+        this.allRequests = response
+        console.log(this.allRequests)
+      },
+      (error: any) => {
+        console.error(error)
+      }
+    )
+  }
+
+  getNumberAndPercentageOfRejectedRequests() {
+    this.requestService.getNumberOfRejectedRequests().subscribe (
+      (response: any) => {
+        this.rejectedRequests = response
+      },
+      (error: any) => {
+        console.error(error)
+      }
+    )
+  }
+
+  getNumberAndPercentageOfFinishedRequests() {
+    this.requestService.getNumberOfFinishedRequests().subscribe (
+      (response: any) => {
+        this.finishedRequests = response
+      },
+      (error: any) => {
+        console.error(error)
+      }
+    )
   }
 
 

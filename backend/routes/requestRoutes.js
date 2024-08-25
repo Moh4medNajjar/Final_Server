@@ -8,9 +8,16 @@ router.use(authMiddleware);
 
 router.post('/', requestController.createRequest);
 router.get('/', requestController.getRequests);
+
+router.get('/approved', requestController.getNumberOfApprovedRequests);
+router.get('/rejected', requestController.getNumberOfRejectedRequests);
+router.get('/finished', requestController.getNumberOfFinishedRequests);
+router.get('/pending', requestController.getNumberOfPendingRequests);
+router.get('/all', requestController.getNumberOfRequests);
+
 router.get('/:id', requestController.getRequestById);
 router.put('/:id', requestController.updateRequest);
-router.delete('/:id', requestController.deleteRequest);
+router.delete('/:id',roleMiddleware('SuperAdmin'), requestController.deleteRequest);
 
 router.get('/user/:userId', requestController.getRequestsByUserId);
 

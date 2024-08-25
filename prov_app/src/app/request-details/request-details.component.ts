@@ -190,7 +190,20 @@ export class RequestDetailsComponent implements OnInit {
     return environmentStyles[environmentType] || { icon: 'fa-question-circle', color: '#9E9E9E' }; // Default: gray question mark
   }
 
-
+  deleteRequest(): void {
+    if (this.requestId) {
+      this.requestService.deleteRequest(this.requestId)
+        .subscribe(
+          (response: any) => {
+            console.log("Successfully deleted the request");
+            this.router.navigate(['/my-requests']);
+          },
+          (error: any) => {
+            console.error('Error deleting request:', error);
+          }
+        );
+    }
+  }
   rejectRequest(): void {
     if (this.requestId) {
       this.requestService.rejectRequest(this.requestId, this.id).subscribe(

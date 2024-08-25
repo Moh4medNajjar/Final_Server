@@ -32,7 +32,7 @@
         <i class="fa fa-tachometer-alt fa-2x"></i>
         <div class="widget-content">
           <h4>Total Requests</h4>
-          <p>{{filteredItems.length}} <span class="percentage">(100%)</span></p>
+          <p>{{ this.allRequests?.numberOfAllRequests }} <span class="percentage">(100%)</span></p>
         </div>
       </div>
       <div class="widget approved-requests">
@@ -40,7 +40,7 @@
         <div class="widget-content">
           <h4>Approved Requests</h4>
           <p>
-            {{ getApprovedCount() }} <span class="percentage">{{ getApprovedPercentage() }}%</span>
+            {{ this.approvedRequests?.numberOfApprovedRequests }} <span class="percentage">{{ this.approvedRequests?.percentageOfApprovedRequests }}%</span>
           </p>
         </div>
       </div>
@@ -50,28 +50,34 @@
         <div class="widget-content">
           <h4>Rejected Requests</h4>
           <p>
-            {{ getStatusCount('rejected') }} <span class="percentage">{{ getStatusPercentage('rejected') }}%</span>
+            {{ rejectedRequests?.numberOfRejectedRequests }}
+            <span class="percentage">{{ rejectedRequests?.percentageOfRejectedRequests }}%</span>
           </p>
         </div>
       </div>
+
       <div class="widget pending-requests">
         <i class="fa fa-clock fa-2x"></i>
         <div class="widget-content">
           <h4>Pending Requests</h4>
           <p>
-            {{ getStatusCount('pending') }} <span class="percentage">{{ getStatusPercentage('pending') }}%</span>
+            {{ pendingRequests?.numberOfPendingRequests }}
+            <span class="percentage">{{ pendingRequests?.percentageOfPendingRequests }}%</span>
           </p>
         </div>
       </div>
+
       <div class="widget finished-requests">
         <i class="fa fa-tasks fa-2x"></i>
         <div class="widget-content">
           <h4>Requests Done</h4>
           <p>
-            {{ getStatusCount('finished') }} <span class="percentage">{{ getStatusPercentage('finished') }}%</span>
+            {{ finishedRequests?.numberOfFinishedRequests }}
+            <span class="percentage">{{ finishedRequests?.percentageOfFinishedRequests }}%</span>
           </p>
         </div>
       </div>
+
     </div>
 
     <!--**********************************************************-->

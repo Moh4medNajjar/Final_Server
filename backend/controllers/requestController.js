@@ -136,24 +136,82 @@ exports.rejectRequest = async (req, res) => {
         res.status(500).json({ message: 'Error rejecting request', error: error.message });
     }
 };
+/****************************************************************************/
+exports.getNumberOfRequests = async (req, res) => {
+    try {
+    const totalRequests = await Request.countDocuments();
 
-// exports.approveByGeneralSpecAdmin = async (req, res) => {
-//     try {
-//         console.log('Approve request received for ID:', req.params.id);
+    res.json({
+        numberOfAllRequests: totalRequests,
+    });
+    } catch (error) {
+    res.status(500).json({ message: 'Error fetching requests', error });
+    }
+};
 
-//         const request = await Request.findById(req.params.id);
-//         if (!request) {
-//             console.log('Request not found');
-//             return res.status(404).json({ message: 'Request not found' });
-//         }
-
-//         request.status = 'approved';
-//         await request.save();
-//         console.log('Request approved:', request);  
-
-//         res.status(200).json({ message: 'Request approved successfully', request });
-//     } catch (error) {
-//         console.error('Error approved request:', error);  
-//         res.status(500).json({ message: 'Error approving request', error: error.message });
-//     }
-// };
+    exports.getNumberOfApprovedRequests = async (req, res) => {
+        try {
+        const totalRequests = await Request.countDocuments();
+        const approvedRequests = await Request.countDocuments({ status: 'approved' });
+    
+        const percentage = (approvedRequests / totalRequests) * 100;
+    
+        res.json({
+            numberOfApprovedRequests: approvedRequests,
+            percentageOfApprovedRequests: percentage.toFixed(2) // Round to 2 decimal places
+        });
+        } catch (error) {
+        res.status(500).json({ message: 'Error fetching approved requests', error });
+        }
+    };
+    
+    // Function to get the number and percentage of rejected requests
+    exports.getNumberOfRejectedRequests = async (req, res) => {
+        try {
+        const totalRequests = await Request.countDocuments();
+        const rejectedRequests = await Request.countDocuments({ status: 'rejected' });
+    
+        const percentage = (rejectedRequests / totalRequests) * 100;
+    
+        res.json({
+            numberOfRejectedRequests: rejectedRequests,
+            percentageOfRejectedRequests: percentage.toFixed(2) // Round to 2 decimal places
+        });
+        } catch (error) {
+        res.status(500).json({ message: 'Error fetching rejected requests', error });
+        }
+    };
+    
+    // Function to get the number and percentage of finished requests
+    exports.getNumberOfFinishedRequests = async (req, res) => {
+        try {
+        const totalRequests = await Request.countDocuments();
+        const finishedRequests = await Request.countDocuments({ status: 'finished' });
+    
+        const percentage = (finishedRequests / totalRequests) * 100;
+    
+        res.json({
+            numberOfFinishedRequests: finishedRequests,
+            percentageOfFinishedRequests: percentage.toFixed(2) // Round to 2 decimal places
+        });
+        } catch (error) {
+        res.status(500).json({ message: 'Error fetching finished requests', error });
+        }
+    };
+    
+    // Function to get the number and percentage of pending requests
+    exports.getNumberOfPendingRequests = async (req, res) => {
+        try {
+        const totalRequests = await Request.countDocuments();
+        const pendingRequests = await Request.countDocuments({ status: 'pending' });
+    
+        const percentage = (pendingRequests / totalRequests) * 100;
+    
+        res.json({
+            numberOfPendingRequests: pendingRequests,
+            percentageOfPendingRequests: percentage.toFixed(2) // Round to 2 decimal places
+        });
+        } catch (error) {
+        res.status(500).json({ message: 'Error fetching pending requests', error });
+        }
+    };

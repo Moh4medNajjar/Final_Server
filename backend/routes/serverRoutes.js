@@ -9,7 +9,7 @@ router.post('/', authMiddleware, roleMiddleware(['NetworkAdmin', 'SuperAdmin']),
 router.get('/', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin', 'SuperAdmin']), serverController.getServers);
 router.get('/user/:requesterId', authMiddleware, serverController.getServersByUserId);
 router.get('/:id', authMiddleware, serverController.getServerById);
-router.put('/:id', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin', 'SecurityAdmin']), serverController.updateServer);
+router.put('/:id', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin']), serverController.updateServer);
 router.delete('/:id', authMiddleware, roleMiddleware('SuperAdmin'), serverController.deleteServer);
 
 module.exports = router;

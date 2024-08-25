@@ -45,6 +45,12 @@ rejectRequest(requestId: string, responderId:string): Observable<any> {
   return this.http.put(`${this.apiUrl}/${requestId}/reject`, {status: 'rejected', responderId:responderId}, { headers });
 }
 
+deleteRequest(requestId: string): Observable<any>{
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.delete(`${this.apiUrl}/${requestId}`, { headers });
+}
+
 
 
 approveRequest(requestId: string, responderId:string): Observable<any> {
@@ -52,9 +58,6 @@ approveRequest(requestId: string, responderId:string): Observable<any> {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   return this.http.put(`${this.apiUrl}/${requestId}/approve`, {status: 'approved', responderId:responderId}, { headers });
 }
-
-
-
 
 finishRequest(requestId: string): Observable<any> {
   const token = localStorage.getItem('token');
@@ -70,6 +73,40 @@ getRequestsByStatus(status?: string): Observable<any> {
     params = params.set('status', status);
   }
   return this.http.get(this.apiUrl, { headers, params });
+}
+
+/**************************************************************************************/
+getNumberOfApprovedRequests(): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any>(`${this.apiUrl}/approved`, {headers}); // Adjust the URL as needed
+}
+
+// Function to get the number and percentage of rejected requests
+getNumberOfRejectedRequests(): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any>(`${this.apiUrl}/rejected`, {headers}); // Adjust the URL as needed
+}
+
+getNumberOfAllRequests(): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any>(`${this.apiUrl}/all`, {headers}); // Adjust the URL as needed
+}
+
+// Function to get the number and percentage of finished requests
+getNumberOfFinishedRequests(): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any>(`${this.apiUrl}/finished`, {headers}); // Adjust the URL as needed
+}
+
+// Function to get the number and percentage of pending requests
+getNumberOfPendingRequests(): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<any>(`${this.apiUrl}/pending`, {headers}); // Adjust the URL as needed
 }
 
 

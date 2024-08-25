@@ -59,7 +59,9 @@
   @if(adminRole === "NetworkAdmin") {
     <p class="mb-4" style="color: rgb(6, 216, 10);"><i class="fa fa-clock me-2"></i>This request was approved by General specs admin and is waiting for network configurations.</p>
   }
-
+  @if (adminRole === "SuperAdmin") {
+    <button (click)="deleteRequest()" class="btn button-reject d-flex align-items-center justify-content-center my-4" style="height: 30px; font-size: 14px;"><i class="fa fa-times me-2"></i>Delete request</button>
+  }
   <div>
     <h3 style="font-weight: 500; font-size: 20px; margin-bottom: 15px;">* Request details</h3>
     <div class="ms-4">
@@ -75,30 +77,33 @@
       <p><i class="fa fa-boxes me-2"></i><span>Software list:</span> {{requestDetails?.software_list}}</p>
       <p><i class="fa fa-lock me-2"></i><span>Open ports:</span> {{requestDetails?.openPorts}}</p>
       <p><i class="fa fa-globe me-2"></i><span>Has public IP:</span> {{requestDetails?.hasPublicIP}}</p>
-      <p><i class="fa fa-calendar me-2"></i><span>Desired creation date:</span> {{formatDate(requestDetails?.desired_start_date)}}</p>
-      <p>
-        <i class="fa fa-tag me-2"></i>
-        <span>Status:</span>
-        <i class="fa me-1" [ngClass]="[
-          getStatusIconClass(requestDetails?.status),
-          getStatusColor(requestDetails?.status)
-        ]"></i>
-        <span [ngClass]="getStatusColor(requestDetails?.status)">
-          {{requestDetails?.status | titlecase}}
-        </span>
-      </p>
+      <p style="margin-bottom: 0;"><i class="fa fa-calendar me-2"></i><span>Desired creation date:</span> {{formatDate(requestDetails?.desired_start_date)}}</p>
+      <div class="d-flex align-items-center justify-content-between" style="height: 60px;">
+        <p>
+          <i class="fa fa-tag me-2"></i>
+          <span>Status:</span>
+          <i class="fa me-1" [ngClass]="[
+            getStatusIconClass(requestDetails?.status),
+            getStatusColor(requestDetails?.status)
+          ]"></i>
+          <span [ngClass]="getStatusColor(requestDetails?.status)">
+            {{requestDetails?.status | titlecase}}
+          </span>
+        </p>
+        @if((adminRole === "GeneralSpecAdmin" || adminRole === "SuperAdmin") && requestDetails?.status === "pending" ) {
+          <div>
+            <div class="d-flex align-items-center justify-content-center mt-4">
+              <button style="height: 30px; font-size: 14px;" class="me-2 btn button-approve" (click)="approveRequest()"><i class="fa fa-check me-2"></i>Approve request</button>
+              <button style="height: 30px; font-size: 14px;" class="btn button-reject" (click)="rejectRequest()"><i class="fa fa-times me-2"></i>Reject request</button>
+            </div>
+            <p class="text-center mt-1" style="font-size:12px">Approving will send this request to the network admin</p>
           </div>
-  </div>
 
-  @if((adminRole === "GeneralSpecAdmin" || adminRole === "SuperAdmin") && requestDetails?.status === "pending" ) {
-    <div>
-      <div class="d-flex align-items-center justify-content-center mt-4">
-        <button class="me-2 btn button-approve" (click)="approveRequest()"><i class="fa fa-check me-2"></i>Approve request</button>
-        <button class="btn button-reject" (click)="rejectRequest()"><i class="fa fa-times me-2"></i>Reject request</button>
+      }
+      <div></div>
       </div>
-      <p class="text-center mt-1" style="font-size:12px">Approving will send this request to the network admin</p>
     </div>
-  }
+  </div>
 
   @if (adminRole === 'NetworkAdmin') {
     <form [formGroup]="serverForm">
@@ -133,4 +138,6 @@
     </form>
   }
 
+
 </div>
+
