@@ -78,7 +78,7 @@
   <!--**********************************************************-->
   <div class="activity-widgets">
       <div class="widget activity-widget">
-        <h3>Users Activities</h3>
+        <h3>Recent Users Activities</h3>
         @if(recentRequests.length === 0) {
           <div style="text-align: center; padding: 20px; margin-top: 40px">
             <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
@@ -98,7 +98,7 @@
 
 
     <div class="widget activity-widget">
-      <h3>Admins Activities</h3>
+      <h3>Recent Admins Activities</h3>
       @if(recentServers.length === 0) {
         <div style="text-align: center; padding: 20px; margin-top: 40px">
           <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
@@ -126,7 +126,7 @@
 
 
   <div class="container-fluid container-test">
-    <div class="matrix-widgets">
+    <div class="matrix-widgets ">
       <div class="widget-other role-widget">
         <h3>Ordinary Users</h3>
         <div class="widget-content">
@@ -177,22 +177,35 @@
       <h3>Number of servers per environment</h3>
       <div class="widget-grid">
         <div class="environment-widget">
-          <h4>Staging</h4>
-          <p>{{ getServerCount('staging') }}</p>
+          <i class="fa fa-server"></i>
+          <div class="widget-content">
+            <h4>Staging</h4>
+            <p>{{ getServerCount('staging') }}</p>
+          </div>
         </div>
         <div class="environment-widget">
-          <h4>Testing</h4>
-          <p>{{ getServerCount('testing') }}</p>
+          <i class="fa fa-cogs"></i>
+          <div class="widget-content">
+            <h4>Testing</h4>
+            <p>{{ getServerCount('testing') }}</p>
+          </div>
         </div>
         <div class="environment-widget">
-          <h4>Developing</h4>
-          <p>{{ getServerCount('developing') }}</p>
+          <i class="fa fa-code"></i>
+          <div class="widget-content">
+            <h4>Developing</h4>
+            <p>{{ getServerCount('developing') }}</p>
+          </div>
         </div>
         <div class="environment-widget">
-          <h4>Production</h4>
-          <p>{{ getServerCount('production') }}</p>
+          <i class="fa fa-rocket"></i>
+          <div class="widget-content">
+            <h4>Production</h4>
+            <p>{{ getServerCount('production') }}</p>
+          </div>
         </div>
       </div>
+
     </div>
 
 

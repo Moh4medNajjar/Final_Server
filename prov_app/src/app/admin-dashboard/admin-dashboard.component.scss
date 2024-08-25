@@ -457,6 +457,7 @@ p {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
   gap: 15px; /* Space between widgets */
+  height: 100%;
 }
 
 
