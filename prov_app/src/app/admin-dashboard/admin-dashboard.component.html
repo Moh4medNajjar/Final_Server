@@ -28,68 +28,89 @@
 
   <h3 class="mb-4">Welcome {{ (userData.fullName || '').split(' ')[0] }} !</h3>
 
-  <div class="widget-container">
-    <div class="widget total-requests">
-      <i class="fa fa-tachometer-alt fa-2x"></i>
-      <div class="widget-content">
-        <h4>Total Requests</h4>
-        <p>{{filteredItems.length}} <span class="percentage">(100%)</span></p>
+  @if (adminRole === "SuperAdmin") {
+    <div class="widget-container">
+      <div class="widget total-requests">
+        <i class="fa fa-tachometer-alt fa-2x"></i>
+        <div class="widget-content">
+          <h4>Total Requests</h4>
+          <p>{{filteredItems.length}} <span class="percentage">(100%)</span></p>
+        </div>
       </div>
-    </div>
-    <div class="widget approved-requests">
-      <i class="fa fa-check-circle fa-2x"></i>
-      <div class="widget-content">
-        <h4>Approved Requests</h4>
-        <p>
-          {{ getApprovedCount() }} <span class="percentage">{{ getApprovedPercentage() }}%</span>
-        </p>
+      <div class="widget approved-requests">
+        <i class="fa fa-check-circle fa-2x"></i>
+        <div class="widget-content">
+          <h4>Approved Requests</h4>
+          <p>
+            {{ getApprovedCount() }} <span class="percentage">{{ getApprovedPercentage() }}%</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="widget rejected-requests">
+        <i class="fa fa-times-circle fa-2x"></i>
+        <div class="widget-content">
+          <h4>Rejected Requests</h4>
+          <p>
+            {{ getStatusCount('rejected') }} <span class="percentage">{{ getStatusPercentage('rejected') }}%</span>
+          </p>
+        </div>
+      </div>
+      <div class="widget pending-requests">
+        <i class="fa fa-clock fa-2x"></i>
+        <div class="widget-content">
+          <h4>Pending Requests</h4>
+          <p>
+            {{ getStatusCount('pending') }} <span class="percentage">{{ getStatusPercentage('pending') }}%</span>
+          </p>
+        </div>
+      </div>
+      <div class="widget finished-requests">
+        <i class="fa fa-tasks fa-2x"></i>
+        <div class="widget-content">
+          <h4>Requests Done</h4>
+          <p>
+            {{ getStatusCount('finished') }} <span class="percentage">{{ getStatusPercentage('finished') }}%</span>
+          </p>
+        </div>
       </div>
     </div>
 
-    <div class="widget rejected-requests">
-      <i class="fa fa-times-circle fa-2x"></i>
-      <div class="widget-content">
-        <h4>Rejected Requests</h4>
-        <p>
-          {{ getStatusCount('rejected') }} <span class="percentage">{{ getStatusPercentage('rejected') }}%</span>
-        </p>
-      </div>
-    </div>
-    <div class="widget pending-requests">
-      <i class="fa fa-clock fa-2x"></i>
-      <div class="widget-content">
-        <h4>Pending Requests</h4>
-        <p>
-          {{ getStatusCount('pending') }} <span class="percentage">{{ getStatusPercentage('pending') }}%</span>
-        </p>
-      </div>
-    </div>
-    <div class="widget finished-requests">
-      <i class="fa fa-tasks fa-2x"></i>
-      <div class="widget-content">
-        <h4>Requests Done</h4>
-        <p>
-          {{ getStatusCount('finished') }} <span class="percentage">{{ getStatusPercentage('finished') }}%</span>
-        </p>
-      </div>
-    </div>
-  </div>
+    <!--**********************************************************-->
+    <div class="activity-widgets">
+        <div class="widget activity-widget">
+          <h3>Recent Users Activities</h3>
+          @if(recentRequests.length === 0) {
+            <div style="text-align: center; padding: 20px; margin-top: 40px">
+              <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
+              <p style="color: #999; margin-top: 10px;">No recent user activities</p>
+            </div>
+          }
+          @else {
+            <div *ngFor="let request of recentRequests" class="activity-item" [routerLink]="['/request-details', request._id]">
+              <i class="fa fa-user"></i>
+              <div class="activity-text">
+                <p>{{ request.fullName }}, holder of matricule {{ request.matricule }}, has requested a server on: {{ request.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+              </div>
+            </div>
+          }
 
-  <!--**********************************************************-->
-  <div class="activity-widgets">
+        </div>
+
+
       <div class="widget activity-widget">
-        <h3>Recent Users Activities</h3>
-        @if(recentRequests.length === 0) {
+        <h3>Recent Admins Activities</h3>
+        @if(recentServers.length === 0) {
           <div style="text-align: center; padding: 20px; margin-top: 40px">
             <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
-            <p style="color: #999; margin-top: 10px;">No recent user activities</p>
+            <p style="color: #999; margin-top: 10px;">No recent admin activities</p>
           </div>
         }
         @else {
-          <div *ngFor="let request of recentRequests" class="activity-item" [routerLink]="['/request-details', request._id]">
-            <i class="fa fa-user"></i>
+          <div *ngFor="let server of recentServers" class="activity-item" [routerLink]="['/server-details', server.id]">
+            <i class="fa fa-shield-alt"></i>
             <div class="activity-text">
-              <p>{{ request.fullName }}, holder of matricule {{ request.matricule }}, has requested a server on: {{ request.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
+              <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
             </div>
           </div>
         }
@@ -97,120 +118,105 @@
       </div>
 
 
-    <div class="widget activity-widget">
-      <h3>Recent Admins Activities</h3>
-      @if(recentServers.length === 0) {
-        <div style="text-align: center; padding: 20px; margin-top: 40px">
-          <i class="fa fa-info-circle" style="font-size: 2em; color: #999;"></i>
-          <p style="color: #999; margin-top: 10px;">No recent admin activities</p>
-        </div>
-      }
-      @else {
-        <div *ngFor="let server of recentServers" class="activity-item" [routerLink]="['/server-details', server.id]">
-          <i class="fa fa-shield-alt"></i>
-          <div class="activity-text">
-            <p>{{ server.adminName }} has created new a server "{{server.vmName}}" for {{server.requesterName}} on: {{ server.createdAt | date: 'dd/MM/yyyy - HH:mm:ss' }}</p>
-          </div>
-        </div>
-      }
+
 
     </div>
+    <!--**********************************************************-->
 
 
 
 
-  </div>
-  <!--**********************************************************-->
-
-
-
-
-  <div class="container-fluid container-test">
-    <div class="matrix-widgets ">
-      <div class="widget-other role-widget">
-        <h3>Ordinary Users</h3>
-        <div class="widget-content">
-          <i class="fa fa-user"></i>
-          <div class="widget-info">
-            <p class="number">{{ getRoleCount('') }}</p>
-            <p class="percentage">{{ getRolePercentage('') }}%</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="widget-other role-widget">
-        <h3>General Admins</h3>
-        <div class="widget-content">
-          <i class="fa fa-user-shield"></i>
-          <div class="widget-info">
-            <p class="number">{{ getRoleCount('GeneralSpecAdmin') }}</p>
-            <p class="percentage">{{ getRolePercentage('GeneralSpecAdmin') }}%</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="widget-other role-widget">
-        <h3>Network Admins</h3>
-        <div class="widget-content">
-          <i class="fa fa-network-wired"></i>
-          <div class="widget-info">
-            <p class="number">{{ getRoleCount('NetworkAdmin') }}</p>
-            <p class="percentage">{{ getRolePercentage('NetworkAdmin') }}%</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="widget-other role-widget">
-        <h3>Superadmins</h3>
-        <div class="widget-content">
-          <i class="fa fa-crown"></i>
-          <div class="widget-info">
-            <p class="number">{{ getRoleCount('SuperAdmin') }}</p>
-            <p class="percentage">{{ getRolePercentage('SuperAdmin') }}%</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="active-servers-widget" style="background-color: #1C2D38;">
-      <h3>Number of servers per environment</h3>
-      <div class="widget-grid">
-        <div class="environment-widget">
-          <i class="fa fa-server"></i>
+    <div class="container-fluid container-test">
+      <div class="matrix-widgets ">
+        <div class="widget-other role-widget">
+          <h3>Ordinary Users</h3>
           <div class="widget-content">
-            <h4>Staging</h4>
-            <p>{{ getServerCount('staging') }}</p>
+            <i class="fa fa-user"></i>
+            <div class="widget-info">
+              <p class="number">{{ getRoleCount('') }}</p>
+              <p class="percentage">{{ getRolePercentage('') }}%</p>
+            </div>
           </div>
         </div>
-        <div class="environment-widget">
-          <i class="fa fa-cogs"></i>
+
+        <div class="widget-other role-widget">
+          <h3>General Admins</h3>
           <div class="widget-content">
-            <h4>Testing</h4>
-            <p>{{ getServerCount('testing') }}</p>
+            <i class="fa fa-user-shield"></i>
+            <div class="widget-info">
+              <p class="number">{{ getRoleCount('GeneralSpecAdmin') }}</p>
+              <p class="percentage">{{ getRolePercentage('GeneralSpecAdmin') }}%</p>
+            </div>
           </div>
         </div>
-        <div class="environment-widget">
-          <i class="fa fa-code"></i>
+
+        <div class="widget-other role-widget">
+          <h3>Network Admins</h3>
           <div class="widget-content">
-            <h4>Developing</h4>
-            <p>{{ getServerCount('developing') }}</p>
+            <i class="fa fa-network-wired"></i>
+            <div class="widget-info">
+              <p class="number">{{ getRoleCount('NetworkAdmin') }}</p>
+              <p class="percentage">{{ getRolePercentage('NetworkAdmin') }}%</p>
+            </div>
           </div>
         </div>
-        <div class="environment-widget">
-          <i class="fa fa-rocket"></i>
+
+        <div class="widget-other role-widget">
+          <h3>Superadmins</h3>
           <div class="widget-content">
-            <h4>Production</h4>
-            <p>{{ getServerCount('production') }}</p>
+            <i class="fa fa-crown"></i>
+            <div class="widget-info">
+              <p class="number">{{ getRoleCount('SuperAdmin') }}</p>
+              <p class="percentage">{{ getRolePercentage('SuperAdmin') }}%</p>
+            </div>
           </div>
         </div>
       </div>
+
+
+      <div class="active-servers-widget" style="background-color: #1C2D38;">
+        <h3>Number of servers per environment</h3>
+        <div class="widget-grid">
+          <div class="environment-widget">
+            <i class="fa fa-server"></i>
+            <div class="widget-content">
+              <h4>Staging</h4>
+              <p>{{ getServerCount('staging') }}</p>
+            </div>
+          </div>
+          <div class="environment-widget">
+            <i class="fa fa-cogs"></i>
+            <div class="widget-content">
+              <h4>Testing</h4>
+              <p>{{ getServerCount('testing') }}</p>
+            </div>
+          </div>
+          <div class="environment-widget">
+            <i class="fa fa-code"></i>
+            <div class="widget-content">
+              <h4>Developing</h4>
+              <p>{{ getServerCount('developing') }}</p>
+            </div>
+          </div>
+          <div class="environment-widget">
+            <i class="fa fa-rocket"></i>
+            <div class="widget-content">
+              <h4>Production</h4>
+              <p>{{ getServerCount('production') }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
 
     </div>
-
-
-  </div>
-
+  }
+  @else{
+    <div class="container-fluid" style="display:flex; align-items: center; justify-content: center; width: 300px; height: fit-content; background-color: rgba(255, 0, 0, 0.858); margin-top: 180px;">
+      <p>Access Denied. This page is restricted to Super Admins only. If you believe you should have access, please contact your administrator.</p>
+    </div>
+  }
 
 
 </div>
