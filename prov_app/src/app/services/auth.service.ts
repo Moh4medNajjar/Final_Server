@@ -29,6 +29,8 @@ export class AuthService {
     return this.http.post<LoginResponse>(this.loginUrl, body);
   }
 
+  
+
   getToken() {
     return localStorage.getItem('token');
   }
