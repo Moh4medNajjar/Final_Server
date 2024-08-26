@@ -13,6 +13,7 @@ import { AdminDetailsComponent } from './admin-details/admin-details.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { AnsweredRequestsComponent } from './answered-requests/answered-requests.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DeletableServersComponent } from './deletable-servers/deletable-servers.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'user-details/:id', component: AdminDetailsComponent },
   { path: 'create-user', component: CreateUserComponent },
   { path: 'answered-requests', component: AnsweredRequestsComponent},
-  { path: 'admin-dashboard', component: AdminDashboardComponent}
+  { path: 'admin-dashboard', component: AdminDashboardComponent},
+  { path: 'delete-page', component: DeletableServersComponent},
 
 ];
 

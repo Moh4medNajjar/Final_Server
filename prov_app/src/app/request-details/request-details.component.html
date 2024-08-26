@@ -8,27 +8,28 @@
     </div>
     <div>
       <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminName}}</p>
-      <p class="text-center" style="font-size:large; font-weight: bold; margin: 0">{{adminRole}}</p>
-
     </div>
-    @if(adminRole === ""){
+    @if(adminRole === "OrdinaryUser"){
       <div class="menu">
-        <a routerLink="/my-requests"><i class="fa fa-file-alt"></i> My Requests</a>
-        <a routerLink="/my-servers"><i class="fa fa-server"></i> My Servers</a>
-        <a href=""><i class="fa fa-user"></i> My Profile</a>
+        <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
+        <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
+        <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
       </div>
     }
 
     @if(adminRole === "GeneralSpecAdmin") {
       <div class="menu">
-        <a routerLink="/my-requests"><i class="fa fa-inbox"></i> Incoming requests</a>
-        <a routerLink="/answered-requests"><i class="fa fa-check-double"></i> Answered requests</a>
-        <a (click)="onLogout()"><i class="fa fa-sign-out-alt"></i> Logout</a>
+        <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
+        <a routerLink="/answered-requests"><i class="fa fa-circle-check me-2"></i>Answered requests</a>
+        <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
+        <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
       </div>
     }
     @if(adminRole === "NetworkAdmin") {
       <div class="menu">
-        <p style="font-weight: bold;"><i class="fa fa-network-wired"></i> Network Admin</p>
+        <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
+        <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
+        <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
       </div>
     }
 

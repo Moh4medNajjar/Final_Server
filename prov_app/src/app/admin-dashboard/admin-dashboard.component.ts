@@ -17,6 +17,7 @@ export class AdminDashboardComponent {
   users: any;
   recentRequests: any[] = [];
   recentServers: any[] = [];
+  deletableServers: any;
 
   onLogout() {
     this.authService.logout();
@@ -56,7 +57,6 @@ userData: any
   this.finishedRequests = null;
   this.pendingRequests = null;
   this.rejectedRequests = null;
-
     this.getNumberAndPercentageOfAllRequests()
     this.getNumberAndPercentageOfApprovedRequests()
     this.getNumberAndPercentageOfRejectedRequests()
@@ -114,6 +114,7 @@ userData: any
   items: any[] = [];
   filteredItems = [...this.items];
   servers: any[] = []
+  NumberOfServersToDelete: any
 
   fetchAllServers() {
     this.serverService.getAllServers().subscribe(
@@ -132,6 +133,7 @@ userData: any
           id: server._id
         }));
         this.filteredItems = [...this.servers];
+        this.NumberOfServersToDelete= this.servers?.filter(server => server.wantToDelete === true).length,
         this.recentServers = this.filteredItems
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       },
@@ -143,6 +145,10 @@ userData: any
 
   getServerCount(environmentType: string): number {
     return this.servers?.filter(server => server.environment_type === environmentType).length;
+  }
+
+  getdeleteCount() {
+    console.log()
   }
 
 
@@ -304,6 +310,8 @@ getNumberAndPercentageOfOrdinaryUsers() {
     }
   )
 }
+
+
 
 
 }

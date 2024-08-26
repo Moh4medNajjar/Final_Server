@@ -135,7 +135,7 @@
         <div class="widget-other role-widget">
           <h3>Ordinary Users</h3>
           <div class="widget-content">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-user mt-5 mb-2 fs-3"></i>
             <div class="widget-info">
               <p class="number">{{ ordinaryUsers.numberOfOrdinaryUsers }}</p>
               <p class="percentage">{{ ordinaryUsers.percentageOfOrdinaryUsers }}%</p>
@@ -146,7 +146,7 @@
         <div class="widget-other role-widget">
           <h3>General Admins</h3>
           <div class="widget-content">
-            <i class="fa fa-user-shield"></i>
+            <i class="fa fa-user-shield mt-5 mb-2 fs-3"></i>
             <div class="widget-info">
               <p class="number">{{ generalAdmins.numberOfGeneralAdmins }}</p>
               <p class="percentage">{{ generalAdmins.percentageOfGeneralAdmins }}%</p>
@@ -157,7 +157,7 @@
         <div class="widget-other role-widget">
           <h3>Network Admins</h3>
           <div class="widget-content">
-            <i class="fa fa-network-wired"></i>
+            <i class="fa fa-network-wired mt-5 mb-2 fs-3"></i>
             <div class="widget-info">
               <p class="number">{{ networkAdmins.numberOfNetworkAdmins }}</p>
               <p class="percentage">{{ networkAdmins.percentageOfNetworkAdmins }}%</p>
@@ -166,9 +166,9 @@
         </div>
 
         <div class="widget-other role-widget">
-          <h3>Superadmins</h3>
+          <h3>Super Admins</h3>
           <div class="widget-content">
-            <i class="fa fa-crown"></i>
+            <i class="fa fa-crown mt-5 mb-2 fs-3"></i>
             <div class="widget-info">
               <p class="number">{{ superAdmins.numberOfSuperAdmins }}</p>
               <p class="percentage">{{ superAdmins.percentageOfSuperAdmins }}%</p>
@@ -179,8 +179,23 @@
 
 
       <div class="active-servers-widget" style="background-color: #1C2D38;">
-        <h3>Number of active servers per environment</h3>
-        <div class="widget-grid">
+        <h3>Servers Stats</h3>
+
+        <div class="widget-grid" >
+          <div class="environment-widget" style="width: 100%!important; display: flex; align-items: center; justify-content: space-between;">
+            <div class="widget-content">
+              <h4 style="color: rgb(20, 191, 20)">Total number</h4>
+              <p style="color: rgb(20, 191, 20)">{{ servers.length }}</p>
+            </div>
+          </div>
+
+          <div class="environment-widget clickable" style="width: 100%!important; display: flex; align-items: center; justify-content: space-between; position: relative; cursor: pointer" routerLink="/delete-page">
+            <div class="widget-content" style="margin-left: 10px;">
+              <h4 style="color:red">View All Delete requests</h4>
+              <p class="text-center">...</p>
+            </div>
+          </div>
+
           <div class="environment-widget">
             <i class="fa fa-server"></i>
             <div class="widget-content">

@@ -16,7 +16,7 @@ const createRandomString = (length) => {
 
 async function createUsers() {
     const users = [];
-    const adminRoles = ['GeneralSpecAdmin', 'NetworkAdmin', 'SecurityAdmin', 'SuperAdmin'];
+    const adminRoles = ['GeneralSpecAdmin', 'NetworkAdmin', 'SuperAdmin'];
     const ordinaryPositions = ['Developer', 'Tester', 'Manager', 'DevOps', 'Support'];
 
     // Create 20 admins
@@ -24,10 +24,10 @@ async function createUsers() {
         const hashedPassword = await bcrypt.hash('password123', 10);
         users.push({
             fullName: `Admin User ${i + 1}`,
-            email: `adminnnn${i + 1}@gmail.com`,
+            email: `admin${i + 1}@gmail.com`,
             password: hashedPassword,
             position: 'Manager',
-            matricule: `ADMIN_MATRICpLE${i + 1}`,
+            matricule: `ADMIN_MATRICULE${i + 1}`,
             phoneNumber: `123454489${String(i).padStart(2, '0')}`,
             role: adminRoles[i % adminRoles.length],
         });
@@ -38,12 +38,12 @@ async function createUsers() {
         const hashedPassword = await bcrypt.hash('password123', 10);
         users.push({
             fullName: `User ${i + 1}`,
-            email: `userrrrrr${i + 1}@gmail.com`,
+            email: `user${i + 1}@gmail.com`,
             password: hashedPassword,
             position: ordinaryPositions[i % ordinaryPositions.length],
             matricule: `USER_MATRICfLE${i + 1111}`,
             phoneNumber: `9875554321${String(i).padStart(2, '0')}`,
-            role: '',  // No admin role
+            role: 'OrdinaryUser', 
         });
     }
 
@@ -83,7 +83,10 @@ async function createServers() {
     const networkAdmins = await User.find({ role: 'NetworkAdmin' });
     const requests = await Request.find({});
 
-    for (let i = 0; i < 100; i++) {
+    const totalServers = 100;
+    const half = totalServers / 2;
+
+    for (let i = 0; i < totalServers; i++) {
         const randomNetworkAdmin = networkAdmins[Math.floor(Math.random() * networkAdmins.length)];
         const randomRequest = requests[Math.floor(Math.random() * requests.length)];
         servers.push({
@@ -104,6 +107,8 @@ async function createServers() {
             privateIP: `192.168.${Math.floor(i / 254)}.${i % 254 + 1}`,
             subnetMask: '255.255.255.0',
             defaultGateway: '192.168.0.1',
+            // Alternate between true and false for wantToDelete
+            wantToDelete: i < half
         });
     }
 

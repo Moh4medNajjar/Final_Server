@@ -9,6 +9,9 @@ router.post('/', authMiddleware, roleMiddleware(['NetworkAdmin', 'SuperAdmin']),
 router.get('/', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin', 'SuperAdmin']), serverController.getServers);
 router.get('/user/:requesterId', authMiddleware, serverController.getServersByUserId);
 router.get('/:id', authMiddleware, serverController.getServerById);
+
+// router.get('/wantToDelete', serverController.getDeletableServers);
+
 router.put('/:id', authMiddleware, roleMiddleware(['GeneralSpecAdmin', 'NetworkAdmin']), serverController.updateServer);
 
 router.patch('/:id/request-delete', authMiddleware, serverController.requestRemoveRequest);

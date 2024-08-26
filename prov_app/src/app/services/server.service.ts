@@ -47,4 +47,17 @@ export class ServerService {
     return this.http.patch(`${this.apiUrl}/${serverId}/request-delete`, {}, { headers });
   }
 
+  deleteServer(serverId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiUrl}/${serverId}`, { headers });
+  }
+
+  // getDeletableServers(): Observable<any> {
+  //   const token = localStorage.getItem('token');
+  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  //   return this.http.get(`${this.apiUrl}/wantToDelete`, { headers });
+
+  // }
+
 }

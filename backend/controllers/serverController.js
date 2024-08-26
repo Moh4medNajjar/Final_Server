@@ -109,20 +109,31 @@ exports.deleteServer = async (req, res) => {
 
 // Request Server Removal
 exports.requestRemoveRequest = async (req, res) => {
-    try {
-      const server = await Server.findById(req.params.id);
-      if (!server) {
-        console.log('Server not found');
-        return res.status(404).json({ message: 'Server not found' });
-      }
-  
-      server.wantToDelete = true;
-      await server.save();
-      console.log('wantToDelete set to: true');
-  
-      res.status(200).json({ message: 'Server delete request submitted successfully' });
-    } catch (error) {
-      console.error('Error submitting delete request:', error);
-      res.status(500).json({ message: 'Error submitting delete request', error: error.message });
+try {
+    const server = await Server.findById(req.params.id);
+    if (!server) {
+    console.log('Server not found');
+    return res.status(404).json({ message: 'Server not found' });
     }
-  };
+
+    server.wantToDelete = true;
+    await server.save();
+    console.log('wantToDelete set to: true');
+
+    res.status(200).json({ message: 'Server delete request submitted successfully' });
+} catch (error) {
+    console.error('Error submitting delete request:', error);
+    res.status(500).json({ message: 'Error submitting delete request', error: error.message });
+}
+};
+
+exports.getDeletableServers = async (req, res) => {
+    try {
+        const deletableServers = await Server.find({ wantToDelete: true });
+        res.json(deletableServers);
+    } catch (error) {
+        console.error('Error fetching deletable servers:', error);
+        res.status(500).json({ message: 'Error fetching deletable servers', error: error.message });
+    }
+};
+

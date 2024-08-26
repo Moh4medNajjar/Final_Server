@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Header Section -->
-  <div class="header mb-5 d-flex align-items-center justify-content-between p-3" style="background-color: #212529; border-radius: 8px;">
+  <div class="header mb-5 d-flex align-items-center justify-content-between">
     <div class="brand d-flex align-items-center">
       <div class="logo"></div>
       <h3 class="ms-3">Provision App</h3>
@@ -11,16 +11,29 @@
       <p class="text-center mb-1" style="font-size:large; font-weight: bold;">{{adminName}}</p>
     </div>
     <div class="menu">
-      @if(adminRole === '') {
+      @if(adminRole === 'OrdinaryUser') {
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>My Requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>My Servers</a>
         <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+      }
+      @if (adminRole === "GeneralSpecAdmin") {
+        <div class="menu">
+          <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
+          <a routerLink="/answered-requests"><i class="fa fa-circle-check me-2"></i>Answered requests</a>
+          <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
+          <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+        </div>
       }
       @if(adminRole === 'SuperAdmin') {
         <a routerLink="/admin-dashboard" class="me-3"><i class="fa fa-home me-2"></i>Home</a>
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
         <a routerLink="/users-list" class="me-3"><i class="fa fa-users me-2"></i>Users</a>
+        <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+      }
+      @if(adminRole === 'NetworkAdmin') {
+        <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
+        <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
         <a (click)="onLogout()" style="cursor: pointer"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
       }
     </div>
@@ -36,9 +49,12 @@
         <h4><i class="fa fa-user me-2"></i>Admin Info</h4>
         <div class="ms-4">
           <p><i class="fa fa-user-shield me-2"></i><span>Server was Created by:</span> {{server?.adminName}}</p>
+          @if(server.wantToDelete === true){
+            <p style="color:rgb(0, 153, 255)">{{server.requesterName}} no longer needs this server and requested to delete it.</p>
+          }
         </div>
         <div class="d-flex align-items-center justify-content-start">
-          @if(adminRole === 'OrdinaryUser'){
+          @if(adminRole === 'SuperAdmin'){
             <button class="btn bg-danger text-light me-2" style="border-radius:0px" (click)="requestDelete(serverId)">Request server removal</button>
           }
           @if (showSuccessMessage) {
@@ -48,12 +64,17 @@
           }
         </div>
       </div>
-      <div class="col-md-6">
-        <h4><i class="fa fa-user-tag me-2"></i>Dedicated to</h4>
-        <div class="ms-4">
-          <p><i class="fa fa-user me-2"></i><span>Requester name:</span> {{server?.requesterName}}</p>
-          <p><i class="fa fa-id-card me-2"></i><span>Requester matricule:</span> {{server?.requesterMatricule}}</p>
+      <div class="col-md-6 d-flex align-items-center justify-content-start">
+        <div>
+          <h4><i class="fa fa-user-tag me-2"></i>Dedicated to</h4>
+          <div class="ms-4">
+            <p><i class="fa fa-user me-2"></i><span>Requester name:</span> {{server?.requesterName}}</p>
+            <p><i class="fa fa-id-card me-2"></i><span>Requester matricule:</span> {{server?.requesterMatricule}}</p>
+          </div>
         </div>
+        @if (adminRole !== "OrdinaryUser") {
+          <button (click)="deleteServer(server._id)" [disabled]="adminRole !== 'SuperAdmin'" class="btn text-light d-flex align-items-center justify-content-center ms-5"  style="border:1px solid red; cursor:pointer; border-radius:0px ;background-color: rgb(255, 0, 0); height: 30px;"><span style="margin-bottom: 4px; margin-left:4px">Delete server</span></button>
+        }
       </div>
     </div>
 

@@ -607,3 +607,14 @@ i {
   }
 }
 
+.clickable:hover {
+  border: 1px solid rgb(255, 0, 0);
+  transition-duration:0.06s ;
+}
+.clickable{
+  transition: ease-in-out;
+}
+
+
+
+

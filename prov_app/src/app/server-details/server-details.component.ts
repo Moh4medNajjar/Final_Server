@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ServerService } from '../services/server.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../services/auth.service';
@@ -41,7 +41,8 @@ export class ServerDetailsComponent implements OnInit {
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private serverService: ServerService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
   onLogout() {
     this.authService.logout();
@@ -121,6 +122,19 @@ export class ServerDetailsComponent implements OnInit {
 
   formatDate(date: string) {
     return this.datePipe.transform(date, 'yyyy-MM-dd HH:mm a');
+  }
+
+  deleteServer(serverId: string) {
+    this.serverService.deleteServer(serverId).subscribe (
+      (response: any) => {
+        console.log("Server deleted successfully");
+        this.router.navigate(['/my-servers'])
+      },
+      (error: any) => {
+        console.error("Error deleting server");
+      }
+
+    )
   }
 
 }

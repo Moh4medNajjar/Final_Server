@@ -21,6 +21,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'; // I
 import { DatePipe } from '@angular/common';
 import { AnsweredRequestsComponent } from './answered-requests/answered-requests.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DeletableServersComponent } from './deletable-servers/deletable-servers.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     AdminDetailsComponent,
     CreateUserComponent,
     AnsweredRequestsComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    DeletableServersComponent
   ],
   imports: [
     BrowserModule,

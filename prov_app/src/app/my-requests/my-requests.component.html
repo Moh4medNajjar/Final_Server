@@ -19,10 +19,9 @@
     @if(role === "GeneralSpecAdmin") {
       <div class="menu">
         <a routerLink="/my-requests" class="me-3"><i class="fa fa-list-alt me-2"></i>Requests</a>
-        <a routerLink="/answered-requests">Answered requests</a>
+        <a routerLink="/answered-requests"><i class="fa fa-circle-check me-2"></i>Answered requests</a>
         <a routerLink="/my-servers" class="me-3"><i class="fa fa-server me-2"></i>Servers</a>
-        <a routerLink="/users-list" class="me-3"><i class="fa fa-users me-2"></i>Users</a>
-        <a (click)="onLogout()">Logout</a>
+        <a (click)="onLogout()"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
       </div>
     }
 
