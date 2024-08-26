@@ -15,8 +15,8 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private registerUrl = 'http://4.245.13.187:3000/api/auth/register';
-  private loginUrl = 'http://4.245.13.187:3000/api/auth/login';
+  private registerUrl = 'http://localhost:3000/api/auth/register';
+  private loginUrl = 'http://localhost:3000/api/auth/login';
 
   constructor(private http: HttpClient, private router:Router) {}
 
@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(this.loginUrl, body);
   }
 
-  
+
 
   getToken() {
     return localStorage.getItem('token');

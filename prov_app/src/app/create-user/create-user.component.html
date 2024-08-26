@@ -125,7 +125,7 @@
         </div>
       </div>
 
-      <div class="row mb-3">
+      <div class="row">
         <div class="col-md-12">
           <div class="form-group d-flex align-items-start">
             <label for="confirmPassword" class="col-md-4">Confirm Password</label>
@@ -137,12 +137,12 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Create User</button>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Create User</button>
+          </div>
         </div>
-      </div>
+      <p *ngIf="successMessage || failureMessage" class="mt-1 text-center"><span style="color:rgb(18, 174, 18)">{{successMessage}}</span><span style="color:red">{{failureMessage}}</span></p>
     </form>
-    <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
   </div>
 </div>

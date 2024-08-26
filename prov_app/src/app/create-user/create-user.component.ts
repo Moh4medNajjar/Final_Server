@@ -11,6 +11,7 @@ export class CreateUserComponent implements OnInit {
   userForm!: FormGroup;
   departments: string[] = ['IT Support', 'Development', 'HR', 'Finance', 'Administration'];
   successMessage: string | null = null;
+  failureMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
   fullName = ""
@@ -61,7 +62,7 @@ export class CreateUserComponent implements OnInit {
         },
         (error: any) => {
           console.error('Error registering user:', error);
-          this.successMessage = 'Error registering user';
+          this.failureMessage = 'A user with that matricule already exists';
           setTimeout(() => this.successMessage = null, 3000);
         }
       );
