@@ -54,7 +54,7 @@
           }
         </div>
         <div class="d-flex align-items-center justify-content-start">
-          @if(adminRole === 'SuperAdmin'){
+          @if(adminRole === 'OrdinaryAdmin'){
             <button class="btn bg-danger text-light me-2" style="border-radius:0px" (click)="requestDelete(serverId)">Request server removal</button>
           }
           @if (showSuccessMessage) {

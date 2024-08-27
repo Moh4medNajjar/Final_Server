@@ -150,7 +150,7 @@ userData: any;
   fetchAllRequests() {
     this.requestService.getRequests().subscribe(
       (data) => {
-        this.items = data;
+        this.items = data.reverse();
         this.filteredItems = [...this.items];
         if(this.role === "GeneralSpecAdmin"){
           this.filteredItems = this.filteredItems.filter(item => item.status === 'pending');

@@ -74,7 +74,7 @@ export class UsersListComponent implements OnInit, AfterViewInit {
       if (this.adminRole === 'SuperAdmin') {
         this.userService.getAllUsers().subscribe(
           (data) => {
-            this.users = data;
+            this.users = data.reverse();
             console.log('Users retrieved:', this.users);
           },
           (error) => {

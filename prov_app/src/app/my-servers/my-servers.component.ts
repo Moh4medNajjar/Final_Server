@@ -96,7 +96,7 @@ fetchAllServers() {
         privateIP: server.privateIP,
         id: server._id
       }));
-      this.filteredItems = [...this.items];
+      this.filteredItems = [...this.items].reverse();
       console.log(this.filteredItems);
     },
     (error) => {
