@@ -114,5 +114,9 @@
       </button>
     }
 
+    @if (filteredItems.length === 0) {
+      <div style="width: 100%; height: 100%; font-size: larger;" class="d-flex align-items-center justify-content-center"><i class="fa-regular fa-face-frown-open me-2"></i>You have no servers</div>
+    }
+
   </div>
 </div>
