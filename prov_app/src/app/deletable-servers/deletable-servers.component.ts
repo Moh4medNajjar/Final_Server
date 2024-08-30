@@ -101,7 +101,7 @@ constructor(private serverService:ServerService,private authService: AuthService
         }));
         // Filter items to include only those with wantToDelete = true
         this.filteredItems = this.items.filter(item => item.wantToDelete === true);
-        console.log(this.filteredItems);
+        this.filteredItems = this.filteredItems.reverse()
       },
       (error) => {
         console.error('Error fetching servers:', error);
